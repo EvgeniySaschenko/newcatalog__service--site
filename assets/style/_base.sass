@@ -1,0 +1,45 @@
+*
+  box-sizing: border-box
+
+img
+  max-width: 100%
+  height: auto
+
+body
+  font-family: var(--app-font-familly), sans-serif
+  font-weight: 400
+  font-size: 16px
+  overflow-x: hidden
+
+a
+  text-decoration: none
+  &:hover
+    transition-duration: .3s
+
+button,
+input
+  outline: none
+
+button,
+input[type="submit"] 
+  cursor: pointer
+
+.wrapper
+  margin: 0 auto
+  position: relative
+
+.container
+  width: 100%
+  margin: 0 auto
+  padding: 0 10px
+  box-sizing: border-box
+  @include screen-xs()
+    width: 100%
+  @include screen-sm()
+    width: 540px
+  @include screen-md()
+    width: 720px
+  @include screen-lg()
+    width: 960px
+  @include screen-xl()
+    width: 1140px

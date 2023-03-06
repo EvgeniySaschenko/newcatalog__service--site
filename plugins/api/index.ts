@@ -1,32 +1,46 @@
 import { $fetch } from '@/plugins/fetch';
+import { SectionType, RatingType, RatingFullType, RatinsBriefType } from '@/types';
 
 export let $api = {
-  // Get all labels for rating
-  getLabels: async ({ ratingId }: { ratingId: number }) => {
-    let result = (await $fetch(`/api/labels/rating/${ratingId}`, {
+  // Get page rating
+  getPageRating: async ({
+    ratingId,
+  }: {
+    ratingId: RatingType['ratingId'];
+  }): Promise<RatingFullType> => {
+    let result = await $fetch(`/api/data?data=page-rating&ratingId=${ratingId}`, {
       method: 'GET',
-    })) as any;
+    });
     return await result.json();
   },
 
-  getRatings: async () => {
-    let result = (await $fetch(`/api/ratings`, {
+  // Get page ratings list section
+  getPageSection: async ({
+    sectionId,
+    page,
+  }: {
+    sectionId: SectionType['sectionId'];
+    page: number;
+  }): Promise<RatinsBriefType[]> => {
+    let result = await $fetch(`/api/data?data=page-section&sectionId=${sectionId}&page=${page}`, {
       method: 'GET',
-    })) as any;
+    });
     return await result.json();
   },
 
-  getItems: async ({ ratingId }: { ratingId: number; typeSort: string }) => {
-    let result = (await $fetch(`/api/ratings-items/rating/${ratingId}`, {
+  // Get page ratings list all
+  getPageRatings: async ({ page }: { page: number }): Promise<RatinsBriefType[]> => {
+    let result = await $fetch(`/api/data?data=page-ratings&page=${page}`, {
       method: 'GET',
-    })) as any;
+    });
     return await result.json();
   },
 
-  getSections: async () => {
-    let result = (await $fetch(`/api/cache?data=sections`, {
+  // Get sections
+  getSections: async (): Promise<SectionType[]> => {
+    let result = await $fetch(`/api/data?data=sections`, {
       method: 'GET',
-    })) as any;
+    });
     return await result.json();
   },
 };

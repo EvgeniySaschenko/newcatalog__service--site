@@ -1,8 +1,9 @@
-import { dbConnect, prefixes } from '@/server/db-temporary/db';
+import { dbConnect, prefixes } from '@/server/db-temporary/_db';
+import { SectionType } from '@/types';
 
 export class Sections {
   // Get sections
-  async getSections() {
+  async getSections(): Promise<SectionType[]> {
     try {
       await dbConnect.connect();
       let result = await dbConnect.get(prefixes['sections']);

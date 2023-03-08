@@ -7,7 +7,7 @@ export class Common {
       await dbConnect.connect();
       let result = await dbConnect.get(prefixes['cache-id']);
       if (typeof result === 'string') {
-        result = result.split('').reverse().join(',');
+        result = result.split('-').reverse().join('-');
       }
       await dbConnect.quit();
       return result;

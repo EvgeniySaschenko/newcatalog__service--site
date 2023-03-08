@@ -1,5 +1,5 @@
-import { $fetch } from '@/plugins/fetch';
 import { SectionType, RatingType, RatingFullType, RatinsBriefType } from '@/types';
+import { $request } from '@/plugins/fetch';
 
 export let $api = {
   // Get page rating
@@ -8,10 +8,10 @@ export let $api = {
   }: {
     ratingId: RatingType['ratingId'];
   }): Promise<RatingFullType> => {
-    let result = await $fetch(`/api/data?data=page-rating&ratingId=${ratingId}`, {
+    let result = await $request(`/api/data?data=page-rating&ratingId=${ratingId}`, {
       method: 'GET',
     });
-    return await result.json();
+    return result;
   },
 
   // Get page ratings list section
@@ -22,26 +22,26 @@ export let $api = {
     sectionId: SectionType['sectionId'];
     page: number;
   }): Promise<RatinsBriefType[]> => {
-    let result = await $fetch(`/api/data?data=page-section&sectionId=${sectionId}&page=${page}`, {
+    let result = await $request(`/api/data?data=page-section&sectionId=${sectionId}&page=${page}`, {
       method: 'GET',
     });
-    return await result.json();
+    return result;
   },
 
   // Get page ratings list all
   getPageRatings: async ({ page }: { page: number }): Promise<RatinsBriefType[]> => {
-    let result = await $fetch(`/api/data?data=page-ratings&page=${page}`, {
+    let result = await $request(`/api/data?data=page-ratings&page=${page}`, {
       method: 'GET',
     });
-    return await result.json();
+    return result;
   },
 
   // Get sections
-  getSections: async (): Promise<SectionType[]> => {
-    let result = await $fetch(`/api/data?data=sections`, {
+  getSections: async (requestClient: any = null): Promise<SectionType[]> => {
+    let result = await $request(`/api/data?data=sections`, {
       method: 'GET',
     });
-    return await result.json();
+    return result;
   },
 };
 

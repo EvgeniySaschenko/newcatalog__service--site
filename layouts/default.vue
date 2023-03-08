@@ -1,12 +1,36 @@
 <template lang="pug">
+app-header
 .container
-  slot
-.container 2434324 435345
+  app-menu-main(:sections='sections')
+//- main.container
+slot
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
-export default defineComponent({});
+import { $api } from '@/plugins/api';
+import AppHeader from '@/components/app-header/app-header.vue';
+import AppBreadcrumbs from '@/components/app-breadcrumbs/app-breadcrumbs.vue';
+import AppMenuMain from '@/components/app-menu-main/app-menu-main.vue';
+
+export default defineNuxtComponent({
+  async asyncData() {
+    let sections = await $api.getSections();
+    return {
+      sections,
+    };
+  },
+  data() {
+    return {
+      sections: [],
+    };
+  },
+
+  components: {
+    AppHeader,
+    AppBreadcrumbs,
+    AppMenuMain,
+  },
+});
 </script>
 <style lang="sass">
 @import '@/assets/style/_style.sass'

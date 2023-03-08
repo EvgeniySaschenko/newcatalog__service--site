@@ -1,14 +1,3 @@
-export interface FetchType {
-  (url: string, params?: RequestInit): Promise<Response>;
-}
-
-// Tell TypeScript that this property is global i.e. available in components via "this"
-declare module '@vue/runtime-core' {
-  interface ComponentCustomProperties {
-    $fetch: FetchType;
-  }
-}
-
 let defaultParams = () => {
   return {
     headers: {
@@ -17,13 +6,18 @@ let defaultParams = () => {
   };
 };
 
-export let $fetch: FetchType = async (url: string, params?: RequestInit): Promise<Response> => {
+export let $request = async (url: string, params?: any): Promise<any> => {
   if (params && params.method !== 'GET') {
     params = Object.assign(defaultParams(), params);
   }
+
+  // let cookies = useRequestHeaders(['cookie']);
+  // console.log(cookies);
+  // Object.assign(params, cookies);
+
   let response: any;
   try {
-    response = await fetch(url, params);
+    response = await $fetch(url, params);
   } catch (error) {
     // Unexpected Errors
     console.error(error);
@@ -42,6 +36,4 @@ export let $fetch: FetchType = async (url: string, params?: RequestInit): Promis
   return response;
 };
 
-export default {
-  $fetch,
-};
+export default {};

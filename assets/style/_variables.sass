@@ -2,6 +2,12 @@ $app-screen-sm: 576px
 $app-screen-md: 768px
 $app-screen-lg: 992px
 $app-screen-xl: 1200px
+
+$app-font-color: #222222
+$app-border-color: #dcdfe6
+$app-primary-color: #5a448d
+$app-font-familly: 'Poppins'
+
 :root
   --app-screen-sm: 576px
   --app-screen-md: 768px
@@ -11,5 +17,29 @@ $app-screen-xl: 1200px
   --app-font-color: #222222
   --app-border-color: #dcdfe6
   --app-primary-color: #5a448d
-
   --app-font-familly: 'Poppins'
+
+// Между max и 1200 = 1140
+@mixin screen-xl
+  @media (min-width: $app-screen-xl) 
+    @content
+
+// Между 1200 и 992px = 960px
+@mixin screen-lg
+  @media (max-width: $app-screen-xl) and (min-width: $app-screen-lg) 
+    @content
+
+// Между 992px и 768px = 720px
+@mixin screen-md
+  @media (max-width: $app-screen-lg) and (min-width: $app-screen-md) 
+    @content
+
+// Между 768px и 576px = 540px
+@mixin screen-sm
+  @media (max-width: $app-screen-md) and (min-width: $app-screen-sm) 
+    @content
+
+// Между 576px и мин = 100%
+@mixin screen-xs
+  @media (max-width: $app-screen-sm)
+    @content

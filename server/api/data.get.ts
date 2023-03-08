@@ -10,8 +10,7 @@ export default defineEventHandler(async (event) => {
   let searchParams = new URL(referer + url).searchParams;
   let common = new Common();
   let cacheIdDb = await common.getCacheId();
-  let cookies = parseCookies(event);
-  let cacheIdUser = cookies.cacheId;
+  let cacheIdUser = getCookie(event, 'cacheId');
 
   // Preparation data
   async function preparationData() {
@@ -98,11 +97,12 @@ export default defineEventHandler(async (event) => {
   let cacheIdDbAfter = (await common.getCacheId()) || '';
   if (cacheIdDbAfter && cacheIdDbAfter !== cacheIdDb) {
     result = await preparationData();
+    cacheIdDbCurrent = cacheIdDb;
   }
 
-  if (result) {
-    setCookie(event, 'cacheId', cacheIdDbAfter);
-  }
+  setCookie(event, 'cacheId', cacheIdDbAfter, {
+    maxAge: 3600 * 365,
+  });
 
   return result;
 });

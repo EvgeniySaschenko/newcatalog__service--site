@@ -1,18 +1,13 @@
 import { dbConnect, prefixes } from '@/server/db-temporary/_db';
-import { SectionType, RatingType, LabelType, RatingItemType } from '@/types';
+import {
+  SectionType,
+  RatingType,
+  RatingFullType,
+  RatinsBriefType,
+  RatinsBriefListType,
+} from '@/types';
 let ratingsListCurrent: number[] = [];
 let sectionsRatingsListCurrent: any = {};
-
-type RatingFullType = {
-  labels: LabelType[];
-  rating: RatingType;
-  ratingItems: RatingItemType[];
-};
-
-type RatinsBriefType = {
-  labels: LabelType[];
-  rating: RatingType;
-};
 
 export class Ratings {
   maxCountRatingsPage = 10;
@@ -119,14 +114,7 @@ export class Ratings {
   }: {
     sectionId: SectionType['sectionId'];
     page: number;
-  }): Promise<
-    | {
-        items: RatinsBriefType[];
-        page: number;
-        countItems: number;
-      }
-    | boolean
-  > {
+  }): Promise<RatinsBriefListType | boolean> {
     try {
       let start = page * this.maxCountRatingsPage - this.maxCountRatingsPage;
       let end = page * this.maxCountRatingsPage;
@@ -145,10 +133,13 @@ export class Ratings {
         items.push(brief as RatinsBriefType);
       }
       await dbConnect.quit();
+      let itemsCount = sectionsRatingsListCurrent[sectionId].length;
+      let pagesCount = Math.ceil(itemsCount / this.maxCountRatingsPage);
       return {
         items,
         page,
-        countItems: sectionsRatingsListCurrent[sectionId].length,
+        pagesCount,
+        itemsCount,
       };
     } catch (error) {
       await dbConnect.quit();
@@ -158,14 +149,7 @@ export class Ratings {
   }
 
   // Get list briefs for page list ratings
-  async getRatingsList({ page }: { page: number }): Promise<
-    | {
-        items: RatinsBriefType[];
-        page: number;
-        countItems: number;
-      }
-    | boolean
-  > {
+  async getRatingsList({ page }: { page: number }): Promise<RatinsBriefListType | boolean> {
     try {
       let start = page * this.maxCountRatingsPage - this.maxCountRatingsPage;
       let end = page * this.maxCountRatingsPage;
@@ -181,10 +165,14 @@ export class Ratings {
         items.push(brief as RatinsBriefType);
       }
       await dbConnect.quit();
+
+      let itemsCount = sectionsRatingsListCurrent.length;
+      let pagesCount = Math.ceil(itemsCount / this.maxCountRatingsPage);
       return {
         items,
         page,
-        countItems: ratingsListCurrent.length,
+        pagesCount,
+        itemsCount,
       };
     } catch (error) {
       dbConnect.quit();

@@ -4,7 +4,7 @@
 <script lang="ts">
 import { SectionType } from '@/types';
 
-export default defineNuxtComponent({
+export default defineComponent({
   props: {
     sections: {
       type: Array,

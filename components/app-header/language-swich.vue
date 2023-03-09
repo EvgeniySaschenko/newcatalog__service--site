@@ -6,7 +6,7 @@ ul.language-swich
 <script lang="ts">
 import { LangInit } from '@/types';
 
-export default defineNuxtComponent({
+export default defineComponent({
   data() {
     return {
       langs: Object.keys(LangInit()),

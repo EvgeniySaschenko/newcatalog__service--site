@@ -10,7 +10,7 @@ export default <RouterConfig>{
     {
       name: 'Раздел',
       path: '/section/:sectionId',
-      component: () => import('@/pages/rating/index.vue'),
+      component: () => import('@/pages/section/index.vue'),
     },
   ],
 };

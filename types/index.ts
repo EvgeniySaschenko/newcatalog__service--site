@@ -102,3 +102,10 @@ export type RatinsBriefType = {
   labels: LabelType[];
   rating: RatingType;
 };
+
+export type RatinsBriefListType = {
+  items: RatinsBriefType[];
+  page: number;
+  pagesCount: number;
+  itemsCount: number;
+};

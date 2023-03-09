@@ -1,14 +1,15 @@
 <template lang="pug">
 ul.app-menu-main
   li.app-menu-main__item(v-for='item of sections')
-    nuxt-link.app-menu-main__link(:to='`/section/${item.sectionId}`') {{ item.name.ua }}
+    nuxt-link.app-menu-main__link(:to='`/section/${item.sectionId}`') {{ item.name[$lang] }}
 </template>
 
 <script lang="ts">
 import { SectionType } from '@/types';
 
-export default defineNuxtComponent({
+export default defineComponent({
   props: {
+    // sections
     sections: {
       type: Array,
       default: () => [] as SectionType[],

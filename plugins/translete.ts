@@ -1,23 +1,22 @@
-export interface TransleteType {
-  (key: string): string;
-}
+export let t = (key: string): string => {
+  return key || '';
+};
+
+export let lang = 'ua';
 
 // Tell TypeScript that this property is global i.e. available in components via "this"
 declare module '@vue/runtime-core' {
   interface ComponentCustomProperties {
-    $t: TransleteType;
+    $t: typeof t;
+    $lang: typeof lang;
   }
 }
-
-export let lang = 'ua';
 
 export default defineNuxtPlugin((nuxtApp) => {
   return {
     provide: {
+      t,
       lang,
-      t: (key: string): string => {
-        return key || '';
-      },
     },
   };
 });

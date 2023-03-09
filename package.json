@@ -22,6 +22,10 @@
     "typescript": "^4.9.5"
   },
   "dependencies": {
-    "redis": "^4.6.5"
+    "@nuxtjs/composition-api": "^0.33.1",
+    "@pinia/nuxt": "^0.4.7",
+    "pinia": "^2.0.33",
+    "redis": "^4.6.5",
+    "vuex": "^4.1.0"
   }
 }

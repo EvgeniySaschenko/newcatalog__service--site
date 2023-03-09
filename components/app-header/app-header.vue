@@ -14,7 +14,7 @@ header.app-header
 <script lang="ts">
 import LanguageSwich from './language-swich.vue';
 
-export default defineNuxtComponent({
+export default defineComponent({
   components: {
     LanguageSwich,
   },

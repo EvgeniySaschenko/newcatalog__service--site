@@ -21,7 +21,7 @@ export default defineEventHandler(async (event) => {
       // sections
       case 'sections': {
         let sections = new Sections();
-        response = await sections.getSections();
+        response = await sections.getSectionsCache();
         break;
       }
       // page-rating

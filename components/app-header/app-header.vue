@@ -1,7 +1,7 @@
 <template lang="pug">
 header.app-header
   .app-header__row.container
-    nuxt-link.app-header__logo(to='/')
+    nuxt-link.app-header__logo(to='/?page=1')
       .app-header__logo-col-1 #
       .app-header__logo-col-2
         .app-header__logo-text-1 new

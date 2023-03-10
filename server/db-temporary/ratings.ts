@@ -166,7 +166,7 @@ export class Ratings {
       }
       await dbConnect.quit();
 
-      let itemsCount = sectionsRatingsListCurrent.length;
+      let itemsCount = ratingsListCurrent.length;
       let pagesCount = Math.ceil(itemsCount / this.maxCountRatingsPage);
       return {
         items,

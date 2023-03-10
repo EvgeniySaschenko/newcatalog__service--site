@@ -1,19 +1,17 @@
 <template lang="pug">
 .page.page--section
-  h1.title-page {{ $t('Раздел') }}: {{ sectionName[$lang] }}
+  h1.title-page {{ $t('Список рейтингов') }}
   app-ratings-list(:ratingsList='ratingsList', :class='{ preloader: isLoading }')
 </template>
 
 <script lang="ts">
 import { $api } from '@/plugins/api';
 import AppRatingsList from '@/components/app-ratings-list/app-ratings-list.vue';
-import useSectionsStore from '@/store/sections';
-import { LangInit } from '@/types';
 
+// Get ratings list
 async function getRatingsList() {
-  let { params, query } = useRoute();
-  let ratingsList = await $api.getPageSection({
-    sectionId: Number(params.sectionId),
+  let { query } = useRoute();
+  let ratingsList = await $api.getPageRatings({
     page: Number(query.page) || 1,
   });
   return ratingsList;
@@ -21,26 +19,19 @@ async function getRatingsList() {
 
 export default defineNuxtComponent({
   async asyncData() {
-    let { params } = useRoute();
     let ratingsList = await getRatingsList();
-    let store = useSectionsStore();
-    let section = store.items.filter((el: any) => el.sectionId == params.sectionId);
-    let sectionName = LangInit();
-
-    if (section.length) {
-      sectionName = section[0].name;
-    }
 
     return {
+      // Ratings list
       ratingsList,
-      sectionName,
     };
   },
 
   data() {
     return {
+      // Ratings list
       ratingsList: {},
-      sectionName: '',
+      // Loading data
       isLoading: false,
     };
   },
@@ -68,7 +59,6 @@ export default defineNuxtComponent({
       }
     },
   },
-
   components: {
     AppRatingsList,
   },

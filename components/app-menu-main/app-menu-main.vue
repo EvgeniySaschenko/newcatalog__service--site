@@ -28,14 +28,14 @@ export default defineComponent({
   @include screen-lg()
     width: 650px !important
   &__item
-    margin: 10px
+    margin: 10px 7px
     font-weight: bold
     color: $app-primary-color
     cursor: pointer
     border-radius: 5px
   &__link
     border: 1px dashed $app-primary-color
-    padding: 5px 10px
+    padding: 5px 7px
     display: inline-flex
     &.router-link-active
       border: 1px dashed #ffffff

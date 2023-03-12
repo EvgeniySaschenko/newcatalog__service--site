@@ -16,9 +16,11 @@
 
 <script lang="ts">
 import { $api } from '@/plugins/api';
+import { $lang } from '@/plugins/translete';
 import RatingItems from './rating-items.vue';
 import { LabelType, RatingType, RatingItemType } from '@/types';
 import useSectionsStore from '@/store/sections';
+import useBreadcrumbsStore from '@/store/breadcrumbs';
 
 // Get ratings list
 export default defineNuxtComponent({
@@ -27,6 +29,15 @@ export default defineNuxtComponent({
     let { labels, rating, ratingItems } = await $api.getPageRating({
       ratingId: Number(params.ratingId),
     });
+    let store = useBreadcrumbsStore();
+
+    store.setBreadcrumbs([
+      {
+        name: rating.name[$lang],
+        link: `/rating/${rating.ratingId}`,
+      },
+    ]);
+
     return {
       labels,
       rating,
@@ -60,6 +71,7 @@ export default defineNuxtComponent({
       },
     },
   },
+
   components: {
     RatingItems,
   },

@@ -9,6 +9,7 @@
 <script lang="ts">
 import { $api } from '@/plugins/api';
 import AppRatingsList from '@/components/app-ratings-list/app-ratings-list.vue';
+import useBreadcrumbsStore from '@/store/breadcrumbs';
 
 // Get ratings list
 async function getRatingsList() {
@@ -22,6 +23,10 @@ async function getRatingsList() {
 export default defineNuxtComponent({
   async asyncData() {
     let ratingsList = await getRatingsList();
+
+    let store = useBreadcrumbsStore();
+
+    store.setBreadcrumbs([]);
 
     return {
       // Ratings list

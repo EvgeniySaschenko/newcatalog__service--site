@@ -8,8 +8,10 @@
 
 <script lang="ts">
 import { $api } from '@/plugins/api';
+import { $lang, $t } from '@/plugins/translete';
 import AppRatingsList from '@/components/app-ratings-list/app-ratings-list.vue';
 import useSectionsStore from '@/store/sections';
+import useBreadcrumbsStore from '@/store/breadcrumbs';
 import { LangInit } from '@/types';
 
 async function getRatingsList() {
@@ -32,6 +34,12 @@ export default defineNuxtComponent({
     if (section.length) {
       sectionName = section[0].name;
     }
+    useBreadcrumbsStore().setBreadcrumbs([
+      {
+        name: `${$t('Раздел')}: ${sectionName[$lang]}`,
+        link: `/section/${params.sectionId}`,
+      },
+    ]);
 
     return {
       ratingsList,

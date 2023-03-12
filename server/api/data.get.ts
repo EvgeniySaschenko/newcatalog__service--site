@@ -36,7 +36,7 @@ export default defineEventHandler(async (event) => {
         break;
       }
       // page-ratings
-      case 'page-ratings': {
+      case 'page-ratings-list': {
         let page = Number(searchParams.get('page')) || 1;
         let ratings = new Ratings();
         response = await ratings.getRatingsList({ page });

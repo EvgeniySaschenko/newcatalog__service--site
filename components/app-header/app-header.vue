@@ -1,7 +1,7 @@
 <template lang="pug">
 header.app-header
   .app-header__row.container
-    nuxt-link.app-header__logo(to='/?page=1')
+    nuxt-link.app-header__logo(to='/')
       .app-header__logo-col-1 #
       .app-header__logo-col-2
         .app-header__logo-text-1 new
@@ -37,7 +37,9 @@ export default defineComponent({
     font-size: 25px
     font-weight: 700
     text-transform: uppercase
-    border: 2px solid #ffffff
+    border: 2px dashed #ffffff
+    border-left: 2px solid
+    border-right: 2px solid
     padding: 10px
     border-radius: 10px
     background-color: rgba(255, 255, 255, .1)

@@ -29,8 +29,8 @@ export let $api = {
   },
 
   // Get page ratings list all
-  getPageRatings: async ({ page }: { page: number }): Promise<RatinsBriefType[]> => {
-    let result = await $request(`/api/data?data=page-ratings&page=${page}`, {
+  getPageRatingsList: async ({ page }: { page: number }): Promise<RatinsBriefType[]> => {
+    let result = await $request(`/api/data?data=page-ratings-list&page=${page}`, {
       method: 'GET',
     });
     return result;

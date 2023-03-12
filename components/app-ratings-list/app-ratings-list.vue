@@ -2,7 +2,7 @@
 .app-ratings-list
   .app-ratings-list__items
     .app-ratings-list__item(v-for='item of ratingsList.items')
-      nuxt-link.app-ratings-list__title(:to='`/rating/${item.ratingId}`') {{ item.rating.name[$lang] }}
+      nuxt-link.app-ratings-list__title(:to='`/rating/${item.rating.ratingId}`') {{ item.rating.name[$lang] }}
       .app-ratings-list__descr {{ item.rating.descr[$lang] }}
       .app-ratings-list__labels-list(v-if='item.labels.length')
         .app-ratings-list__label.label-rating(

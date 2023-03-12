@@ -1,7 +1,9 @@
 <template lang="pug">
 .page.page--section
+  app-preloader(:preloader='isLoading')
   h1.title-page {{ $t('Список рейтингов') }}
-  app-ratings-list(:ratingsList='ratingsList', :class='{ preloader: isLoading }')
+  .page__ratings-list
+    app-ratings-list(:ratingsList='ratingsList')
 </template>
 
 <script lang="ts">
@@ -11,7 +13,7 @@ import AppRatingsList from '@/components/app-ratings-list/app-ratings-list.vue';
 // Get ratings list
 async function getRatingsList() {
   let { query } = useRoute();
-  let ratingsList = await $api.getPageRatings({
+  let ratingsList = await $api.getPageRatingsList({
     page: Number(query.page) || 1,
   });
   return ratingsList;
@@ -24,6 +26,7 @@ export default defineNuxtComponent({
     return {
       // Ratings list
       ratingsList,
+      isLoading: false,
     };
   },
 
@@ -32,15 +35,19 @@ export default defineNuxtComponent({
       // Ratings list
       ratingsList: {},
       // Loading data
-      isLoading: false,
+      isLoading: true,
     };
   },
 
   watch: {
     $route: {
       async handler(to, from) {
+        if (to.path !== from.path) {
+          // Do not request data for the page when the user leaves it
+          this.isLoading = true;
+          return;
+        }
         if (to.query.page === from.query.page) return; // Do not request data if "query.page" has not changed
-        if (to.path !== from.path) return; // Do not request data for the page when the user leaves it
         await this.setRatingsList();
       },
     },

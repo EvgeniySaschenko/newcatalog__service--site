@@ -109,3 +109,9 @@ export type RatinsBriefListType = {
   pagesCount: number;
   itemsCount: number;
 };
+
+// Breadcrum
+export type BreadcrumbType = {
+  name: string;
+  link: string;
+};

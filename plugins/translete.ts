@@ -1,22 +1,22 @@
-export let t = (key: string): string => {
+export let $t = (key: string): string => {
   return key || '';
 };
 
-export let lang = 'ua';
+export let $lang = 'ua';
 
 // Tell TypeScript that this property is global i.e. available in components via "this"
 declare module '@vue/runtime-core' {
   interface ComponentCustomProperties {
-    $t: typeof t;
-    $lang: typeof lang;
+    $t: typeof $t;
+    $lang: typeof $lang;
   }
 }
 
 export default defineNuxtPlugin((nuxtApp) => {
   return {
     provide: {
-      t,
-      lang,
+      t: $t,
+      lang: $lang,
     },
   };
 });

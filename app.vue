@@ -1,6 +1,8 @@
 <template lang="pug">
 .wrapper
   app-header
+  .container
+    app-breadcrumbs(:breadcrumbs='breadcrumbs')
   main.app-content.container
     app-menu-main(:sections='sections')
     nuxt-layout
@@ -15,6 +17,7 @@ import AppFooter from '@/components/app-footer/app-footer.vue';
 import AppBreadcrumbs from '@/components/app-breadcrumbs/app-breadcrumbs.vue';
 import AppMenuMain from '@/components/app-menu-main/app-menu-main.vue';
 import useSectionsStore from '@/store/sections';
+import useBreadcrumbsStore from '@/store/breadcrumbs';
 import { SectionType } from '@/types';
 
 export default defineNuxtComponent({
@@ -31,6 +34,12 @@ export default defineNuxtComponent({
     return {
       sections: useSectionsStore().items as SectionType[],
     };
+  },
+
+  computed: {
+    breadcrumbs() {
+      return useBreadcrumbsStore().items;
+    },
   },
 
   components: {

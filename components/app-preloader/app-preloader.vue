@@ -15,7 +15,7 @@ export default defineComponent({
 
   data() {
     return {
-      isShow: false,
+      isShow: true,
     };
   },
 
@@ -25,7 +25,6 @@ export default defineComponent({
       immediate: true,
       handler() {
         setTimeout(() => {
-          console.log(this.preloader);
           this.isShow = this.preloader;
         }, 500);
       },

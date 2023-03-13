@@ -48,7 +48,7 @@ export default defineComponent({
       background-color: #0000FF
     50%
       opacity: .3
-      background-color: #5F9EA0
+      background-color: #000080
     70%
       opacity: .4
       background-color: #0000FF
@@ -77,6 +77,7 @@ export default defineComponent({
     flex-shrink: 0
     animation: preloader-animate 3s ease-in-out infinite
     background-color: $app-primary-color
+    background-color: black
     height: 100%
     margin: auto
     height: 100%
@@ -95,15 +96,15 @@ export default defineComponent({
     animation: preloader-animate-2 2s ease-in-out infinite
     background-color: $app-primary-color
     border-radius: 10px
-    height: 80px
+    height: 60px
     margin: auto
-    width: 80px
+    width: 60px
     z-index: 10
     bottom: 0
     content: "#"
     color: #ffffff
     border: 2px dashed #ffffff
-    font-size: 30px
+    font-size: 50px
     font-weight: 700
     left: 0
     position: absolute

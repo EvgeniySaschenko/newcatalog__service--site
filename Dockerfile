@@ -7,6 +7,6 @@ WORKDIR ${WORKDIR_BASE}/${SERVICE}
 
 # Установка пакетов
 COPY package.json package-lock.json ./
-RUN npm install
+RUN npm install --legacy-peer-deps
 
 COPY . .

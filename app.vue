@@ -1,9 +1,8 @@
 <template lang="pug">
 .wrapper
   app-header
-  .container
+  .app-content.container
     app-breadcrumbs(:breadcrumbs='breadcrumbs')
-  main.app-content.container
     app-menu-main(:sections='sections')
     nuxt-layout
       nuxt-page
@@ -53,5 +52,6 @@ export default defineNuxtComponent({
 <style lang="sass">
 @import '@/assets/style/_style.sass'
 .app-content
+  background-color: #ffffff
   min-height: 100vh
 </style>

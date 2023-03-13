@@ -1,5 +1,5 @@
 <template lang="pug">
-footer.app-footer
+footer.app-footer newcatalog.net@gmail.com
 </template>
 
 <script lang="ts">
@@ -11,4 +11,6 @@ export default defineComponent({});
 .app-footer
   background-color: $app-primary-color
   padding: 20px 0
+  color: #ffffff
+  text-align: center
 </style>

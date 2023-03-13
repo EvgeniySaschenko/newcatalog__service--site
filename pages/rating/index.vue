@@ -1,6 +1,6 @@
 <template lang="pug">
 .page.page--section
-  app-preloader(:preloader='isLoading')
+  app-preloader(:isLoading='isLoading')
   h1.title-page {{ rating.name[$lang] }}
 
   .page__top
@@ -12,11 +12,18 @@
 
   .page__rating-items
     rating-items(:labels='labels', :items='ratingItems', :rating='rating')
+
+  .page__descr {{ rating.descr[$lang] }}
+
+head
+  title {{ pageTitle }}
+  meta(name='description', :content='pageMetaDescr')
 </template>
 
 <script lang="ts">
 import { $api } from '@/plugins/api';
 import { $lang } from '@/plugins/translete';
+import { $config } from '@/plugins/config';
 import RatingItems from './rating-items.vue';
 import { LabelType, RatingType, RatingItemType } from '@/types';
 import useSectionsStore from '@/store/sections';
@@ -43,6 +50,8 @@ export default defineNuxtComponent({
       rating,
       ratingItems,
       isLoading: false,
+      pageTitle: `${$config.projectName} - ${rating.name[$lang]}`,
+      pageMetaDescr: rating.descr[$lang],
     };
   },
 
@@ -85,6 +94,11 @@ export default defineNuxtComponent({
     display: flex
     justify-content: flex-end
     margin-bottom: 10px
+  &__descr
+    margin: 15px 0
+    color: $app-primary-color
+    text-align: center
+
 .labels-sections
   display: inline-flex
   flex-wrap: wrap

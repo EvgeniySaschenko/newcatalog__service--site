@@ -1,13 +1,17 @@
 <template lang="pug">
 .page.page--section
-  app-preloader(:preloader='isLoading')
-  h1.title-page {{ $t('Список рейтингов') }}
+  app-preloader(:isLoading='isLoading')
+  h1.title-page {{ $t('Рейтинг интернет сервисов') }}
   .page__ratings-list
     app-ratings-list(:ratingsList='ratingsList')
+head
+  title {{ pageTitle }}
 </template>
 
 <script lang="ts">
+import { $config } from '@/plugins/config';
 import { $api } from '@/plugins/api';
+import { $t } from '@/plugins/translete';
 import AppRatingsList from '@/components/app-ratings-list/app-ratings-list.vue';
 import useBreadcrumbsStore from '@/store/breadcrumbs';
 
@@ -32,6 +36,7 @@ export default defineNuxtComponent({
       // Ratings list
       ratingsList,
       isLoading: false,
+      pageTitle: `${$config.projectName} - ${$t('Рейтинг интернет сервисов')}`,
     };
   },
 

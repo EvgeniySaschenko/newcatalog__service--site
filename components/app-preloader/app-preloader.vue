@@ -7,7 +7,7 @@ export default defineComponent({
   emits: ['update'],
   props: {
     // Curent page
-    preloader: {
+    isLoading: {
       type: Boolean,
       default: false,
     },
@@ -21,12 +21,12 @@ export default defineComponent({
 
   watch: {
     // Сreate new state on change in external source
-    preloader: {
+    isLoading: {
       immediate: true,
       handler() {
         setTimeout(() => {
-          this.isShow = this.preloader;
-        }, 500);
+          this.isShow = this.isLoading;
+        }, 300);
       },
     },
   },

@@ -1,18 +1,20 @@
 <template lang="pug">
 .page.page--section
-  app-preloader(:preloader='isLoading')
-  h1.title-page {{ $t('Раздел') }}: {{ sectionName[$lang] }}
+  app-preloader(:isLoading='isLoading')
+  h1.title-page {{ $t('Раздел') }}: {{ sectionName }}
   .page__ratings-list
     app-ratings-list(:ratingsList='ratingsList')
+head
+  title {{ pageTitle }}
 </template>
 
 <script lang="ts">
+import { $config } from '@/plugins/config';
 import { $api } from '@/plugins/api';
 import { $lang, $t } from '@/plugins/translete';
 import AppRatingsList from '@/components/app-ratings-list/app-ratings-list.vue';
 import useSectionsStore from '@/store/sections';
 import useBreadcrumbsStore from '@/store/breadcrumbs';
-import { LangInit } from '@/types';
 
 async function getRatingsList() {
   let { params, query } = useRoute();
@@ -29,19 +31,21 @@ export default defineNuxtComponent({
     let ratingsList = await getRatingsList();
     let store = useSectionsStore();
     let section = store.items.filter((el: any) => el.sectionId == params.sectionId);
-    let sectionName = LangInit();
+    let sectionName = '';
 
-    if (section.length) {
-      sectionName = section[0].name;
+    if (section[0].name) {
+      sectionName = `${section[0].name[$lang]}`;
     }
+
     useBreadcrumbsStore().setBreadcrumbs([
       {
-        name: `${$t('Раздел')}: ${sectionName[$lang]}`,
+        name: sectionName,
         link: `/section/${params.sectionId}`,
       },
     ]);
 
     return {
+      pageTitle: `${$config.projectName} - ${$t('Раздел')}: ${sectionName}`,
       ratingsList,
       sectionName,
       isLoading: false,

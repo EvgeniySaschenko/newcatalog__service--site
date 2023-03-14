@@ -2,14 +2,16 @@
 .app-ratings-list
   .app-ratings-list__items
     .app-ratings-list__item(v-for='item of ratingsList.items')
-      nuxt-link.app-ratings-list__title(:to='`/rating/${item.rating.ratingId}`') {{ item.rating.name[$lang] }}
+      nuxt-link.app-ratings-list__title(
+        :to='`/rating/${item.rating.ratingId}`',
+        data-element-type='app-ratings-list__title'
+      ) {{ item.rating.name[$lang] }}
       .app-ratings-list__descr {{ item.rating.descr[$lang] }}
       .app-ratings-list__labels-list(v-if='item.labels.length')
         .app-ratings-list__label.label-rating(
           v-for='label of item.labels',
           :style='`background-color: ${label.color}`'
         ) {{ '#' + label.name[$lang] }}
-      .app-ratings-list__date {{ $date(item.rating.dateFirstPublication) }}
 
   app-pagination(
     v-if='ratingsList.pagesCount > 1',
@@ -56,8 +58,4 @@ export default defineComponent({
     margin-bottom: 10px
   &__labels-list
     margin-bottom: 10px
-  &__date
-    font-size: 10px
-    color: $app-primary-color
-    text-align: right
 </style>

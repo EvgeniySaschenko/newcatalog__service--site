@@ -6,6 +6,7 @@
   .page__top
     .labels-sections
       nuxt-link.labels-sections__item(
+        data-element-type='labels-sections__item',
         v-for='sectionId of rating.sectionsIds',
         :to='`/section/${sectionId}`'
       ) {{ `#${sectionsMap[sectionId].name[$lang]}` }}
@@ -14,10 +15,6 @@
     rating-items(:labels='labels', :items='ratingItems', :rating='rating')
 
   .page__descr {{ rating.descr[$lang] }}
-
-head
-  title {{ pageTitle }}
-  meta(name='description', :content='pageMetaDescr')
 </template>
 
 <script lang="ts">
@@ -45,13 +42,16 @@ export default defineNuxtComponent({
       },
     ]);
 
+    useSeoMeta({
+      title: `${$config.projectName} - ${rating.name[$lang]}`,
+      description: rating.descr[$lang],
+    });
+
     return {
       labels,
       rating,
       ratingItems,
       isLoading: false,
-      pageTitle: `${$config.projectName} - ${rating.name[$lang]}`,
-      pageMetaDescr: rating.descr[$lang],
     };
   },
 

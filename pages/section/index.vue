@@ -4,8 +4,6 @@
   h1.title-page {{ $t('Раздел') }}: {{ sectionName }}
   .page__ratings-list
     app-ratings-list(:ratingsList='ratingsList')
-head
-  title {{ pageTitle }}
 </template>
 
 <script lang="ts">
@@ -44,8 +42,11 @@ export default defineNuxtComponent({
       },
     ]);
 
+    useSeoMeta({
+      title: `${$config.projectName} - ${$t('Раздел')}: ${sectionName}`,
+    });
+
     return {
-      pageTitle: `${$config.projectName} - ${$t('Раздел')}: ${sectionName}`,
       ratingsList,
       sectionName,
       isLoading: false,

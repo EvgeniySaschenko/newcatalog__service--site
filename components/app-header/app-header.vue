@@ -1,7 +1,7 @@
 <template lang="pug">
 header.app-header
   .app-header__row.container
-    nuxt-link.app-header__logo(to='/')
+    nuxt-link.app-header__logo(to='/', data-element-type='app-header__logo')
       img.app-header__logo-img(src='@/assets/img/logo.png')
     .app-header__langs
       language-swich
@@ -22,6 +22,7 @@ export default defineComponent({
 .app-header
   padding: 15px 0
   background-color: $app-primary-color
+  margin-bottom: 15px
   &__row
     display: flex
     justify-content: space-between

@@ -4,8 +4,6 @@
   h1.title-page {{ $t('Рейтинг интернет сервисов') }}
   .page__ratings-list
     app-ratings-list(:ratingsList='ratingsList')
-head
-  title {{ pageTitle }}
 </template>
 
 <script lang="ts">
@@ -32,11 +30,14 @@ export default defineNuxtComponent({
 
     store.setBreadcrumbs([]);
 
+    useSeoMeta({
+      title: `${$config.projectName} - ${$t('Рейтинг интернет сервисов')}`,
+    });
+
     return {
       // Ratings list
       ratingsList,
       isLoading: false,
-      pageTitle: `${$config.projectName} - ${$t('Рейтинг интернет сервисов')}`,
     };
   },
 

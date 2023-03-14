@@ -1,7 +1,12 @@
 <template lang="pug">
 .rating-items
   .rating-items__list
-    a.rating-items__item(v-for='item of items', :href='item.url', target='_blank')
+    a.rating-items__item(
+      v-for='(item, index) in items',
+      :href='item.url',
+      target='_blank',
+      @click='gtmPush(index)'
+    )
       .rating-items__img-box(:style='`background-color: ${item.color}`')
         img.rating-items__img(:src='item.logoImg')
       .rating-items__info
@@ -17,7 +22,7 @@
 </template>
 
 <script lang="ts">
-import { LabelType } from '@/types';
+import { LabelType, RatingItemType } from '@/types';
 
 type LabelsMapType = {
   [key: LabelType['labelId']]: LabelType;
@@ -50,6 +55,24 @@ export default defineNuxtComponent({
     for (let label of this.labels as LabelType[]) {
       this.labelsMap[label.labelId] = label;
     }
+  },
+
+  methods: {
+    gtmPush(index: number) {
+      let rating = this.items[index] as RatingItemType;
+
+      this.$gtmPush({
+        event: 'rating-item.click',
+        ratingItemId: rating.ratingItemId,
+        ratingId: rating.ratingId,
+        siteId: rating.siteId,
+        elementsType: this.$config.elementsTypes['rating-items__item'],
+        timestamp: Date.now(),
+        userAgent: window.navigator.userAgent,
+        isTouchDevice: this.$screen.isTouchDevice(),
+        screen: { height: window.screen.height, width: window.screen.width },
+      });
+    },
   },
 });
 </script>

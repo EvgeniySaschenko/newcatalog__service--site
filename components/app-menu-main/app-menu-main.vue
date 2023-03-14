@@ -1,7 +1,10 @@
 <template lang="pug">
 ul.app-menu-main
-  li.app-menu-main__item(v-for='item of sections')
-    nuxt-link.app-menu-main__link(:to='`/section/${item.sectionId}`') {{ item.name[$lang] }}
+  li.app-menu-main__item(v-for='(item, index) in sections')
+    nuxt-link.app-menu-main__link(
+      :to='`/section/${item.sectionId}`',
+      data-element-type='app-menu-main__link'
+    ) {{ item.name[$lang] }}
 </template>
 
 <script lang="ts">
@@ -12,7 +15,21 @@ export default defineComponent({
     // sections
     sections: {
       type: Array,
-      default: () => [] as SectionType[],
+      default: () => [],
+    },
+  },
+
+  methods: {
+    // Add data to GTM
+    gtmPush(index: number) {
+      let section = this.sections[index] as SectionType;
+      let gtmInfo = {
+        event: 'click',
+        type: 'section',
+        sectionIdFrom: Number(this.$route.params.sectionId),
+        sectionIdTo: section.sectionId,
+      };
+      this.$gtmPush(gtmInfo);
     },
   },
 });
@@ -25,8 +42,8 @@ export default defineComponent({
   display: flex
   flex-wrap: wrap
   justify-content: center
-  @include screen-lg()
-    width: 650px !important
+  // @media (max-width: $app-screen-xl)
+  //   display: none
   &__item
     margin: 10px 7px
     font-weight: bold

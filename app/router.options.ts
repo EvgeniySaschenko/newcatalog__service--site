@@ -3,17 +3,17 @@ import type { RouterConfig } from '@nuxt/schema';
 export default <RouterConfig>{
   routes: (routes) => [
     {
-      name: 'Список рейтингов',
+      name: 'ratings-list',
       path: '/',
       component: () => import('@/pages/ratings-list/index.vue'),
     },
     {
-      name: 'Рейтинг',
+      name: 'rating',
       path: '/rating/:ratingId',
       component: () => import('@/pages/rating/index.vue'),
     },
     {
-      name: 'Раздел',
+      name: 'section',
       path: '/section/:sectionId',
       component: () => import('@/pages/section/index.vue'),
     },

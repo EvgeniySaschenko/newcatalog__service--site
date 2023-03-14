@@ -1,15 +1,20 @@
 <template lang="pug">
 .app-breadcrumbs
-  .app-breadcrumbs__list
-    .app-breadcrumbs__item(v-for='(item, index) in items')
-      nuxt-link.app-breadcrumbs__link(:to='item.link', v-if='index != items.length - 1') {{ item.name }}
-      span.app-breadcrumbs__link.active(v-else) {{ item.name }}
+  client-only
+    .app-breadcrumbs__list
+      .app-breadcrumbs__item(v-for='(item, index) in items')
+        nuxt-link.app-breadcrumbs__link(
+          :to='item.link',
+          v-if='index != items.length - 1',
+          data-element-type='app-breadcrumbs__link'
+        ) {{ item.name }}
+        span.app-breadcrumbs__link.active(v-else) {{ item.name }}
 </template>
 
 <script lang="ts">
 import { BreadcrumbType } from '@/types';
 
-export default defineComponent({
+export default defineNuxtComponent({
   props: {
     breadcrumbs: {
       type: Array,
@@ -40,6 +45,20 @@ export default defineComponent({
       },
     },
   },
+
+  methods: {
+    // Add data to GTM
+    gtmPush(index: number) {
+      let section = this.sections[index] as SectionType;
+      let gtmInfo = {
+        event: 'click',
+        type: 'section',
+        sectionIdFrom: Number(this.$route.params.sectionId),
+        sectionIdTo: section.sectionId,
+      };
+      this.$gtmPush(gtmInfo);
+    },
+  },
 });
 </script>
 <style lang="sass" scoped>
@@ -47,7 +66,7 @@ export default defineComponent({
 
 .app-breadcrumbs
   width: 100%
-  margin: 10px 0
+  min-height: 30px
   &__list
     display: flex
     color: $app-primary-color
@@ -63,6 +82,11 @@ export default defineComponent({
       font-size: 10px
     &:last-child
       font-weight: 400
+      border-bottom: 0
+      .app-breadcrumbs__link
+        border-bottom: 0
       &::after
         content: ""
+  &__link
+    border-bottom: 1px solid $app-primary-color
 </style>

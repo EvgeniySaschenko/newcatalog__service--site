@@ -8,7 +8,7 @@
       nuxt-link.labels-sections__item(
         data-element-type='labels-sections__item',
         v-for='sectionId of rating.sectionsIds',
-        :to='`/section/${sectionId}`'
+        :to='`/${$lang}/section/${sectionId}`'
       ) {{ `#${sectionsMap[sectionId].name[$lang]}` }}
 
   .page__rating-items
@@ -19,16 +19,17 @@
 
 <script lang="ts">
 import { $api } from '@/plugins/api';
-import { $lang } from '@/plugins/translete';
+import translate from '@/plugins/translate';
 import { $config } from '@/plugins/config';
 import RatingItems from './rating-items.vue';
-import { LabelType, RatingType, RatingItemType } from '@/types';
+import { LabelType, RatingType, RatingItemType, LangType } from '@/types';
 import useSectionsStore from '@/store/sections';
 import useBreadcrumbsStore from '@/store/breadcrumbs';
 
 // Get ratings list
 export default defineNuxtComponent({
   async asyncData() {
+    let { $lang } = translate() as { $lang: keyof LangType };
     let { params } = useRoute();
     let { labels, rating, ratingItems } = await $api.getPageRating({
       ratingId: Number(params.ratingId),
@@ -38,7 +39,7 @@ export default defineNuxtComponent({
     store.setBreadcrumbs([
       {
         name: rating.name[$lang],
-        link: `/rating/${rating.ratingId}`,
+        link: `/${$lang}/rating/${rating.ratingId}`,
       },
     ]);
 

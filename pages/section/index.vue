@@ -9,7 +9,8 @@
 <script lang="ts">
 import { $config } from '@/plugins/config';
 import { $api } from '@/plugins/api';
-import { $lang, $t } from '@/plugins/translete';
+import { LangType } from '@/types';
+import translate, { $tType } from '@/plugins/translate';
 import AppRatingsList from '@/components/app-ratings-list/app-ratings-list.vue';
 import useSectionsStore from '@/store/sections';
 import useBreadcrumbsStore from '@/store/breadcrumbs';
@@ -25,6 +26,7 @@ async function getRatingsList() {
 
 export default defineNuxtComponent({
   async asyncData() {
+    let { $t, $lang } = translate() as { $t: $tType; $lang: keyof LangType };
     let { params } = useRoute();
     let ratingsList = await getRatingsList();
     let store = useSectionsStore();
@@ -38,7 +40,7 @@ export default defineNuxtComponent({
     useBreadcrumbsStore().setBreadcrumbs([
       {
         name: sectionName,
-        link: `/section/${params.sectionId}`,
+        link: `/${$lang}/section/${params.sectionId}`,
       },
     ]);
 

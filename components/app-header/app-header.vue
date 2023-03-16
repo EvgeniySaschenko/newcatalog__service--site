@@ -1,18 +1,18 @@
 <template lang="pug">
 header.app-header
   .app-header__row.container
-    nuxt-link.app-header__logo(to='/', data-element-type='app-header__logo')
-      img.app-header__logo-img(src='@/assets/img/logo.png')
+    nuxt-link.app-header__logo(:to='`/${$lang}`', data-element-type='app-header__logo')
+      img.app-header__logo-img(src='@/assets/img/logo.png', alt='Logo')
     .app-header__langs
-      language-swich
+      app-language-swich
 </template>
 
 <script lang="ts">
-import LanguageSwich from './language-swich.vue';
+import AppLanguageSwich from '@/components/app-language-swich/app-language-swich.vue';
 
 export default defineComponent({
   components: {
-    LanguageSwich,
+    AppLanguageSwich,
   },
 });
 </script>

@@ -2,7 +2,7 @@
 .app-pagination
   .app-pagination__list
     nuxt-link.app-pagination__item(
-      :to='`?page=${item}`',
+      :to='`/${$lang}/?page=${item}`',
       data-element-type='app-pagination__item',
       @click.prevent='setUrlParam(item)',
       v-for='item of pages',

@@ -26,6 +26,7 @@
     "@pinia/nuxt": "^0.4.7",
     "@types/is-touch-device": "^1.0.0",
     "is-touch-device": "^1.0.1",
+    "js-cookie": "^3.0.1",
     "pinia": "^2.0.33",
     "redis": "^4.6.5",
     "vue-gtag-next": "^1.14.0",

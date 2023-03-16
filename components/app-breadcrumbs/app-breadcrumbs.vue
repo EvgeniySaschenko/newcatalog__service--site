@@ -12,7 +12,7 @@
 </template>
 
 <script lang="ts">
-import { BreadcrumbType } from '@/types';
+import { BreadcrumbType, SectionType } from '@/types';
 
 export default defineNuxtComponent({
   props: {
@@ -38,25 +38,11 @@ export default defineNuxtComponent({
         this.items = [
           {
             name: this.$t('Главная'),
-            link: '/',
+            link: `/${this.$lang}`,
           },
           ...this.breadcrumbs,
         ] as BreadcrumbType[];
       },
-    },
-  },
-
-  methods: {
-    // Add data to GTM
-    gtmPush(index: number) {
-      let section = this.sections[index] as SectionType;
-      let gtmInfo = {
-        event: 'click',
-        type: 'section',
-        sectionIdFrom: Number(this.$route.params.sectionId),
-        sectionIdTo: section.sectionId,
-      };
-      this.$gtmPush(gtmInfo);
     },
   },
 });

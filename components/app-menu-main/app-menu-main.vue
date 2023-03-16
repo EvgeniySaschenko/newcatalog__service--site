@@ -2,34 +2,18 @@
 ul.app-menu-main
   li.app-menu-main__item(v-for='(item, index) in sections')
     nuxt-link.app-menu-main__link(
-      :to='`/section/${item.sectionId}`',
+      :to='`/${$lang}/section/${item.sectionId}`',
       data-element-type='app-menu-main__link'
-    ) {{ item.name[$lang] }}
+    ) {{ `#${item.name[$lang]}` }}
 </template>
 
 <script lang="ts">
-import { SectionType } from '@/types';
-
 export default defineComponent({
   props: {
     // sections
     sections: {
       type: Array,
       default: () => [],
-    },
-  },
-
-  methods: {
-    // Add data to GTM
-    gtmPush(index: number) {
-      let section = this.sections[index] as SectionType;
-      let gtmInfo = {
-        event: 'click',
-        type: 'section',
-        sectionIdFrom: Number(this.$route.params.sectionId),
-        sectionIdTo: section.sectionId,
-      };
-      this.$gtmPush(gtmInfo);
     },
   },
 });

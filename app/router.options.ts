@@ -1,21 +1,30 @@
 import type { RouterConfig } from '@nuxt/schema';
+import { LangType } from '@/types';
+import translate from '@/plugins/translate';
+
 // https://router.vuejs.org/api/interfaces/routeroptions.html
-export default <RouterConfig>{
+let $router = <RouterConfig>{
   routes: (routes) => [
     {
-      name: 'ratings-list',
+      name: 'ratings-list-mome',
       path: '/',
       component: () => import('@/pages/ratings-list/index.vue'),
     },
     {
+      name: 'ratings-list',
+      path: '/:lang',
+      component: () => import('@/pages/ratings-list/index.vue'),
+    },
+    {
       name: 'rating',
-      path: '/rating/:ratingId',
+      path: '/:lang/rating/:ratingId',
       component: () => import('@/pages/rating/index.vue'),
     },
     {
       name: 'section',
-      path: '/section/:sectionId',
+      path: '/:lang/section/:sectionId',
       component: () => import('@/pages/section/index.vue'),
     },
   ],
 };
+export default $router;

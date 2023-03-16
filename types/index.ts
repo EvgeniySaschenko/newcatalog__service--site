@@ -6,13 +6,6 @@ export type LangType = {
   ru: string;
 };
 
-export const LangInit = (): LangType => {
-  return {
-    ua: '',
-    ru: '',
-  };
-};
-
 // Section
 export type SectionType = {
   sectionId: number;

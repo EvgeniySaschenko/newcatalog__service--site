@@ -1,14 +1,13 @@
 import isTouchDevice from 'is-touch-device';
 
-export let $screen = {
-  isTouchDevice,
+export type $screenType = {
+  isTouchDevice: typeof isTouchDevice;
 };
 
-declare module '@vue/runtime-core' {
-  interface ComponentCustomProperties {
-    $screen: typeof $screen;
-  }
-}
+export let $screen = {
+  // Check device
+  isTouchDevice,
+};
 
 export default defineNuxtPlugin((nuxtApp) => {
   return {
@@ -17,3 +16,9 @@ export default defineNuxtPlugin((nuxtApp) => {
     },
   };
 });
+
+declare module '@vue/runtime-core' {
+  interface ComponentCustomProperties {
+    $screen: $screenType;
+  }
+}

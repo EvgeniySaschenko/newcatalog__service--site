@@ -23,16 +23,21 @@ export let $request = async (url: string, params?: any): Promise<any> => {
     console.error(error);
     throw { server: 'Ошибка сервера' };
   }
-  if (response.status == 400) {
-    // Data validation errors
-    throw await response.json();
-  } else if (response.status == 404) {
-    throw { server: 'URL не найден на сервере' };
-  } else if (response.status > 400) {
-    // Other server errors
-    console.error(response);
-    throw { server: 'Ошибка сервера' };
+
+  console.log(response);
+  if (response.statusCode == 205) {
+    location.reload();
   }
+  // if (response.status == 400) {
+  //   // Data validation errors
+  //   throw await response.json();
+  // } else if (response.status == 404) {
+  //   throw { server: 'URL не найден на сервере' };
+  // } else if (response.status > 400) {
+  //   // Other server errors
+  //   console.error(response);
+  //   throw { server: 'Ошибка сервера' };
+  // }
   return response;
 };
 

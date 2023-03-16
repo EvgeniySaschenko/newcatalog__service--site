@@ -8,7 +8,7 @@
       @click='gtmPush(index)'
     )
       .rating-items__img-box(:style='`background-color: ${item.color}`')
-        img.rating-items__img(:src='item.logoImg')
+        img.rating-items__img(:src='item.logoImg', :alt='item.hostname')
       .rating-items__info
         .rating-items__name-box
           .rating-items__name {{ item.name[$lang] }}

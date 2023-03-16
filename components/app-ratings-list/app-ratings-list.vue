@@ -3,7 +3,7 @@
   .app-ratings-list__items
     .app-ratings-list__item(v-for='item of ratingsList.items')
       nuxt-link.app-ratings-list__title(
-        :to='`/rating/${item.rating.ratingId}`',
+        :to='`/${$lang}/rating/${item.rating.ratingId}`',
         data-element-type='app-ratings-list__title'
       ) {{ item.rating.name[$lang] }}
       .app-ratings-list__descr {{ item.rating.descr[$lang] }}

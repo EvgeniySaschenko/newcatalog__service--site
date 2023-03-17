@@ -13,12 +13,12 @@
         .rating-items__name-box
           .rating-items__name {{ item.name[$lang] }}
         .rating-items__hostname {{ item.hostname }}
-
-        .rating-items__labels-list(v-if='labels.length')
-          .rating-items__label.label-rating(
+        .rating-items__labels(v-if='labels.length')
+          app-label-rating(
             v-for='labelId of item.labelsIds',
-            :style='`background-color: ${labelsMap[labelId].color}`'
-          ) {{ `#${labelsMap[labelId].name[$lang]}` }}
+            :color='labelsMap[labelId].color',
+            :text='labelsMap[labelId].name[$lang]'
+          )
 </template>
 
 <script lang="ts">
@@ -58,6 +58,7 @@ export default defineNuxtComponent({
   },
 
   methods: {
+    // Add info to Google Tag Manager
     gtmPush(index: number) {
       let rating = this.items[index] as RatingItemType;
 
@@ -88,13 +89,9 @@ export default defineNuxtComponent({
   &__item
     width: 33.33%
     border: 1px dashed $app-primary-color
-    @include screen-lg()
+    @media (max-width: $app-screen-xl)
       width: 50%
-    @include screen-md()
-      width: 50%
-    @include screen-sm()
-      width: 100%
-    @include screen-xs()
+    @media (max-width: $app-screen-md)
       width: 100%
   &__img-box
     display: flex

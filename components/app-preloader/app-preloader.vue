@@ -1,5 +1,5 @@
 <template lang="pug">
-.app-preloader(v-if='isShow')
+.app-preloader(v-if='isShow', :style='`position: ${position};`')
 </template>
 
 <script lang="ts">
@@ -10,6 +10,11 @@ export default defineComponent({
     isLoading: {
       type: Boolean,
       default: false,
+    },
+    // Css position
+    position: {
+      type: String,
+      default: 'absolute',
     },
   },
 
@@ -24,54 +29,60 @@ export default defineComponent({
     isLoading: {
       immediate: true,
       handler() {
-        setTimeout(() => {
-          this.isShow = this.isLoading;
-        }, 300);
+        if (this.isLoading) {
+          this.isShow = true;
+        } else {
+          this.isShow = false;
+        }
       },
     },
   },
 });
 </script>
-<style lang="sass" scoped>
+<style lang="sass">
 @import '@/assets/style/_variables.sass'
 
 .app-preloader
-  position: absolute
-  height: 100%
-  width: 100%
+  display: flex
+  align-items: center
+  justify-content: center
+  top: 0
+  left: 0
+  bottom: 0
+  right: 0
   @keyframes preloader-animate
     0%
-      opacity: .6
+      opacity: .1
       background-color: $app-primary-color
     20%
       opacity: .4
       background-color: #0000FF
     50%
-      opacity: .3
+      opacity: .6
       background-color: #000080
     70%
       opacity: .4
       background-color: #0000FF
     100%
-      opacity: .6
+      opacity: .1
       background-color: $app-primary-color
 
   @keyframes preloader-animate-2
     0%
       transform: scale(1.2)
-      opacity: .9
+      opacity: 0
     25%
       transform: scale(1)
-      opacity: .7
+      opacity: .3
     50%
       transform: sscale(1.2)
       opacity: .6
     75%
       transform: scale(1)
-      opacity: .7
+      opacity: .9
     100%
       transform: scale(1.2)
-      opacity: .9
+      opacity: 1
 
   &::before
     flex-shrink: 0
@@ -96,15 +107,15 @@ export default defineComponent({
     animation: preloader-animate-2 2s ease-in-out infinite
     background-color: $app-primary-color
     border-radius: 10px
-    height: 60px
+    height: 70px
     margin: auto
-    width: 60px
+    width: 70px
     z-index: 10
     bottom: 0
     content: "#"
     color: #ffffff
     border: 2px dashed #ffffff
-    font-size: 50px
+    font-size: 60px
     font-weight: 700
     left: 0
     position: absolute

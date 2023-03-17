@@ -4,7 +4,7 @@ ul.app-menu-main
     nuxt-link.app-menu-main__link(
       :to='`/${$lang}/section/${item.sectionId}`',
       data-element-type='app-menu-main__link'
-    ) {{ `#${item.name[$lang]}` }}
+    ) {{ item.name[$lang] }}
 </template>
 
 <script lang="ts">
@@ -26,6 +26,8 @@ export default defineComponent({
   display: flex
   flex-wrap: wrap
   justify-content: center
+  font-size: 16px
+  // max-width: 700px
   // @media (max-width: $app-screen-xl)
   //   display: none
   &__item
@@ -36,7 +38,7 @@ export default defineComponent({
     border-radius: 5px
   &__link
     border: 1px dashed $app-primary-color
-    padding: 5px 7px
+    padding: 5px 5px
     display: inline-flex
     &.router-link-active
       border: 1px dashed #ffffff

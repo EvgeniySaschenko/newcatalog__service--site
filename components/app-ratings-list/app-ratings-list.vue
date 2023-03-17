@@ -33,31 +33,31 @@
 </template>
 
 <script lang="ts">
-import { RatinsBriefListType } from '@/types';
 import AppPagination from '@/components/app-pagination/app-pagination.vue';
 import useSectionsStore from '@/store/sections';
+import { RatinsBriefListType } from '@/types';
 
 export default defineComponent({
+  components: {
+    AppPagination,
+  },
+  props: {
+    ratingsList: {
+      type: Object as () => RatinsBriefListType,
+      default: () => {
+        return {};
+      },
+    },
+  },
   data() {
     return {
       // Sections map
       sectionsMap: useSectionsStore().itemsMap,
     };
   },
-  props: {
-    ratingsList: {
-      type: Object,
-      default: () => {
-        return {} as RatinsBriefListType;
-      },
-    },
-  },
-
-  components: {
-    AppPagination,
-  },
 
   methods: {
+    // Reciord number relative all list
     calcNumberRecord(index: number) {
       let { maxRecordsPerPage, page } = this.ratingsList;
       return (page - 1) * maxRecordsPerPage + (index + 1);

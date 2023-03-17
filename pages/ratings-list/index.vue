@@ -7,16 +7,15 @@
 </template>
 
 <script lang="ts">
-import { $config } from '@/plugins/config';
-import { $api } from '@/plugins/api';
-import translate, { $tType } from '@/plugins/translate';
 import AppRatingsList from '@/components/app-ratings-list/app-ratings-list.vue';
 import useBreadcrumbsStore from '@/store/breadcrumbs';
+import { RatinsBriefType } from '@/types';
 
 // Get ratings list
 async function getRatingsList() {
+  let { $pluginApi } = useNuxtApp();
   let { query } = useRoute();
-  let ratingsList = await $api.getPageRatingsList({
+  let ratingsList = await $pluginApi.getPageRatingsList({
     page: Number(query.page) || 1,
   });
   return ratingsList;
@@ -24,7 +23,7 @@ async function getRatingsList() {
 
 export default defineNuxtComponent({
   async asyncData() {
-    let { $t } = translate() as { $t: $tType };
+    let { $pluginConfig, $t } = useNuxtApp();
     let ratingsList = await getRatingsList();
 
     let store = useBreadcrumbsStore();
@@ -32,11 +31,10 @@ export default defineNuxtComponent({
     store.setBreadcrumbs([]);
 
     useSeoMeta({
-      title: `${$config.projectName} - ${$t('Рейтинг интернет-сервисов')}`,
+      title: `${$pluginConfig.projectName} - ${$t('Рейтинг интернет-сервисов')}`,
     });
 
     return {
-      // Ratings list
       ratingsList,
       isLoading: false,
     };
@@ -45,7 +43,7 @@ export default defineNuxtComponent({
   data() {
     return {
       // Ratings list
-      ratingsList: {},
+      ratingsList: [] as RatinsBriefType[],
       // Loading data
       isLoading: true,
     };
@@ -72,12 +70,13 @@ export default defineNuxtComponent({
         this.ratingsList = await getRatingsList();
       } catch (error) {
         console.error(error);
-        this.ratingsList = {};
+        this.ratingsList = [];
       } finally {
         this.isLoading = false;
       }
     },
   },
+
   components: {
     AppRatingsList,
   },

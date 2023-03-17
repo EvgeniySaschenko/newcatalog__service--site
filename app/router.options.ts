@@ -1,6 +1,4 @@
 import type { RouterConfig } from '@nuxt/schema';
-import { LangType } from '@/types';
-import translate from '@/plugins/translate';
 
 // https://router.vuejs.org/api/interfaces/routeroptions.html
 let $router = <RouterConfig>{

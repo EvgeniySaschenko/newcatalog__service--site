@@ -12,7 +12,6 @@
 
 <script lang="ts">
 export default defineComponent({
-  emits: ['update'],
   props: {
     // Curent page
     page: {
@@ -25,6 +24,7 @@ export default defineComponent({
       default: 1,
     },
   },
+  emits: ['update'],
 
   data() {
     return {

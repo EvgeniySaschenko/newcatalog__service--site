@@ -1,7 +1,7 @@
 import { LangType } from '@/types';
 
 export default defineNuxtPlugin((nuxtApp) => {
-  onNuxtReady(async () => {
+  onNuxtReady(() => {
     let { path, params } = nuxtApp.$router.currentRoute.value;
     let { $lang, $langDefault, $langs } = nuxtApp;
 

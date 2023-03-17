@@ -2,7 +2,6 @@
 .page.page--section
   app-preloader(:isLoading='isLoading', position='fixed')
   app-page-title(:text='rating.name[$lang]')
-
   .page__top
     .labels-sections
       nuxt-link.labels-sections__item(
@@ -18,20 +17,18 @@
 </template>
 
 <script lang="ts">
-import { $api } from '@/plugins/api';
-import translate from '@/plugins/translate';
-import { $config } from '@/plugins/config';
 import RatingItems from './rating-items.vue';
-import { LabelType, RatingType, RatingItemType, LangType } from '@/types';
 import useSectionsStore from '@/store/sections';
 import useBreadcrumbsStore from '@/store/breadcrumbs';
+import { LabelType, RatingType, RatingItemType } from '@/types';
 
 // Get ratings list
 export default defineNuxtComponent({
   async asyncData() {
-    let { $lang } = translate() as { $lang: keyof LangType };
+    let { $pluginConfig, $lang, $pluginApi } = useNuxtApp();
+
     let { params } = useRoute();
-    let { labels, rating, ratingItems } = await $api.getPageRating({
+    let { labels, rating, ratingItems } = await $pluginApi.getPageRating({
       ratingId: Number(params.ratingId),
     });
     let store = useBreadcrumbsStore();
@@ -39,12 +36,12 @@ export default defineNuxtComponent({
     store.setBreadcrumbs([
       {
         name: rating.name[$lang],
-        link: `/${$lang}/rating/${rating.ratingId}`,
+        url: `/${$lang}/rating/${rating.ratingId}`,
       },
     ]);
 
     useSeoMeta({
-      title: `${$config.projectName} - ${rating.name[$lang]}`,
+      title: `${$pluginConfig.projectName} - ${rating.name[$lang]}`,
       description: rating.descr[$lang],
     });
 
@@ -73,10 +70,9 @@ export default defineNuxtComponent({
 
   watch: {
     $route: {
-      async handler(to, from) {
+      handler(to, from) {
         if (to.path !== from.path) {
           this.isLoading = true;
-          return;
         }
       },
     },

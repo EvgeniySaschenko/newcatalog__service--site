@@ -9,7 +9,6 @@ ul.app-language-swich
 
 <script lang="ts">
 import { LangType } from '@/types';
-import { $config } from '@/plugins/config';
 
 export default defineComponent({
   methods: {
@@ -23,7 +22,7 @@ export default defineComponent({
         partsUrl[1] = item;
       }
 
-      useCookie($config.cookies.lang, {
+      useCookie(this.$pluginConfig.cookies.lang, {
         maxAge: 3600 * 24 * 365,
       }).value = item;
       window.location.href = partsUrl.join('/');

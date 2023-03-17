@@ -1,5 +1,5 @@
 import { LangType } from '@/types';
-let words = {
+let $words = {
   ru: {
     Главная: 'Главная',
     'Рейтинг интернет-сервисов': 'Рейтинг интернет-сервисов',
@@ -12,7 +12,8 @@ let words = {
   },
 };
 
-export type $tType = (key: string) => string;
+export type $wordsType = keyof (typeof $words)[keyof LangType];
+export type $tType = (key: $wordsType) => string;
 
 export default defineNuxtPlugin((nuxtApp) => {
   let $langDefault: keyof LangType = 'ru';
@@ -30,28 +31,21 @@ export default defineNuxtPlugin((nuxtApp) => {
     $lang = $langDefault;
   }
 
-  let $t = (key: string): string => {
-    return words[$lang][key] || key || '';
+  let $t: $tType = (key) => {
+    return $words[$lang][key] || key || '';
   };
 
   return {
-    $langDefault,
-    $lang,
-    $t,
-    $langs,
+    // As an exception, the "plugin" prefix was not added
     provide: {
+      // All langs
       langs: $langs,
+      // Lang default
       langDefault: $langDefault,
+      // Function for  translate
       t: $t,
+      // Current language
       lang: $lang,
     },
   };
 });
-
-// Tell TypeScript that this property is global i.e. available in components via "this"
-declare module '@vue/runtime-core' {
-  interface ComponentCustomProperties {
-    $t: $tType;
-    $lang: keyof LangType;
-  }
-}

@@ -5,7 +5,7 @@
       v-for='(item, index) in items',
       :href='item.url',
       target='_blank',
-      @click='gtmPush(index)'
+      @click='pluginGtmPush(index)'
     )
       .rating-items__img-box(:style='`background-color: ${item.color}`')
         img.rating-items__img(:src='item.logoImg', :alt='item.hostname')
@@ -28,16 +28,11 @@ type LabelsMapType = {
   [key: LabelType['labelId']]: LabelType;
 };
 
-export default defineNuxtComponent({
-  data() {
-    return {
-      labelsMap: {} as LabelsMapType,
-    };
-  },
+export default defineComponent({
   props: {
     // labels
     labels: {
-      type: Array,
+      type: Array as () => LabelType[],
       default: () => {
         return [];
       },
@@ -45,11 +40,16 @@ export default defineNuxtComponent({
 
     // rating items
     items: {
-      type: Array,
+      type: Array as () => RatingItemType[],
       default: () => {
         return [];
       },
     },
+  },
+  data() {
+    return {
+      labelsMap: {} as LabelsMapType,
+    };
   },
   created() {
     for (let label of this.labels as LabelType[]) {
@@ -59,18 +59,18 @@ export default defineNuxtComponent({
 
   methods: {
     // Add info to Google Tag Manager
-    gtmPush(index: number) {
+    pluginGtmPush(index: number) {
       let rating = this.items[index] as RatingItemType;
 
-      this.$gtmPush({
+      this.$pluginGtmPush({
         event: 'rating-item.click',
         ratingItemId: rating.ratingItemId,
         ratingId: rating.ratingId,
         siteId: rating.siteId,
-        elementsType: this.$config.elementsTypes['rating-items__item'],
+        elementsType: this.$pluginConfig.elementsTypes['rating-items__item'],
         timestamp: Date.now(),
         userAgent: window.navigator.userAgent,
-        isTouchDevice: this.$screen.isTouchDevice(),
+        isTouchDevice: this.$pluginScreen.isTouchDevice(),
         screen: { height: window.screen.height, width: window.screen.width },
       });
     },

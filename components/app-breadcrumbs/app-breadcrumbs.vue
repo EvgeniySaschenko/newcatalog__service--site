@@ -12,12 +12,12 @@
 </template>
 
 <script lang="ts">
-import { BreadcrumbType, SectionType } from '@/types';
+import { BreadcrumbType } from '@/types';
 
-export default defineNuxtComponent({
+export default defineComponent({
   props: {
     breadcrumbs: {
-      type: Array,
+      type: Array as () => BreadcrumbType[],
       default: () => {
         return [];
       },
@@ -38,10 +38,10 @@ export default defineNuxtComponent({
         this.items = [
           {
             name: this.$t('Главная'),
-            link: `/${this.$lang}`,
+            url: `/${this.$lang}`,
           },
           ...this.breadcrumbs,
-        ] as BreadcrumbType[];
+        ];
       },
     },
   },

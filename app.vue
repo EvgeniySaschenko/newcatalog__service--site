@@ -10,7 +10,6 @@
 </template>
 
 <script lang="ts">
-import { $api } from '@/plugins/api';
 import AppHeader from '@/components/app-header/app-header.vue';
 import AppFooter from '@/components/app-footer/app-footer.vue';
 import AppMenuMain from '@/components/app-menu-main/app-menu-main.vue';
@@ -21,7 +20,8 @@ import { SectionType } from '@/types';
 
 export default defineNuxtComponent({
   async asyncData() {
-    let sections = await $api.getSections();
+    let { $pluginApi } = useNuxtApp();
+    let sections = await $pluginApi.getSections();
     let store = useSectionsStore();
     store.setSections(sections);
     return {

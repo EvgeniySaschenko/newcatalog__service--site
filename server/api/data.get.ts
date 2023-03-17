@@ -1,9 +1,9 @@
-let { SITE__DOMAIN } = process.env;
-let referer = `https://${SITE__DOMAIN}`;
 import { Common } from '@/server/db-temporary/common';
 import { Sections } from '@/server/db-temporary/sections';
 import { Ratings } from '@/server/db-temporary/ratings';
-let cacheIdDbCurrent: any = undefined;
+let { SITE__DOMAIN } = process.env;
+let referer = `https://${SITE__DOMAIN}`;
+let cacheIdDbCurrent: string | undefined;
 
 export default defineEventHandler(async (event) => {
   let url = event.node.req.url || '';

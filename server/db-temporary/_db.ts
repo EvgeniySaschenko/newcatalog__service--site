@@ -6,10 +6,10 @@ let {
   DB_TEMPORARY__DB_CONTENT_PREFIXES,
 } = process.env;
 
-export let dbConnect = createClient({
+let dbConnect = createClient({
   url: `${DB_TEMPORARY__HOST}:${DB_TEMPORARY__PORT_INTERNAL}/${DB_TEMPORARY__DB_CONTENT}`,
 });
 
-export let prefixes = JSON.parse(DB_TEMPORARY__DB_CONTENT_PREFIXES || '');
+let prefixes = JSON.parse(DB_TEMPORARY__DB_CONTENT_PREFIXES || '');
 
-export default {};
+export default { dbConnect, prefixes };

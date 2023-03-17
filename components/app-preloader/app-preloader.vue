@@ -4,7 +4,6 @@
 
 <script lang="ts">
 export default defineComponent({
-  emits: ['update'],
   props: {
     // Curent page
     isLoading: {

@@ -6,7 +6,7 @@ let defaultParams = () => {
   };
 };
 
-export let $request = async (url: string, params?: any): Promise<any> => {
+export const $pluginRequest = async (url: string, params?: any): Promise<any> => {
   if (params && params.method !== 'GET') {
     params = Object.assign(defaultParams(), params);
   }
@@ -21,10 +21,8 @@ export let $request = async (url: string, params?: any): Promise<any> => {
   } catch (error) {
     // Unexpected Errors
     console.error(error);
-    throw { server: 'Ошибка сервера' };
   }
 
-  console.log(response);
   if (response.statusCode == 205) {
     location.reload();
   }
@@ -41,4 +39,11 @@ export let $request = async (url: string, params?: any): Promise<any> => {
   return response;
 };
 
-export default {};
+export default defineNuxtPlugin((nuxtApp) => {
+  return {
+    provide: {
+      // Function for requests to server. It is needed to set general rules for all requests
+      pluginRequest: $pluginRequest,
+    },
+  };
+});

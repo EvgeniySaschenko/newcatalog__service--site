@@ -1,4 +1,4 @@
-import { dbConnect, prefixes } from '@/server/db-temporary/_db';
+import db from '@/server/db-temporary/_db';
 import {
   SectionType,
   RatingType,
@@ -6,19 +6,21 @@ import {
   RatinsBriefType,
   RatinsBriefListType,
 } from '@/types';
+type SectionsRatingsListType = [number[]];
+
 let ratingsListCurrent: number[] = [];
-let sectionsRatingsListCurrent: any = {};
+let sectionsRatingsListCurrent = {} as SectionsRatingsListType;
 
 export class Ratings {
   maxRecordsPerPage = 10;
   // Rating ids are cached in Nuxt
   async initLists({ sections }: { sections: SectionType[] }) {
-    let sectionsRatingsList = {} as any;
+    let sectionsRatingsList = {} as SectionsRatingsListType;
     let ratingsList = await this.getRatingsIds();
     if (!ratingsList) return false;
     for await (let { sectionId } of sections) {
       let list = await this.getSectionRatingsIds({ sectionId });
-      if (!list && typeof Array.isArray(list)) return false;
+      if (!Array.isArray(list)) return false;
       sectionsRatingsList[sectionId] = list;
     }
     ratingsListCurrent = ratingsList as number[];
@@ -33,23 +35,25 @@ export class Ratings {
     ratingId: RatingType['ratingId'];
   }): Promise<RatingFullType | boolean> {
     try {
-      await dbConnect.connect();
-      let rating = JSON.parse((await dbConnect.get(`${prefixes['rating']}_${ratingId}`)) || '');
-      let labels = JSON.parse((await dbConnect.get(`${prefixes['labels']}_${ratingId}`)) || '[]');
+      await db.dbConnect.connect();
+      let rating = JSON.parse((await db.dbConnect.get(`${db.prefixes.rating}_${ratingId}`)) || '');
+      let labels = JSON.parse(
+        (await db.dbConnect.get(`${db.prefixes.labels}_${ratingId}`)) || '[]'
+      );
       let ratingItems = JSON.parse(
-        (await dbConnect.get(`${prefixes['rating-items']}_${ratingId}`)) || '{}'
+        (await db.dbConnect.get(`${db.prefixes['rating-items']}_${ratingId}`)) || '{}'
       );
 
       if (!rating) return false;
 
-      await dbConnect.quit();
+      await db.dbConnect.quit();
       return {
         rating,
         labels,
         ratingItems,
       };
     } catch (error) {
-      await dbConnect.quit();
+      await db.dbConnect.quit();
       console.error(error);
     }
     return false;
@@ -62,8 +66,12 @@ export class Ratings {
     ratingId: RatingType['ratingId'];
   }): Promise<RatinsBriefType | boolean> {
     try {
-      let rating = JSON.parse((await dbConnect.get(`${prefixes['rating']}_${ratingId}`)) || '{}');
-      let labels = JSON.parse((await dbConnect.get(`${prefixes['labels']}_${ratingId}`)) || '[]');
+      let rating = JSON.parse(
+        (await db.dbConnect.get(`${db.prefixes.rating}_${ratingId}`)) || '{}'
+      );
+      let labels = JSON.parse(
+        (await db.dbConnect.get(`${db.prefixes.labels}_${ratingId}`)) || '[]'
+      );
 
       return {
         rating,
@@ -78,12 +86,12 @@ export class Ratings {
   // Get list ids all ratings
   async getRatingsIds(): Promise<RatingType['ratingId'][] | boolean> {
     try {
-      await dbConnect.connect();
-      let result = await dbConnect.get(prefixes['ratings-list']);
-      await dbConnect.quit();
+      await db.dbConnect.connect();
+      let result = await db.dbConnect.get(db.prefixes['ratings-list']);
+      await db.dbConnect.quit();
       return result ? JSON.parse(result).arr : [];
     } catch (error) {
-      await dbConnect.quit();
+      await db.dbConnect.quit();
       console.error(error);
     }
     return false;
@@ -96,12 +104,12 @@ export class Ratings {
     sectionId: SectionType['sectionId'];
   }): Promise<RatingType['ratingId'][] | boolean> {
     try {
-      await dbConnect.connect();
-      let result = await dbConnect.get(`${prefixes['section-ratings']}_${sectionId}`);
-      await dbConnect.quit();
+      await db.dbConnect.connect();
+      let result = await db.dbConnect.get(`${db.prefixes['section-ratings']}_${sectionId}`);
+      await db.dbConnect.quit();
       return result ? JSON.parse(result).arr : [];
     } catch (error) {
-      await dbConnect.quit();
+      await db.dbConnect.quit();
       console.error(error);
     }
     return false;
@@ -126,13 +134,13 @@ export class Ratings {
       if (!listIds.length) return false;
 
       let items = [] as RatinsBriefType[];
-      await dbConnect.connect();
+      await db.dbConnect.connect();
       for await (let ratingId of listIds) {
         let brief = await this.getRatingBrief({ ratingId });
-        if (!brief) throw Error(`${ratingId}`);
+        if (!brief) throw new Error(`${ratingId}`);
         items.push(brief as RatinsBriefType);
       }
-      await dbConnect.quit();
+      await db.dbConnect.quit();
       let itemsCount = sectionsRatingsListCurrent[sectionId].length;
       let pagesCount = Math.ceil(itemsCount / this.maxRecordsPerPage);
       return {
@@ -143,7 +151,7 @@ export class Ratings {
         maxRecordsPerPage: this.maxRecordsPerPage,
       };
     } catch (error) {
-      await dbConnect.quit();
+      await db.dbConnect.quit();
       console.error(error);
     }
     return false;
@@ -159,13 +167,13 @@ export class Ratings {
       if (!listIds.length) return false;
 
       let items = [] as RatinsBriefType[];
-      await dbConnect.connect();
+      await db.dbConnect.connect();
       for await (let ratingId of listIds) {
         let brief = await this.getRatingBrief({ ratingId });
-        if (!brief) throw Error(`${ratingId}`);
+        if (!brief) throw new Error(`${ratingId}`);
         items.push(brief as RatinsBriefType);
       }
-      await dbConnect.quit();
+      await db.dbConnect.quit();
 
       let itemsCount = ratingsListCurrent.length;
       let pagesCount = Math.ceil(itemsCount / this.maxRecordsPerPage);
@@ -177,7 +185,7 @@ export class Ratings {
         maxRecordsPerPage: this.maxRecordsPerPage,
       };
     } catch (error) {
-      dbConnect.quit();
+      db.dbConnect.quit();
       console.error(error);
     }
     return false;

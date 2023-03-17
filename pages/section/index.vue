@@ -7,17 +7,15 @@
 </template>
 
 <script lang="ts">
-import { $config } from '@/plugins/config';
-import { $api } from '@/plugins/api';
-import { LangType } from '@/types';
-import translate, { $tType } from '@/plugins/translate';
 import AppRatingsList from '@/components/app-ratings-list/app-ratings-list.vue';
 import useSectionsStore from '@/store/sections';
 import useBreadcrumbsStore from '@/store/breadcrumbs';
+import { RatinsBriefType } from '@/types';
 
 async function getRatingsList() {
+  let { $pluginApi } = useNuxtApp();
   let { params, query } = useRoute();
-  let ratingsList = await $api.getPageSection({
+  let ratingsList = await $pluginApi.getPageSection({
     sectionId: Number(params.sectionId),
     page: Number(query.page) || 1,
   });
@@ -26,7 +24,7 @@ async function getRatingsList() {
 
 export default defineNuxtComponent({
   async asyncData() {
-    let { $t, $lang } = translate() as { $t: $tType; $lang: keyof LangType };
+    let { $pluginConfig, $t, $lang } = useNuxtApp();
     let { params } = useRoute();
     let ratingsList = await getRatingsList();
     let store = useSectionsStore();
@@ -40,12 +38,12 @@ export default defineNuxtComponent({
     useBreadcrumbsStore().setBreadcrumbs([
       {
         name: sectionName,
-        link: `/${$lang}/section/${params.sectionId}`,
+        url: `/${$lang}/section/${params.sectionId}`,
       },
     ]);
 
     useSeoMeta({
-      title: `${$config.projectName} - ${$t('Раздел')}: ${sectionName}`,
+      title: `${$pluginConfig.projectName} - ${$t('Раздел')}: ${sectionName}`,
     });
 
     return {
@@ -57,7 +55,7 @@ export default defineNuxtComponent({
 
   data() {
     return {
-      ratingsList: {},
+      ratingsList: [] as RatinsBriefType[],
       sectionName: '',
       isLoading: true,
     };
@@ -84,7 +82,7 @@ export default defineNuxtComponent({
         this.ratingsList = await getRatingsList();
       } catch (error) {
         console.error(error);
-        this.ratingsList = {};
+        this.ratingsList = [];
       } finally {
         this.isLoading = false;
       }

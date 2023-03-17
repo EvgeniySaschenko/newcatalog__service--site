@@ -8,11 +8,13 @@ ul.app-menu-main
 </template>
 
 <script lang="ts">
+import { SectionType } from '@/types';
+
 export default defineComponent({
   props: {
     // sections
     sections: {
-      type: Array,
+      type: Array as () => SectionType[],
       default: () => [],
     },
   },
@@ -40,6 +42,7 @@ export default defineComponent({
     border: 1px dashed $app-primary-color
     padding: 5px 5px
     display: inline-flex
+    white-space: nowrap
     &.router-link-active
       border: 1px dashed #ffffff
       color: #ffffff

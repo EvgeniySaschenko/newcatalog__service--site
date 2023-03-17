@@ -10,7 +10,7 @@ let ratingsListCurrent: number[] = [];
 let sectionsRatingsListCurrent: any = {};
 
 export class Ratings {
-  maxCountRatingsPage = 10;
+  maxRecordsPerPage = 10;
   // Rating ids are cached in Nuxt
   async initLists({ sections }: { sections: SectionType[] }) {
     let sectionsRatingsList = {} as any;
@@ -116,8 +116,8 @@ export class Ratings {
     page: number;
   }): Promise<RatinsBriefListType | boolean> {
     try {
-      let start = page * this.maxCountRatingsPage - this.maxCountRatingsPage;
-      let end = page * this.maxCountRatingsPage;
+      let start = page * this.maxRecordsPerPage - this.maxRecordsPerPage;
+      let end = page * this.maxRecordsPerPage;
 
       if (!sectionsRatingsListCurrent[sectionId]) return false;
 
@@ -134,12 +134,13 @@ export class Ratings {
       }
       await dbConnect.quit();
       let itemsCount = sectionsRatingsListCurrent[sectionId].length;
-      let pagesCount = Math.ceil(itemsCount / this.maxCountRatingsPage);
+      let pagesCount = Math.ceil(itemsCount / this.maxRecordsPerPage);
       return {
         items,
         page,
         pagesCount,
         itemsCount,
+        maxRecordsPerPage: this.maxRecordsPerPage,
       };
     } catch (error) {
       await dbConnect.quit();
@@ -151,8 +152,8 @@ export class Ratings {
   // Get list briefs for page list ratings
   async getRatingsList({ page }: { page: number }): Promise<RatinsBriefListType | boolean> {
     try {
-      let start = page * this.maxCountRatingsPage - this.maxCountRatingsPage;
-      let end = page * this.maxCountRatingsPage;
+      let start = page * this.maxRecordsPerPage - this.maxRecordsPerPage;
+      let end = page * this.maxRecordsPerPage;
       let listIds = ratingsListCurrent.slice(start, end);
 
       if (!listIds.length) return false;
@@ -167,12 +168,13 @@ export class Ratings {
       await dbConnect.quit();
 
       let itemsCount = ratingsListCurrent.length;
-      let pagesCount = Math.ceil(itemsCount / this.maxCountRatingsPage);
+      let pagesCount = Math.ceil(itemsCount / this.maxRecordsPerPage);
       return {
         items,
         page,
         pagesCount,
         itemsCount,
+        maxRecordsPerPage: this.maxRecordsPerPage,
       };
     } catch (error) {
       dbConnect.quit();

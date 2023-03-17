@@ -1,7 +1,7 @@
 <template lang="pug">
 .page.page--section
-  app-preloader(:isLoading='isLoading')
-  h1.title-page {{ rating.name[$lang] }}
+  app-preloader(:isLoading='isLoading', position='fixed')
+  app-page-title(:text='rating.name[$lang]')
 
   .page__top
     .labels-sections
@@ -91,6 +91,7 @@ export default defineNuxtComponent({
 @import '@/assets/style/_variables.sass'
 
 .page
+  position: relative
   &__top
     display: flex
     justify-content: flex-end

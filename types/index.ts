@@ -101,6 +101,7 @@ export type RatinsBriefListType = {
   page: number;
   pagesCount: number;
   itemsCount: number;
+  maxRecordsPerPage: number;
 };
 
 // Breadcrum

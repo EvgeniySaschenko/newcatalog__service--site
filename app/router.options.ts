@@ -1,7 +1,7 @@
 import type { RouterConfig } from '@nuxt/schema';
 
 // https://router.vuejs.org/api/interfaces/routeroptions.html
-let $router = <RouterConfig>{
+const $router = <RouterConfig>{
   routes: (routes) => [
     {
       name: 'ratings-list-mome',

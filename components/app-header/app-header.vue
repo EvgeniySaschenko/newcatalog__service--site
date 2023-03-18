@@ -27,11 +27,11 @@ export default defineComponent({
     display: flex
     justify-content: space-between
     align-items: center
-    @include screen-xs()
+    @media (max-width: $app-screen-sm)
       flex-direction: column
   &__logo
     max-width: 280px
-    @include screen-xs()
+    @media (max-width: $app-screen-sm)
       margin-bottom: 10px
     &-img
       width: 100%

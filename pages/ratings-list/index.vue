@@ -1,7 +1,7 @@
 <template lang="pug">
 .page.page--section
   app-preloader(:isLoading='isLoading', position='fixed')
-  app-page-title(:text='$t("Рейтинг интернет-сервисов")')
+  app-page-title(:text='$t("Rating of Internet services")')
   .page__ratings-list
     app-ratings-list(:ratingsList='ratingsList')
 </template>
@@ -31,7 +31,7 @@ export default defineNuxtComponent({
     store.setBreadcrumbs([]);
 
     useSeoMeta({
-      title: `${$pluginConfig.projectName} - ${$t('Рейтинг интернет-сервисов')}`,
+      title: `${$pluginConfig.projectName} - ${$t('Rating of Internet services')}`,
     });
 
     return {

@@ -22,6 +22,7 @@ export default defineNuxtComponent({
   async asyncData() {
     let { $pluginApi } = useNuxtApp();
     let sections = await $pluginApi.getSections();
+
     let store = useSectionsStore();
     store.setSections(sections);
     return {
@@ -46,6 +47,13 @@ export default defineNuxtComponent({
     AppFooter,
     AppMenuMain,
     AppBreadcrumbs,
+  },
+
+  created() {
+    // If the cache has not yet been created
+    if ((this.sections as any)?.statusCode == 202) {
+      showError({ statusCode: 202 });
+    }
   },
 });
 </script>

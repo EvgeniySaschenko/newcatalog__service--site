@@ -29,9 +29,8 @@ export default defineComponent({
   flex-wrap: wrap
   justify-content: center
   font-size: 16px
-  // max-width: 700px
-  // @media (max-width: $app-screen-xl)
-  //   display: none
+  @media (max-width: $app-screen-xl)
+    max-width: 700px
   &__item
     margin: 10px 7px
     font-weight: bold

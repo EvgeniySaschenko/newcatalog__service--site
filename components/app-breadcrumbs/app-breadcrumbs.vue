@@ -4,7 +4,7 @@
     .app-breadcrumbs__list
       .app-breadcrumbs__item(v-for='(item, index) in items')
         nuxt-link.app-breadcrumbs__link(
-          :to='item.link',
+          :to='item.url',
           v-if='index != items.length - 1',
           data-element-type='app-breadcrumbs__link'
         ) {{ item.name }}
@@ -37,7 +37,7 @@ export default defineComponent({
       handler() {
         this.items = [
           {
-            name: this.$t('Главная'),
+            name: this.$t('Home'),
             url: `/${this.$lang}`,
           },
           ...this.breadcrumbs,

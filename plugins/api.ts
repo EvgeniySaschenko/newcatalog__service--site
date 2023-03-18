@@ -1,15 +1,17 @@
 import { SectionType, RatingType, RatingFullType, RatinsBriefType } from '@/types';
-import { $pluginRequest } from '@/plugins/request';
+// import { $pluginRequest } from '@/plugins/request';
 
 export default defineNuxtPlugin((nuxtApp) => {
-  let $pluginApi = {
+  let $pluginApi;
+
+  $pluginApi = {
     // Get page rating
     getPageRating: async ({
       ratingId,
     }: {
       ratingId: RatingType['ratingId'];
     }): Promise<RatingFullType> => {
-      let result = await $pluginRequest(`/api/data?data=page-rating&ratingId=${ratingId}`, {
+      let result = await nuxtApp.$pluginRequest(`/api/data?data=page-rating&ratingId=${ratingId}`, {
         method: 'GET',
       });
       return result;
@@ -23,7 +25,7 @@ export default defineNuxtPlugin((nuxtApp) => {
       sectionId: SectionType['sectionId'];
       page: number;
     }): Promise<RatinsBriefType[]> => {
-      let result = await $pluginRequest(
+      let result = await nuxtApp.$pluginRequest(
         `/api/data?data=page-section&sectionId=${sectionId}&page=${page}`,
         {
           method: 'GET',
@@ -34,7 +36,7 @@ export default defineNuxtPlugin((nuxtApp) => {
 
     // Get page ratings list all
     getPageRatingsList: async ({ page }: { page: number }): Promise<RatinsBriefType[]> => {
-      let result = await $pluginRequest(`/api/data?data=page-ratings-list&page=${page}`, {
+      let result = await nuxtApp.$pluginRequest(`/api/data?data=page-ratings-list&page=${page}`, {
         method: 'GET',
       });
       return result;
@@ -42,7 +44,7 @@ export default defineNuxtPlugin((nuxtApp) => {
 
     // Get sections
     getSections: async (): Promise<SectionType[]> => {
-      let result = await $pluginRequest(`/api/data?data=sections`, {
+      let result = await nuxtApp.$pluginRequest(`/api/data?data=sections`, {
         method: 'GET',
       });
       return result;

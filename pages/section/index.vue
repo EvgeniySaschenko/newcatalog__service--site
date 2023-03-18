@@ -1,7 +1,7 @@
 <template lang="pug">
 .page.page--section
   app-preloader(:isLoading='isLoading', position='fixed')
-  app-page-title(:text='`${$t("Раздел")} ${sectionName}`')
+  app-page-title(:text='`${$t("Section")}: ${sectionName}`')
   .page__ratings-list
     app-ratings-list(:ratingsList='ratingsList')
 </template>
@@ -19,6 +19,7 @@ async function getRatingsList() {
     sectionId: Number(params.sectionId),
     page: Number(query.page) || 1,
   });
+
   return ratingsList;
 }
 
@@ -27,6 +28,7 @@ export default defineNuxtComponent({
     let { $pluginConfig, $t, $lang } = useNuxtApp();
     let { params } = useRoute();
     let ratingsList = await getRatingsList();
+
     let store = useSectionsStore();
     let section = store.items.filter((el: any) => el.sectionId == params.sectionId);
     let sectionName = '';
@@ -43,7 +45,7 @@ export default defineNuxtComponent({
     ]);
 
     useSeoMeta({
-      title: `${$pluginConfig.projectName} - ${$t('Раздел')}: ${sectionName}`,
+      title: `${$pluginConfig.projectName} - ${$t('Section')}: ${sectionName}`,
     });
 
     return {

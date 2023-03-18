@@ -3,7 +3,7 @@ import { Sections } from '@/server/db-temporary/sections';
 import { Ratings } from '@/server/db-temporary/ratings';
 let { SITE__DOMAIN } = process.env;
 let referer = `https://${SITE__DOMAIN}`;
-let cacheIdDbCurrent: string | undefined;
+let cacheIdDbCurrent: any;
 
 export default defineEventHandler(async (event) => {
   let url = event.node.req.url || '';
@@ -71,8 +71,7 @@ export default defineEventHandler(async (event) => {
     let isSuccess = await ratings.initLists({ sections });
     if (!isSuccess) {
       setCookie(event, 'cacheId', '');
-      event.node.res.statusCode = 202;
-      return;
+      throw createError({ statusCode: 202 });
     }
     cacheIdDbCurrent = cacheIdDb;
   }
@@ -80,15 +79,13 @@ export default defineEventHandler(async (event) => {
   // If the client requested data at the time of preparing the cache
   if (!cacheIdDb) {
     setCookie(event, 'cacheId', '');
-    event.node.res.statusCode = 202;
-    return;
+    throw createError({ statusCode: 202 });
   }
 
   // If the client currently has outdated data and needs to refresh the page
   if (cacheIdUser && cacheIdUser !== cacheIdDb) {
     setCookie(event, 'cacheId', '');
-    event.node.res.statusCode = 205;
-    return;
+    throw createError({ statusCode: 205 });
   }
 
   let result = await preparationData();

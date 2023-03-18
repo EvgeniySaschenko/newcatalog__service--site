@@ -36,8 +36,9 @@ export default defineComponent({
   text-transform: uppercase
   color: #ffffff
   &__item
-    padding: 4px
-    line-height: 1
+    padding: 6px
+    display: flex
+    align-items: center
     cursor: pointer
     font-size: 12px
     font-weight: 700

@@ -27,6 +27,8 @@ module.exports = {
     '@typescript-eslint/no-empty-function': 'warn',
     'vue/return-in-computed-property': 'warn',
     'vue/multi-word-component-names': 'off',
+    // This option "multiline-arguments" does not work here, so I use "multiline"
+    'function-paren-newline': ['error', 'multiline'],
   },
   overrides: [
     {

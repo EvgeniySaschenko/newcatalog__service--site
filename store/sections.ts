@@ -16,7 +16,7 @@ export default defineStore('sections', {
       this.items = items;
 
       for (let section of items) {
-        let sectionId = section['sectionId'];
+        let sectionId = section.sectionId;
         this.itemsMap[sectionId] = section;
       }
     },

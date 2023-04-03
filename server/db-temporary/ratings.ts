@@ -37,12 +37,10 @@ export class Ratings {
     try {
       await db.dbConnect.connect();
       let rating = JSON.parse((await db.dbConnect.get(`${db.prefixes.rating}_${ratingId}`)) || '');
-      let labels = JSON.parse(
-        (await db.dbConnect.get(`${db.prefixes.labels}_${ratingId}`)) || '[]'
-      );
-      let ratingItems = JSON.parse(
-        (await db.dbConnect.get(`${db.prefixes['rating-items']}_${ratingId}`)) || '{}'
-      );
+      // eslint-disable-next-line prettier/prettier
+      let labels = JSON.parse((await db.dbConnect.get(`${db.prefixes.labels}_${ratingId}`)) || '[]');
+      // eslint-disable-next-line prettier/prettier
+      let ratingItems = JSON.parse((await db.dbConnect.get(`${db.prefixes['rating-items']}_${ratingId}`)) || '{}');
 
       if (!rating) return false;
 
@@ -66,12 +64,10 @@ export class Ratings {
     ratingId: RatingType['ratingId'];
   }): Promise<RatinsBriefType | boolean> {
     try {
-      let rating = JSON.parse(
-        (await db.dbConnect.get(`${db.prefixes.rating}_${ratingId}`)) || '{}'
-      );
-      let labels = JSON.parse(
-        (await db.dbConnect.get(`${db.prefixes.labels}_${ratingId}`)) || '[]'
-      );
+      // eslint-disable-next-line prettier/prettier
+      let rating = JSON.parse((await db.dbConnect.get(`${db.prefixes.rating}_${ratingId}`)) || '{}');
+      // eslint-disable-next-line prettier/prettier
+      let labels = JSON.parse((await db.dbConnect.get(`${db.prefixes.labels}_${ratingId}`)) || '[]');
 
       return {
         rating,

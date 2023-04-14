@@ -31,7 +31,7 @@ export default defineNuxtPlugin((nuxtApp) => {
   let cookitName = nuxtApp.$pluginConfig.cookies.lang;
   let cookieLang = useCookie(cookitName).value as keyof LangType;
   let $langDefault: keyof LangType = 'ru';
-  let $langs = ['ua', 'ru'];
+  let $langs = ['uk', 'ru'];
   let $lang: keyof LangType = cookieLang || $langDefault;
 
   let { params, path } = useRoute();

@@ -29,6 +29,10 @@ export default defineNuxtComponent({
     let { params } = useRoute();
     let ratingsList = await getRatingsList();
 
+    if (ratingsList?.isError) {
+      ratingsList.showError();
+    }
+
     let store = useSectionsStore();
     let section = store.items.filter((el: any) => el.sectionId == params.sectionId);
     let sectionName = '';

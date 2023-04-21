@@ -22,7 +22,9 @@ export default defineNuxtComponent({
   async asyncData() {
     let { $pluginApi } = useNuxtApp();
     let sections = await $pluginApi.getSections();
-
+    if (sections?.isError) {
+      sections.showError();
+    }
     let store = useSectionsStore();
     store.setSections(sections);
     return {

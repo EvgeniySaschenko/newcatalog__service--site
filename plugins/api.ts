@@ -1,5 +1,10 @@
-import { SectionType, RatingType, RatingFullType, RatinsBriefType } from '@/types';
-// import { $pluginRequest } from '@/plugins/request';
+import {
+  SectionType,
+  RatingType,
+  RatingFullType,
+  RatinsBriefType,
+  ResponseShowErrorType,
+} from '@/types';
 
 export default defineNuxtPlugin((nuxtApp) => {
   let $pluginApi;
@@ -10,8 +15,8 @@ export default defineNuxtPlugin((nuxtApp) => {
       ratingId,
     }: {
       ratingId: RatingType['ratingId'];
-    }): Promise<RatingFullType> => {
-      let result = await nuxtApp.$pluginRequest(`/api/data?data=page-rating&ratingId=${ratingId}`, {
+    }): Promise<RatingFullType & ResponseShowErrorType> => {
+      let result = await nuxtApp.$request(`/api/data?data=page-rating&ratingId=${ratingId}`, {
         method: 'GET',
       });
       return result;
@@ -24,8 +29,8 @@ export default defineNuxtPlugin((nuxtApp) => {
     }: {
       sectionId: SectionType['sectionId'];
       page: number;
-    }): Promise<RatinsBriefType[]> => {
-      let result = await nuxtApp.$pluginRequest(
+    }): Promise<RatinsBriefType[] & ResponseShowErrorType> => {
+      let result = await nuxtApp.$request(
         `/api/data?data=page-section&sectionId=${sectionId}&page=${page}`,
         {
           method: 'GET',
@@ -35,16 +40,20 @@ export default defineNuxtPlugin((nuxtApp) => {
     },
 
     // Get page ratings list all
-    getPageRatingsList: async ({ page }: { page: number }): Promise<RatinsBriefType[]> => {
-      let result = await nuxtApp.$pluginRequest(`/api/data?data=page-ratings-list&page=${page}`, {
+    getPageRatingsList: async ({
+      page,
+    }: {
+      page: number;
+    }): Promise<RatinsBriefType[] & ResponseShowErrorType> => {
+      let result = await nuxtApp.$request(`/api/data?data=page-ratings-list&page=${page}`, {
         method: 'GET',
       });
       return result;
     },
 
     // Get sections
-    getSections: async (): Promise<SectionType[]> => {
-      let result = await nuxtApp.$pluginRequest(`/api/data?data=sections`, {
+    getSections: async (): Promise<SectionType[] & ResponseShowErrorType> => {
+      let result = await nuxtApp.$request(`/api/data?data=sections`, {
         method: 'GET',
       });
       return result;

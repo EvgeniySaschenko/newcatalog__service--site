@@ -1,22 +1,16 @@
-import db from '@/server/db-temporary/_db';
+import db from './_db';
 
-export class Common {
+export const common = {
   // Get cache id
-  async getCacheId() {
+  async getCacheId(): Promise<string | null> {
     try {
-      await db.dbConnect.connect();
       let result = await db.dbConnect.get(db.prefixes['cache-id']);
       if (typeof result === 'string') {
         result = result.split('-').reverse().join('-');
       }
-      await db.dbConnect.quit();
       return result;
     } catch (error) {
-      await db.dbConnect.quit();
-      console.error(error);
+      return null;
     }
-    return false;
-  }
-}
-
-export default {};
+  },
+};

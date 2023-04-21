@@ -28,9 +28,16 @@ export default defineNuxtComponent({
     let { $pluginConfig, $lang, $pluginApi } = useNuxtApp();
 
     let { params } = useRoute();
-    let { labels, rating, ratingItems } = await $pluginApi.getPageRating({
+    let response = await $pluginApi.getPageRating({
       ratingId: Number(params.ratingId),
     });
+
+    if (response?.isError) {
+      response.showError();
+    }
+
+    let { labels, rating, ratingItems } = response;
+
     let store = useBreadcrumbsStore();
 
     store.setBreadcrumbs([

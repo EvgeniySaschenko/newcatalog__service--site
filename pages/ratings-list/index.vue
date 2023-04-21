@@ -18,6 +18,11 @@ async function getRatingsList() {
   let ratingsList = await $pluginApi.getPageRatingsList({
     page: Number(query.page) || 1,
   });
+
+  if (ratingsList?.isError) {
+    ratingsList.showError();
+  }
+
   return ratingsList;
 }
 
@@ -25,7 +30,6 @@ export default defineNuxtComponent({
   async asyncData() {
     let { $pluginConfig, $t } = useNuxtApp();
     let ratingsList = await getRatingsList();
-
     let store = useBreadcrumbsStore();
 
     store.setBreadcrumbs([]);

@@ -12,6 +12,10 @@
     .page-error__text(v-if='error.statusCode == 404')
       .page-error__text-1 {{ $t('Page not found') }}
       nuxt-link.page-error__btn(:to='`/${$lang}`', data-element-type='page-error__btn--go-to-home') {{ $t('Go to home') }}
+    // 204
+    .page-error__text(v-if='error.statusCode == 204')
+      .page-error__text-1 {{ $t('Page content not found') }}
+      nuxt-link.page-error__btn(:to='`/${$lang}`', data-element-type='page-error__btn--go-to-home') {{ $t('Go to home') }}
     // 202
     .page-error__text(v-if='error.statusCode == 202')
       .page-error__text-1 {{ $t('The server is being updated') }}

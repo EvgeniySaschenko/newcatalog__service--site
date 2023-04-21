@@ -29,6 +29,7 @@ module.exports = {
     'vue/multi-word-component-names': 'off',
     // This option "multiline-arguments" does not work here, so I use "multiline"
     'function-paren-newline': ['error', 'multiline'],
+    'dot-notation': 'off',
   },
   overrides: [
     {

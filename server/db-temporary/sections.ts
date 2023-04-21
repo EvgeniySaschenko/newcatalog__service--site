@@ -1,22 +1,14 @@
-import db from '@/server/db-temporary/_db';
+import db from './_db';
 import { SectionType } from '@/types';
 
 let sectionsCache = [] as SectionType[];
-export class Sections {
+export const sections = {
   // Get sections
   async getSections(): Promise<SectionType[]> {
-    try {
-      await db.dbConnect.connect();
-      let result = await db.dbConnect.get(db.prefixes.sections);
-      await db.dbConnect.quit();
-      sectionsCache = result ? JSON.parse(result) : [];
-      return sectionsCache;
-    } catch (error) {
-      db.dbConnect.quit();
-      console.error(error);
-    }
-    return [];
-  }
+    let result = await db.dbConnect.get(db.prefixes.sections);
+    sectionsCache = JSON.parse(result || '');
+    return sectionsCache;
+  },
 
   // Get sections cache
   async getSectionsCache(): Promise<SectionType[]> {
@@ -24,7 +16,5 @@ export class Sections {
       return sectionsCache;
     }
     return await this.getSections();
-  }
-}
-
-export default {};
+  },
+};

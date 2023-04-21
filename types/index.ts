@@ -4,6 +4,12 @@ export type LangType = {
   ru: string;
 };
 
+// Response show error
+export type ResponseShowErrorType = {
+  isError: true;
+  showError: () => void;
+};
+
 // Section
 export type SectionType = {
   sectionId: number;

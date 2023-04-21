@@ -7,15 +7,27 @@ export default defineNuxtPlugin((nuxtApp) => {
     };
   };
 
-  const $pluginRequest = async (url: string, params?: any): Promise<any> => {
+  let $request = async (url: string, params?: any): Promise<any> => {
     if (params && params.method !== 'GET') {
       params = Object.assign(defaultParams(), params);
     }
     let response: any = await $fetch(url, params);
 
-    // Reload page - if the cache is out of date
-    if (response.statusCode == 205) {
-      location.reload();
+    let statusCode = response?.statusCode;
+    switch (statusCode) {
+      case 202:
+      case 204:
+      case 404:
+      case 500:
+        return {
+          isError: true,
+          showError: () => {
+            throw showError({ statusCode, fatal: true });
+          },
+        };
+      case 205:
+        location.reload();
+        break;
     }
 
     return response;
@@ -24,7 +36,7 @@ export default defineNuxtPlugin((nuxtApp) => {
   return {
     provide: {
       // Function for requests to server. It is needed to set general rules for all requests
-      pluginRequest: $pluginRequest,
+      request: $request,
     },
   };
 });

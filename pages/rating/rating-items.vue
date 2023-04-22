@@ -5,7 +5,7 @@
       v-for='(item, index) in items',
       :href='item.url',
       target='_blank',
-      @click='pluginGtmPush(index)'
+      @click='gtmPush(index)'
     )
       .rating-items__img-box(:style='`background-color: ${item.color}`')
         img.rating-items__img(:src='item.logoImg', :alt='item.hostname')
@@ -59,18 +59,17 @@ export default defineComponent({
 
   methods: {
     // Add info to Google Tag Manager
-    pluginGtmPush(index: number) {
+    gtmPush(index: number) {
       let rating = this.items[index] as RatingItemType;
-
-      this.$pluginGtmPush({
+      this.$gtmPush({
         event: 'rating-item.click',
         ratingItemId: rating.ratingItemId,
         ratingId: rating.ratingId,
         siteId: rating.siteId,
-        elementsType: this.$pluginConfig.elementsTypes['rating-items__item'],
+        elementType: this.$configApp.elementsTypes['rating-items__item'],
         timestamp: Date.now(),
         userAgent: window.navigator.userAgent,
-        isTouchDevice: this.$pluginScreen.isTouchDevice(),
+        isTouchDevice: this.$screen.isTouchDevice,
         screen: { height: window.screen.height, width: window.screen.width },
       });
     },

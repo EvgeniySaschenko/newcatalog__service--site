@@ -1,4 +1,5 @@
-import { LangType } from '@/types';
+import { LangType, AppContextType } from '@/types';
+
 let $words = {
   ru: {
     Home: 'Главная',
@@ -28,7 +29,7 @@ export type $wordsType = keyof (typeof $words)[keyof LangType];
 export type $tType = (key: $wordsType) => string;
 
 export default defineNuxtPlugin((nuxtApp) => {
-  let cookitName = nuxtApp.$pluginConfig.cookies.lang;
+  let cookitName = (nuxtApp as never as AppContextType).$configApp.cookies.lang;
   let cookieLang = useCookie(cookitName).value as keyof LangType;
   let $langDefault: keyof LangType = 'ru';
   let $langs = ['uk', 'ru'];

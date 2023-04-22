@@ -22,7 +22,7 @@ export default defineComponent({
         partsUrl[1] = item;
       }
 
-      useCookie(this.$pluginConfig.cookies.lang, {
+      useCookie(this.$configApp.cookies.lang, {
         maxAge: 3600 * 24 * 365,
       }).value = item;
       window.location.href = partsUrl.join('/');

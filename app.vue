@@ -20,8 +20,8 @@ import { SectionType } from '@/types';
 
 export default defineNuxtComponent({
   async asyncData() {
-    let { $pluginApi } = useNuxtApp();
-    let sections = await $pluginApi.getSections();
+    let { $api } = useNuxtApp();
+    let sections = await $api.getSections();
     if (sections?.isError) {
       sections.showError();
     }
@@ -49,13 +49,6 @@ export default defineNuxtComponent({
     AppFooter,
     AppMenuMain,
     AppBreadcrumbs,
-  },
-
-  created() {
-    // If the cache has not yet been created
-    if ((this.sections as any)?.statusCode == 202) {
-      showError({ statusCode: 202 });
-    }
   },
 });
 </script>

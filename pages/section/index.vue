@@ -13,9 +13,9 @@ import useBreadcrumbsStore from '@/store/breadcrumbs';
 import { RatinsBriefType } from '@/types';
 
 async function getRatingsList() {
-  let { $pluginApi } = useNuxtApp();
+  let { $api } = useNuxtApp();
   let { params, query } = useRoute();
-  let ratingsList = await $pluginApi.getPageSection({
+  let ratingsList = await $api.getPageSection({
     sectionId: Number(params.sectionId),
     page: Number(query.page) || 1,
   });
@@ -25,7 +25,7 @@ async function getRatingsList() {
 
 export default defineNuxtComponent({
   async asyncData() {
-    let { $pluginConfig, $t, $lang } = useNuxtApp();
+    let { $configApp, $t, $lang } = useNuxtApp();
     let { params } = useRoute();
     let ratingsList = await getRatingsList();
 
@@ -49,7 +49,7 @@ export default defineNuxtComponent({
     ]);
 
     useSeoMeta({
-      title: `${$pluginConfig.projectName} - ${$t('Section')}: ${sectionName}`,
+      title: `${$configApp.projectName} - ${$t('Section')}: ${sectionName}`,
     });
 
     return {

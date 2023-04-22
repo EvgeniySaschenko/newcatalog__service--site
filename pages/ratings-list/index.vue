@@ -13,9 +13,9 @@ import { RatinsBriefType } from '@/types';
 
 // Get ratings list
 async function getRatingsList() {
-  let { $pluginApi } = useNuxtApp();
+  let { $api } = useNuxtApp();
   let { query } = useRoute();
-  let ratingsList = await $pluginApi.getPageRatingsList({
+  let ratingsList = await $api.getPageRatingsList({
     page: Number(query.page) || 1,
   });
 
@@ -28,14 +28,14 @@ async function getRatingsList() {
 
 export default defineNuxtComponent({
   async asyncData() {
-    let { $pluginConfig, $t } = useNuxtApp();
+    let { $configApp, $t } = useNuxtApp();
     let ratingsList = await getRatingsList();
     let store = useBreadcrumbsStore();
 
     store.setBreadcrumbs([]);
 
     useSeoMeta({
-      title: `${$pluginConfig.projectName} - ${$t('Rating of Internet services')}`,
+      title: `${$configApp.projectName} - ${$t('Rating of Internet services')}`,
     });
 
     return {

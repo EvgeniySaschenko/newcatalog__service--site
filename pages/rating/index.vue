@@ -25,10 +25,10 @@ import { LabelType, RatingType, RatingItemType } from '@/types';
 // Get ratings list
 export default defineNuxtComponent({
   async asyncData() {
-    let { $pluginConfig, $lang, $pluginApi } = useNuxtApp();
+    let { $configApp, $lang, $api } = useNuxtApp();
 
     let { params } = useRoute();
-    let response = await $pluginApi.getPageRating({
+    let response = await $api.getPageRating({
       ratingId: Number(params.ratingId),
     });
 
@@ -48,7 +48,7 @@ export default defineNuxtComponent({
     ]);
 
     useSeoMeta({
-      title: `${$pluginConfig.projectName} - ${rating.name[$lang]}`,
+      title: `${$configApp.projectName} - ${rating.name[$lang]}`,
       description: rating.descr[$lang],
     });
 

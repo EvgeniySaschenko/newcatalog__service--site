@@ -1,3 +1,20 @@
+// import { Router } from '@nuxt/schema';
+import type { Router } from 'vue-router';
+import { PluginApi } from '@/plugins/api';
+import { PluginRequest } from '@/plugins/request';
+import { PluginConfigApp } from '@/plugins/config';
+import { PluginScreen } from '@/plugins/screen.client';
+import { PluginGtag } from '@/plugins/gtag.client';
+
+export type AppContextType = {
+  $api: PluginApi;
+  $request: PluginRequest['request'];
+  $configApp: PluginConfigApp;
+  $screen: PluginScreen;
+  $gtmPush: PluginGtag['gtmPush'];
+  $router: Router;
+};
+
 // Lang
 export type LangType = {
   ua: string;

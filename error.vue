@@ -1,30 +1,56 @@
 <template lang="pug">
 .page-error
   .page-error__box
-    nuxt-link.page-error__logo(:to='`/${$lang}`', data-element-type='page-error__logo')
+    nuxt-link.page-error__logo(:to='`/${$langDefault()}`', data-element-type='page-error__logo')
       img.page-error__logo-img(src='@/assets/img/logo.png', alt='Logo')
 
     .page-error__code {{ error.statusCode }}
+    // 503
+    .page-error__text(v-if='error.statusCode == 503')
+      .page-error__text-1 {{ $t('The server is being updated') }}
+      .page-error__text-2 {{ $t('Try refreshing the page a little later') }}
+      button.page-error__btn(@click='refreshPage()') {{ $t('Refresh page') }}
     // 500
     .page-error__text(v-if='error.statusCode == 500')
       .page-error__text-1 {{ $t('Server error') }}
     // 404
     .page-error__text(v-if='error.statusCode == 404')
       .page-error__text-1 {{ $t('Page not found') }}
-      nuxt-link.page-error__btn(:to='`/${$lang}`', data-element-type='page-error__btn--go-to-home') {{ $t('Go to home') }}
+      nuxt-link.page-error__btn(
+        :to='`/${$langDefault()}`',
+        data-element-type='page-error__btn--go-to-home'
+      ) {{ $t('Go to home') }}
     // 204
     .page-error__text(v-if='error.statusCode == 204')
       .page-error__text-1 {{ $t('Page content not found') }}
-      nuxt-link.page-error__btn(:to='`/${$lang}`', data-element-type='page-error__btn--go-to-home') {{ $t('Go to home') }}
-    // 202
-    .page-error__text(v-if='error.statusCode == 202')
-      .page-error__text-1 {{ $t('The server is being updated') }}
-      .page-error__text-2 {{ $t('Try refreshing the page a little later') }}
-      button.page-error__btn(@click='refreshPage()') {{ $t('Refresh page') }}
+      nuxt-link.page-error__btn(
+        :to='`/${$langDefault()}`',
+        data-element-type='page-error__btn--go-to-home'
+      ) {{ $t('Go to home') }}
 </template>
 
 <script lang="ts">
+import useSettingsStore from '@/store/settings';
+
 export default defineNuxtComponent({
+  async asyncData() {
+    let { $api } = useNuxtApp();
+    let response = await $api.getInit();
+    if (response?.isError) {
+      response.showError();
+    }
+    useSettingsStore().setSettings(response.settings);
+    return {};
+  },
+
+  beforeCreate() {
+    let { $setTranslations, $setLangs, $setLangDefault } = useNuxtApp();
+    let { translations, langs, langDefault } = useSettingsStore().items;
+    $setTranslations(translations);
+    $setLangs(langs);
+    $setLangDefault(langDefault);
+  },
+
   props: {
     error: {
       type: Object,

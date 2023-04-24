@@ -11,13 +11,13 @@
         img.rating-items__img(:src='item.logoImg', :alt='item.hostname')
       .rating-items__info
         .rating-items__name-box
-          .rating-items__name {{ item.name[$lang] }}
+          .rating-items__name {{ item.name[$langDefault()] }}
         .rating-items__hostname {{ item.hostname }}
         .rating-items__labels(v-if='labels.length')
           app-label-rating(
             v-for='labelId of item.labelsIds',
             :color='labelsMap[labelId].color',
-            :text='labelsMap[labelId].name[$lang]'
+            :text='labelsMap[labelId].name[$langDefault()]'
           )
 </template>
 

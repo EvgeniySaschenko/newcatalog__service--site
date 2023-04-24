@@ -15,20 +15,26 @@ import AppFooter from '@/components/app-footer/app-footer.vue';
 import AppMenuMain from '@/components/app-menu-main/app-menu-main.vue';
 import AppBreadcrumbs from '@/components/app-breadcrumbs/app-breadcrumbs.vue';
 import useSectionsStore from '@/store/sections';
+import useSettingsStore from '@/store/settings';
 import useBreadcrumbsStore from '@/store/breadcrumbs';
 import { SectionType } from '@/types';
 
 export default defineNuxtComponent({
   async asyncData() {
     let { $api } = useNuxtApp();
-    let sections = await $api.getSections();
-    if (sections?.isError) {
-      sections.showError();
+    let response = await $api.getInit();
+
+    if (response?.isError) {
+      response.showError();
     }
-    let store = useSectionsStore();
-    store.setSections(sections);
+    let { sections, settings } = response;
+    // The data was not stored in "data()", so I used "Store"
+    useSectionsStore().setSections(sections);
+    useSettingsStore().setSettings(settings); //
+
+    // console.log(settings);
     return {
-      sections,
+      settings,
     };
   },
 
@@ -42,6 +48,14 @@ export default defineNuxtComponent({
     breadcrumbs() {
       return useBreadcrumbsStore().items;
     },
+  },
+
+  beforeCreate() {
+    let { $setTranslations, $setLangs, $setLangDefault } = useNuxtApp();
+    let { translations, langs, langDefault } = useSettingsStore().items;
+    $setTranslations(translations);
+    $setLangs(langs);
+    $setLangDefault(langDefault);
   },
 
   components: {

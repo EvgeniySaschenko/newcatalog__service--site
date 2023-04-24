@@ -1,12 +1,16 @@
 import db from './_db';
 import { SectionType } from '@/types';
 
-let sectionsCache = [] as SectionType[];
+let sectionsCache = [] as never as SectionType[];
 export const sections = {
   // Get sections
   async getSections(): Promise<SectionType[]> {
     let result = await db.dbConnect.get(db.prefixes.sections);
     sectionsCache = JSON.parse(result || '');
+    if (!sectionsCache?.length) {
+      sectionsCache = [] as never as SectionType[];
+      throw new Error('No valid data: "getSections - !sectionsCache?.length"');
+    }
     return sectionsCache;
   },
 

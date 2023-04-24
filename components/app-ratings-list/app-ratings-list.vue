@@ -4,17 +4,17 @@
     .app-ratings-list__item(v-for='(item, index) in ratingsList.items')
       // content
       nuxt-link.app-ratings-list__title(
-        :to='`/${$lang}/rating/${item.rating.ratingId}`',
+        :to='`/${$langDefault()}/rating/${item.rating.ratingId}`',
         data-element-type='app-ratings-list__title'
-      ) {{ item.rating.name[$lang] }}
-      .app-ratings-list__descr {{ item.rating.descr[$lang] }}
+      ) {{ item.rating.name[$langDefault()] }}
+      .app-ratings-list__descr {{ item.rating.descr[$langDefault()] }}
 
       // labels
       .app-ratings-list__labels(v-if='item.labels.length')
         app-label-rating(
           v-for='label of item.labels',
           :color='label.color',
-          :text='label.name[$lang]'
+          :text='label.name[$langDefault()]'
         )
 
       .app-ratings-list__bottom
@@ -23,7 +23,7 @@
           span.app-ratings-list__number {{ `#${calcNumberRecord(index)}` }}
         // sections
         .app-ratings-list__sections
-          label.app-ratings-list__sections-item(v-for='sectionId of item.rating.sectionsIds') {{ `#${sectionsMap[sectionId].name[$lang]}` }}
+          label.app-ratings-list__sections-item(v-for='sectionId of item.rating.sectionsIds') {{ `#${sectionsMap[sectionId].name[$langDefault()]}` }}
 
   app-pagination(
     v-if='ratingsList.pagesCount > 1',

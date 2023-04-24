@@ -1,10 +1,12 @@
 // import { Router } from '@nuxt/schema';
-import type { Router } from 'vue-router';
+import { Router } from 'vue-router';
+import { LangsListType } from './langs-list';
 import { PluginApi } from '@/plugins/api';
 import { PluginRequest } from '@/plugins/request';
 import { PluginConfigApp } from '@/plugins/config';
 import { PluginScreen } from '@/plugins/screen.client';
 import { PluginGtag } from '@/plugins/gtag.client';
+import { PluginTranslations } from '@/plugins/translations';
 
 export type AppContextType = {
   $api: PluginApi;
@@ -13,12 +15,30 @@ export type AppContextType = {
   $screen: PluginScreen;
   $gtmPush: PluginGtag['gtmPush'];
   $router: Router;
+  $langs: PluginTranslations['getLangs'];
+  $langDefault: PluginTranslations['getLangDefault'];
+  $t: PluginTranslations['t'];
+  $setLangDefault: PluginTranslations['setLangDefault'];
+  $setLangs: PluginTranslations['setLangs'];
+  $setTranslations: PluginTranslations['setTranslations'];
 };
 
 // Lang
-export type LangType = {
-  ua: string;
-  ru: string;
+export type LangType = Partial<LangsListType>;
+// Translations type
+export type TranslationsType = Record<keyof LangType, Record<string, string>>;
+
+// Settings
+export enum SettingsEnum {
+  langDefault = 'langDefault',
+  langs = 'langs',
+  translations = 'translations',
+}
+
+export type SettingsType = {
+  [SettingsEnum.langDefault]: keyof LangType;
+  [SettingsEnum.langs]: (keyof LangType)[];
+  [SettingsEnum.translations]: TranslationsType;
 };
 
 // Response show error

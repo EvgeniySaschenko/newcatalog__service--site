@@ -15,10 +15,10 @@ export class PluginRequest {
 
     let statusCode = response?.statusCode;
     switch (statusCode) {
-      case 202:
       case 204:
       case 404:
       case 500:
+      case 503:
         /*
           If the server returned "statusCode" instead of data, this function will be returned, 
           it must be called on the page in order to display the fullscreen error

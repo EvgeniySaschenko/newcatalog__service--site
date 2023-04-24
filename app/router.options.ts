@@ -4,14 +4,14 @@ import type { RouterConfig } from '@nuxt/schema';
 const $router = <RouterConfig>{
   routes: (routes) => [
     {
-      name: 'ratings-list-mome',
+      name: 'home',
       path: '/',
-      component: () => import('@/pages/ratings-list/index.vue'),
+      component: () => import('@/pages/ratings-all/index.vue'),
     },
     {
-      name: 'ratings-list',
+      name: 'ratings-all',
       path: '/:lang',
-      component: () => import('@/pages/ratings-list/index.vue'),
+      component: () => import('@/pages/ratings-all/index.vue'),
     },
     {
       name: 'rating',

@@ -38,7 +38,7 @@ export default defineComponent({
         this.items = [
           {
             name: this.$t('Home'),
-            url: `/${this.$lang}`,
+            url: `/${this.$langDefault()}`,
           },
           ...this.breadcrumbs,
         ];

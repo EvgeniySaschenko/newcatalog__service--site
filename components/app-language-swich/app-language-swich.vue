@@ -1,23 +1,40 @@
 <template lang="pug">
-ul.app-language-swich
-  li.app-language-swich__item(
-    v-for='item of $langs',
-    :class='{ active: $lang == item }',
-    @click='swichLang(item)'
-  ) {{ item }}
+.app-language-swich(data-app-language-swich, v-if='$langs().length > 1')
+  .app-language-swich__current(@click='toggleList()') {{ $langDefault() }}
+  .app-language-swich__box
+    ul.app-language-swich__list(v-show='isShow')
+      li.app-language-swich__item(
+        v-for='item of $langs()',
+        :class='{ active: $langDefault() == item }',
+        @click='swichLang(item)'
+      ) {{ item }}
 </template>
 
 <script lang="ts">
 import { LangType } from '@/types';
 
 export default defineComponent({
+  data() {
+    return {
+      isShow: false,
+    };
+  },
+
+  mounted() {
+    document.addEventListener('click', this.listenerClickOutside);
+  },
+
+  beforeUnmount() {
+    document.removeEventListener('click', this.listenerClickOutside);
+  },
+
   methods: {
     // Swich lang
     swichLang(item: keyof LangType) {
       let { fullPath, params } = this.$route;
       let partsUrl = fullPath.split('/');
 
-      if (this.$lang === item) return;
+      if (this.$langDefault() === item) return;
       if (params.lang) {
         partsUrl[1] = item;
       }
@@ -27,22 +44,52 @@ export default defineComponent({
       }).value = item;
       window.location.href = partsUrl.join('/');
     },
+    // Show / hidden list
+    toggleList() {
+      this.isShow = !this.isShow;
+    },
+
+    // Hidden list - if click outside
+    listenerClickOutside(event: any) {
+      if (!this.isShow) return;
+      if (!event.target.closest('[data-app-language-swich]')) {
+        this.isShow = false;
+      }
+    },
   },
 });
 </script>
 <style lang="sass" scoped>
+@import '@/assets/style/_variables.sass'
+
 .app-language-swich
-  display: flex
   text-transform: uppercase
   color: #ffffff
+  text-align: center
+  font-size: 12px
+  font-weight: 700
+  &__current
+    cursor: pointer
+    padding: 5px
+    border: 1px solid #ffffff
+  &__box
+    position: relative
+  &__list
+    position: absolute
+    top: 5px
+    left: 50%
+    transform: translateX(-50%)
+    border: 1px solid #ffffff
+    border-radius: 2px
+    background-color: #ffffff
+    text-align: center
+    z-index: 100
   &__item
     padding: 6px
-    display: flex
-    align-items: center
     cursor: pointer
-    font-size: 12px
-    font-weight: 700
-    margin: 0 2px
+    color: $app-primary-color
+    border: 1px solid $app-primary-color
     &.active
-      border: 1px solid #ffffff
+      background-color: $app-primary-color
+      color: #ffffff
 </style>

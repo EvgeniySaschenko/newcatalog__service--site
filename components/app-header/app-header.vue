@@ -1,7 +1,7 @@
 <template lang="pug">
 header.app-header
   .app-header__row.container
-    nuxt-link.app-header__logo(:to='`/${$lang}`', data-element-type='app-header__logo')
+    nuxt-link.app-header__logo(:to='`/${$langDefault()}`', data-element-type='app-header__logo')
       img.app-header__logo-img(src='@/assets/img/logo.png', alt='Logo')
     .app-header__langs
       app-language-swich

@@ -5,21 +5,22 @@ import {
   RatinsBriefType,
   ResponseShowErrorType,
   AppContextType,
+  SettingsType,
 } from '@/types';
 
 export class PluginApi {
-  constructor(nuxtApp: AppContextType) {
-    this.nuxtApp = nuxtApp;
+  constructor(plugins: AppContextType) {
+    this._plugins = plugins;
   }
 
-  nuxtApp = {} as AppContextType;
+  _plugins = {} as AppContextType;
   // Get page rating
   async getPageRating({
     ratingId,
   }: {
     ratingId: RatingType['ratingId'];
   }): Promise<RatingFullType & ResponseShowErrorType> {
-    let result = await this.nuxtApp.$request(`/api/data?data=page-rating&ratingId=${ratingId}`, {
+    let result = await this._plugins.$request(`/api/data?data=page-rating&ratingId=${ratingId}`, {
       method: 'GET',
     });
     return result;
@@ -33,7 +34,7 @@ export class PluginApi {
     sectionId: SectionType['sectionId'];
     page: number;
   }): Promise<RatinsBriefType[] & ResponseShowErrorType> {
-    let result = await this.nuxtApp.$request(
+    let result = await this._plugins.$request(
       `/api/data?data=page-section&sectionId=${sectionId}&page=${page}`,
       {
         method: 'GET',
@@ -43,20 +44,25 @@ export class PluginApi {
   }
 
   // Get page ratings list all
-  async getPageRatingsList({
+  async getPageRatingsAll({
     page,
   }: {
     page: number;
   }): Promise<RatinsBriefType[] & ResponseShowErrorType> {
-    let result = await this.nuxtApp.$request(`/api/data?data=page-ratings-list&page=${page}`, {
+    let result = await this._plugins.$request(`/api/data?data=page-ratings-all&page=${page}`, {
       method: 'GET',
     });
     return result;
   }
 
   // Get sections
-  async getSections(): Promise<SectionType[] & ResponseShowErrorType> {
-    let result = await this.nuxtApp.$request(`/api/data?data=sections`, {
+  async getInit(): Promise<
+    {
+      sections: SectionType[];
+      settings: SettingsType;
+    } & ResponseShowErrorType
+  > {
+    let result = await this._plugins.$request(`/api/data?data=init`, {
       method: 'GET',
     });
     return result;

@@ -1,19 +1,19 @@
 <template lang="pug">
 .page.page--section
   app-preloader(:isLoading='isLoading', position='fixed')
-  app-page-title(:text='rating.name[$lang]')
+  app-page-title(:text='rating.name[$langDefault()]')
   .page__top
     .labels-sections
       nuxt-link.labels-sections__item(
         data-element-type='labels-sections__item',
         v-for='sectionId of rating.sectionsIds',
-        :to='`/${$lang}/section/${sectionId}`'
-      ) {{ `#${sectionsMap[sectionId].name[$lang]}` }}
+        :to='`/${$langDefault()}/section/${sectionId}`'
+      ) {{ `#${sectionsMap[sectionId].name[$langDefault()]}` }}
 
   .page__rating-items
     rating-items(:labels='labels', :items='ratingItems', :rating='rating')
 
-  .page__descr {{ rating.descr[$lang] }}
+  .page__descr {{ rating.descr[$langDefault()] }}
 </template>
 
 <script lang="ts">
@@ -25,7 +25,7 @@ import { LabelType, RatingType, RatingItemType } from '@/types';
 // Get ratings list
 export default defineNuxtComponent({
   async asyncData() {
-    let { $configApp, $lang, $api } = useNuxtApp();
+    let { $configApp, $langDefault, $api } = useNuxtApp();
 
     let { params } = useRoute();
     let response = await $api.getPageRating({
@@ -42,14 +42,14 @@ export default defineNuxtComponent({
 
     store.setBreadcrumbs([
       {
-        name: rating.name[$lang],
-        url: `/${$lang}/rating/${rating.ratingId}`,
+        name: rating.name[$langDefault()] || '',
+        url: `/${$langDefault()}/rating/${rating.ratingId}`,
       },
     ]);
 
     useSeoMeta({
-      title: `${$configApp.projectName} - ${rating.name[$lang]}`,
-      description: rating.descr[$lang],
+      title: `${$configApp.projectName} - ${rating.name[$langDefault()]}`,
+      description: rating.descr[$langDefault()],
     });
 
     return {

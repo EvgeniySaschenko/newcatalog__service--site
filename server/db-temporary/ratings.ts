@@ -6,10 +6,10 @@ import {
   RatinsBriefType,
   RatinsBriefListType,
 } from '@/types';
-type SectionsRatingsListType = [number[]];
+type SectionsRatingsListType = Record<number, number[]>;
 
-let ratingsListCurrent: number[] = [];
-let sectionsRatingsListCurrent = {} as SectionsRatingsListType;
+let ratingsListCache: number[] = [];
+let sectionsRatingsListCache = {} as SectionsRatingsListType;
 
 export const ratings = {
   maxRecordsPerPage: 10,
@@ -17,14 +17,27 @@ export const ratings = {
   async initLists({ sections }: { sections: SectionType[] }) {
     let sectionsRatingsList = {} as SectionsRatingsListType;
     let ratingsList = await this.getRatingsIds();
-    if (!ratingsList) return false;
+    if (!ratingsList) {
+      throw new Error('No valid data: "initLists - !ratingsList"');
+    }
     for await (let { sectionId } of sections) {
       let list = await this.getSectionRatingsIds({ sectionId });
-      if (!Array.isArray(list)) return false;
+      if (!Array.isArray(list)) {
+        // eslint-disable-next-line unicorn/prefer-type-error
+        throw new Error('No valid data: "initLists - !Array.isArray(list)"');
+      }
       sectionsRatingsList[sectionId] = list;
     }
-    ratingsListCurrent = ratingsList as number[];
-    sectionsRatingsListCurrent = sectionsRatingsList;
+    if (!(ratingsList as []).length) {
+      throw new Error('No valid data: "initLists - !(ratingsList as []).length"');
+    }
+    ratingsListCache = ratingsList as number[];
+
+    if (!Object.keys(sectionsRatingsList).length) {
+      // eslint-disable-next-line prettier/prettier
+      throw new Error('No valid data: "initLists - !Object.keys(sectionsRatingsList).length"');
+    }
+    sectionsRatingsListCache = sectionsRatingsList;
     return true;
   },
 
@@ -40,7 +53,7 @@ export const ratings = {
     // eslint-disable-next-line prettier/prettier
     let ratingItems = JSON.parse((await db.dbConnect.get(`${db.prefixes['rating-items']}_${ratingId}`)) || '[]');
 
-    if (!rating) return false;
+    if (!rating) throw new Error('No valid data: "getPageRating - !rating"');
 
     return {
       rating,
@@ -87,7 +100,7 @@ export const ratings = {
   },
 
   // Get list briefs for page section
-  async getSectionRatingsList({
+  async getPageSection({
     sectionId,
     page,
   }: {
@@ -97,11 +110,16 @@ export const ratings = {
     let start = page * this.maxRecordsPerPage - this.maxRecordsPerPage;
     let end = page * this.maxRecordsPerPage;
 
-    if (!sectionsRatingsListCurrent[sectionId]) return false;
+    if (!sectionsRatingsListCache[sectionId]) {
+      // eslint-disable-next-line prettier/prettier
+      throw new Error('No valid data: "getPageSection - !sectionsRatingsListCache[sectionId]"');
+    }
 
-    let listIds = sectionsRatingsListCurrent[sectionId].slice(start, end);
+    let listIds = sectionsRatingsListCache[sectionId].slice(start, end);
 
-    if (!listIds.length) return false;
+    if (!listIds.length) {
+      throw new Error('No valid data: "getPageSection - !listIds.length"');
+    }
 
     let items = [] as RatinsBriefType[];
     for await (let ratingId of listIds) {
@@ -110,7 +128,7 @@ export const ratings = {
       items.push(brief as RatinsBriefType);
     }
 
-    let itemsCount = sectionsRatingsListCurrent[sectionId].length;
+    let itemsCount = sectionsRatingsListCache[sectionId].length;
     let pagesCount = Math.ceil(itemsCount / this.maxRecordsPerPage);
     return {
       items,
@@ -122,21 +140,21 @@ export const ratings = {
   },
 
   // Get list briefs for page list ratings
-  async getRatingsList({ page }: { page: number }): Promise<RatinsBriefListType | boolean> {
+  async getPageRatingsAll({ page }: { page: number }): Promise<RatinsBriefListType | boolean> {
     let start = page * this.maxRecordsPerPage - this.maxRecordsPerPage;
     let end = page * this.maxRecordsPerPage;
-    let listIds = ratingsListCurrent.slice(start, end);
+    let listIds = ratingsListCache.slice(start, end);
 
-    if (!listIds.length) return false;
+    if (!listIds.length) throw new Error('No valid data: "getPageRatingsAll - !listIds.length"');
 
     let items = [] as RatinsBriefType[];
     for await (let ratingId of listIds) {
       let brief = await this.getRatingBrief({ ratingId });
-      if (!brief) throw new Error(`${ratingId}`);
+      if (!brief) throw new Error('No valid data: "getPageRatingsAll - !brief"');
       items.push(brief as RatinsBriefType);
     }
 
-    let itemsCount = ratingsListCurrent.length;
+    let itemsCount = ratingsListCache.length;
     let pagesCount = Math.ceil(itemsCount / this.maxRecordsPerPage);
     return {
       items,

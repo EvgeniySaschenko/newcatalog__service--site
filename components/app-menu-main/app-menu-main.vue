@@ -2,9 +2,9 @@
 ul.app-menu-main
   li.app-menu-main__item(v-for='(item, index) in sections')
     nuxt-link.app-menu-main__link(
-      :to='`/${$lang}/section/${item.sectionId}`',
+      :to='`/${$langDefault()}/section/${item.sectionId}`',
       data-element-type='app-menu-main__link'
-    ) {{ item.name[$lang] }}
+    ) {{ item.name[$langDefault()] }}
 </template>
 
 <script lang="ts">

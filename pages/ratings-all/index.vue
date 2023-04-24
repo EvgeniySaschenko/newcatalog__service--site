@@ -15,13 +15,9 @@ import { RatinsBriefType } from '@/types';
 async function getRatingsList() {
   let { $api } = useNuxtApp();
   let { query } = useRoute();
-  let ratingsList = await $api.getPageRatingsList({
+  let ratingsList = await $api.getPageRatingsAll({
     page: Number(query.page) || 1,
   });
-
-  if (ratingsList?.isError) {
-    ratingsList.showError();
-  }
 
   return ratingsList;
 }
@@ -30,6 +26,10 @@ export default defineNuxtComponent({
   async asyncData() {
     let { $configApp, $t } = useNuxtApp();
     let ratingsList = await getRatingsList();
+    if (ratingsList?.isError) {
+      return ratingsList.showError();
+    }
+
     let store = useBreadcrumbsStore();
 
     store.setBreadcrumbs([]);
@@ -71,7 +71,11 @@ export default defineNuxtComponent({
     async setRatingsList() {
       this.isLoading = true;
       try {
-        this.ratingsList = await getRatingsList();
+        let ratingsList = await getRatingsList();
+        if (ratingsList?.isError) {
+          return ratingsList.showError();
+        }
+        this.ratingsList = ratingsList;
       } catch (error) {
         console.error(error);
         this.ratingsList = [];

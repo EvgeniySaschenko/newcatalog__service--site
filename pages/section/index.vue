@@ -25,7 +25,7 @@ async function getRatingsList() {
 
 export default defineNuxtComponent({
   async asyncData() {
-    let { $configApp, $t, $lang } = useNuxtApp();
+    let { $configApp, $t, $langDefault } = useNuxtApp();
     let { params } = useRoute();
     let ratingsList = await getRatingsList();
 
@@ -38,13 +38,13 @@ export default defineNuxtComponent({
     let sectionName = '';
 
     if (section[0].name) {
-      sectionName = `${section[0].name[$lang]}`;
+      sectionName = `${section[0].name[$langDefault()]}`;
     }
 
     useBreadcrumbsStore().setBreadcrumbs([
       {
         name: sectionName,
-        url: `/${$lang}/section/${params.sectionId}`,
+        url: `/${$langDefault()}/section/${params.sectionId}`,
       },
     ]);
 

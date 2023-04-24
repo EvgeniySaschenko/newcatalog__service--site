@@ -1,9 +1,10 @@
 <template lang="pug">
 footer.app-footer
-  .app-footer__row.app-footer__row--email newcatalog.net@gmail.com
-  .app-footer__row.app-footer__row--langs
-    .langs
-      a.langs__item(:href='`/${item}`', v-for='item in $langs') {{ item }}
+  .container
+    .app-footer__row.app-footer__row--email newcatalog.net@gmail.com
+    .app-footer__row.app-footer__row--langs
+      .langs
+        a.langs__item(:href='`/${item}`', v-for='item in $langs()') {{ item }}
 </template>
 
 <script lang="ts">
@@ -20,10 +21,14 @@ export default defineComponent({});
   &__row--email
     margin-bottom: 10px
   .langs
+    font-size: 12px
+    text-align: center
     &__item
-      display: inline-flex
+      display: inline-block
       color: #ffffff
       text-transform: uppercase
       padding: 5px
       border: 1px solid #ffffff
+      margin: 2px 1px
+      min-width: 40px // All to be the same width
 </style>

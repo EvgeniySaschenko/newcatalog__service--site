@@ -100,24 +100,20 @@ export default defineComponent({
     top: 0
 
   &::after
+    content: ""
     display: flex
     align-items: center
     justify-content: center
     animation: preloader-animate-2 2s ease-in-out infinite
-    background-color: $app-primary-color
-    border-radius: 10px
+    background-size: cover
+    left: 0
+    position: absolute
+    right: 0
+    top: 0
     height: 70px
     margin: auto
     width: 70px
     z-index: 10
     bottom: 0
-    content: "#"
-    color: #ffffff
-    border: 2px dashed #ffffff
-    font-size: 60px
-    font-weight: 700
-    left: 0
-    position: absolute
-    right: 0
-    top: 0
+    background-image: var(--app-preloader-image)
 </style>

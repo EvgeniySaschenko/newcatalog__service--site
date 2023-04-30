@@ -60,18 +60,16 @@ export default defineComponent({
 });
 </script>
 <style lang="sass" scoped>
-@import '@/assets/style/_variables.sass'
-
 .app-language-swich
   text-transform: uppercase
-  color: #ffffff
+  color: var(--app-color-primary-inverted)
   text-align: center
   font-size: 12px
   font-weight: 700
   &__current
     cursor: pointer
     padding: 5px
-    border: 1px solid #ffffff
+    border: 1px solid var(--app-color-primary-inverted)
   &__box
     position: relative
   &__list
@@ -79,17 +77,17 @@ export default defineComponent({
     top: 5px
     left: 50%
     transform: translateX(-50%)
-    border: 1px solid #ffffff
+    border: 1px solid var(--app-color-primary-inverted)
     border-radius: 2px
-    background-color: #ffffff
+    background-color: var(--app-color-primary-inverted)
     text-align: center
     z-index: 100
   &__item
     padding: 6px
     cursor: pointer
-    color: $app-primary-color
-    border: 1px solid $app-primary-color
+    color: var(--app-color-primary)
+    border: 1px solid var(--app-color-primary)
     &.active
-      background-color: $app-primary-color
-      color: #ffffff
+      background-color: var(--app-color-primary)
+      color: var(--app-color-primary-inverted)
 </style>

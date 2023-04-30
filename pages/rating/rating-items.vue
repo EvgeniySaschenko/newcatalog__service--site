@@ -87,7 +87,7 @@ export default defineComponent({
     width: 100%
   &__item
     width: 33.33%
-    border: 1px dashed $app-primary-color
+    border: 1px dashed var(--app-color-primary)
     @media (max-width: $app-screen-xl)
       width: 50%
     @media (max-width: $app-screen-md)
@@ -105,7 +105,7 @@ export default defineComponent({
     padding: 10px
     text-align: center
   &__name
-    color: #000000
+    color: var(--app-color-text-regular)
     display: -webkit-box
     -webkit-line-clamp: 2
     -webkit-box-orient: vertical
@@ -116,7 +116,7 @@ export default defineComponent({
     margin-bottom: 10px
     padding: 0 10px
   &__hostname
-    color: $app-primary-color
+    color: var(--app-color-primary)
     margin-bottom: 10px
     font-weight: 700
     width: 100%

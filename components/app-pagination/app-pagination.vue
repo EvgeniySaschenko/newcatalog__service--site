@@ -63,8 +63,6 @@ export default defineComponent({
 });
 </script>
 <style lang="sass" scoped>
-@import '@/assets/style/_variables.sass'
-
 .app-pagination
   margin: 15px auto
   &__list
@@ -81,9 +79,9 @@ export default defineComponent({
     min-width: 30px
     margin: 5px
     padding: 5px
-    border: 2px solid $app-primary-color
+    border: 2px solid var(--app-color-primary)
     cursor: pointer
     &.active
-      background-color: $app-primary-color
-      color: #ffffff
+      background-color: var(--app-color-primary)
+      color: var(--app-color-primary-inverted)
 </style>

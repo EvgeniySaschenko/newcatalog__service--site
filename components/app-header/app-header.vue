@@ -2,7 +2,8 @@
 header.app-header
   .app-header__row.container
     nuxt-link.app-header__logo(:to='`/${$langDefault()}`', data-element-type='app-header__logo')
-      img.app-header__logo-img(src='/images/app/logo.png', alt='Logo')
+      img.app-header__logo-img(:src='logoImage', alt='Logo')
+    .app-header__custom-code(v-html='headerHtml', v-if='headerHtml')
     .app-header__langs
       app-language-swich
 </template>
@@ -14,6 +15,16 @@ export default defineComponent({
   components: {
     AppLanguageSwich,
   },
+  props: {
+    logoImage: {
+      type: String,
+      required: true,
+    },
+    headerHtml: {
+      type: String,
+      default: '',
+    },
+  },
 });
 </script>
 <style lang="sass" scoped>
@@ -21,7 +32,7 @@ export default defineComponent({
 
 .app-header
   padding: 15px 0
-  background-color: $app-primary-color
+  background-color: var(--app-color-primary)
   margin-bottom: 15px
   &__row
     display: flex

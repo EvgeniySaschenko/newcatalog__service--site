@@ -27,6 +27,6 @@ export default defineComponent({
   border-radius: 10px
   display: inline-flex
   font-weight: 700
-  color: #fff
+  color: #ffffff
   margin: 5px 3px
 </style>

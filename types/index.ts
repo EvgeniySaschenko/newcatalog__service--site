@@ -30,15 +30,53 @@ export type TranslationsType = Record<keyof LangType, Record<string, string>>;
 
 // Settings
 export enum SettingsEnum {
+  // langs
   langDefault = 'langDefault',
   langs = 'langs',
+  // translations
   translations = 'translations',
+  // images
+  imageAppFavicon = 'imageAppFavicon',
+  imageAppPreloader = 'imageAppPreloader',
+  imageAppLogo = 'imageAppLogo',
+  // colors
+  colorPrimary = 'colorPrimary',
+  colorPrimaryInverted = 'colorPrimaryInverted',
+  colorTextRegular = 'colorTextRegular',
+  colorSelectionBackground = 'colorSelectionBackground',
+  colorSelectionText = 'colorSelectionText',
+  // Code / text
+  headScript = 'headScript',
+  headStyles = 'headStyles',
+  headerHtml = 'headerHtml',
+  contentTopHtml = 'contentTopHtml',
+  contentBottomHtml = 'contentBottomHtml',
+  footerHtml = 'footerHtml',
 }
 
 export type SettingsType = {
+  // langs
   [SettingsEnum.langDefault]: keyof LangType;
   [SettingsEnum.langs]: (keyof LangType)[];
+  // translations
   [SettingsEnum.translations]: TranslationsType;
+  // images
+  [SettingsEnum.imageAppFavicon]: string;
+  [SettingsEnum.imageAppPreloader]: string;
+  [SettingsEnum.imageAppLogo]: string;
+  // colors
+  [SettingsEnum.colorPrimary]: string;
+  [SettingsEnum.colorPrimaryInverted]: string;
+  [SettingsEnum.colorTextRegular]: string;
+  [SettingsEnum.colorSelectionBackground]: string;
+  [SettingsEnum.colorSelectionText]: string;
+  // Code / text
+  [SettingsEnum.headScript]: string;
+  [SettingsEnum.headStyles]: string;
+  [SettingsEnum.headerHtml]: string;
+  [SettingsEnum.contentTopHtml]: string;
+  [SettingsEnum.contentBottomHtml]: string;
+  [SettingsEnum.footerHtml]: string;
 };
 
 // Response show error

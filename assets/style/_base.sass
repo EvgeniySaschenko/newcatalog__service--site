@@ -1,6 +1,6 @@
 /* cyrillic */
 @font-face
-  font-family: $app-font-familly
+  font-family: var(--app-font-familly)
   font-style: normal
   font-weight: 400
   font-display: swap
@@ -9,7 +9,7 @@
 
 /* latin */
 @font-face
-  font-family: $app-font-familly
+  font-family: var(--app-font-familly)
   font-style: normal
   font-weight: 400
   font-display: swap
@@ -18,7 +18,7 @@
 
 /* latin */
 @font-face
-  font-family: $app-font-familly
+  font-family: var(--app-font-familly)
   font-style: normal
   font-weight: 700
   font-display: swap
@@ -27,7 +27,7 @@
 
 /* cyrillic */
 @font-face
-  font-family: $app-font-familly
+  font-family: var(--app-font-familly)
   font-style: normal
   font-weight: 700
   font-display: swap
@@ -37,28 +37,28 @@
 *
   box-sizing: border-box
 
+::-moz-selection
+  background: var(--app-color-selection-background)
+  color: var(--app-color-selection-text)
+
 ::selection 
-  background: #f88686
-  color: #ffffff
-
-::-moz-selection 
-  background: #f88686
-  color: #ffffff
-
+  background: var(--app-color-selection-background)
+  color: var(--app-color-selection-text)
 
 img
   max-width: 100%
   height: auto
 
 body
-  font-family: $app-font-familly, sans-serif
+  font-family: var(--app-font-familly), sans-serif
   font-weight: 400
   font-size: 16px
   overflow-x: hidden
-
+  color: var(--app-color-text-regular)
+  
 a
   text-decoration: none
-  color: $app-primary-color
+  color: var(--app-color-primary)
   &:hover
     transition-duration: .3s
 

@@ -91,8 +91,6 @@ export default defineNuxtComponent({
 });
 </script>
 <style lang="sass">
-@import '@/assets/style/_variables.sass'
-
 .page
   position: relative
   &__top
@@ -101,7 +99,7 @@ export default defineNuxtComponent({
     margin-bottom: 10px
   &__descr
     margin: 15px 0
-    color: $app-primary-color
+    color: var(--app-color-primary)
     text-align: center
 
 .labels-sections
@@ -111,8 +109,8 @@ export default defineNuxtComponent({
   &__item
     margin: 5px
     padding: 5px
-    border-bottom: 2px dotted $app-primary-color
-    color: $app-primary-color
+    border-bottom: 2px dotted var(--app-color-primary)
+    color: var(--app-color-primary)
     text-transform: uppercase
     font-weight: 700
 </style>

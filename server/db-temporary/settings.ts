@@ -6,19 +6,13 @@ let settingsCache = {} as never as SettingsType;
 export const settings = {
   // Get settings
   async getSettings(): Promise<SettingsType> {
-    let langs = JSON.parse((await db.dbConnect.get(db.prefixes['langs-site'])) || '');
-    let langDefault = JSON.parse((await db.dbConnect.get(db.prefixes['lang-default-site'])) || '');
+    let settings = JSON.parse((await db.dbConnect.get(db.prefixes['settings'])) || '');
     let translations = JSON.parse((await db.dbConnect.get(db.prefixes['translations-site'])) || '');
-
-    settingsCache = {
-      langs,
-      langDefault,
-      translations,
-    };
+    settingsCache = Object.assign({}, settings, { translations });
 
     let key: keyof typeof settingsCache;
     for (key in settingsCache) {
-      if (!settingsCache[key]) {
+      if (!settingsCache[key] === undefined) {
         settingsCache = {} as never as SettingsType;
         throw new Error('No valid data: "getSettings - !settingsCache[key]"');
       }

@@ -34,16 +34,16 @@ export default defineComponent({
   &__item
     margin: 10px 7px
     font-weight: bold
-    color: $app-primary-color
+    color: var(--app-color-primary)
     cursor: pointer
     border-radius: 5px
   &__link
-    border: 1px dashed $app-primary-color
+    border: 1px dashed var(--app-color-primary)
     padding: 5px 5px
     display: inline-flex
     white-space: nowrap
     &.router-link-active
-      border: 1px dashed #ffffff
-      color: #ffffff
-      background: $app-primary-color
+      border: 1px dashed var(--app-color-primary-inverted)
+      color: var(--app-color-primary-inverted)
+      background: var(--app-color-primary)
 </style>

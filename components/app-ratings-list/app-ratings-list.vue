@@ -71,12 +71,12 @@ export default defineComponent({
 .app-ratings-list
   &__item
     margin-bottom: 10px
-    border: 1px dashed $app-primary-color
-    border-left: 5px solid $app-primary-color
+    border: 1px dashed var(--app-color-primary)
+    border-left: 5px solid var(--app-color-primary)
     padding: 10px 10px 5px 10px
   &__title
     margin-bottom: 10px
-    color: $app-primary-color
+    color: var(--app-color-primary)
     font-size: 20px
     font-weight: 700
     display: block
@@ -92,8 +92,8 @@ export default defineComponent({
     align-items: center
   &__number
     font-weight: 700
-    color: $app-primary-color
-    border: 1px dashed $app-primary-color
+    color: var(--app-color-primary)
+    border: 1px dashed var(--app-color-primary)
     padding: 5px 10px
     border-radius: 5px
     display: flex
@@ -107,7 +107,7 @@ export default defineComponent({
     justify-content: flex-end
     &-item
       margin: 5px 10px
-      color: $app-primary-color
+      color: var(--app-color-primary)
       text-transform: uppercase
       font-weight: 700
       font-size: 12px

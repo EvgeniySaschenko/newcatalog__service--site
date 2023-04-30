@@ -39,8 +39,6 @@ export default defineComponent({
 });
 </script>
 <style lang="sass">
-@import '@/assets/style/_variables.sass'
-
 .app-preloader
   display: flex
   align-items: center
@@ -52,19 +50,19 @@ export default defineComponent({
   @keyframes preloader-animate
     0%
       opacity: .1
-      background-color: $app-primary-color
+      background-color: var(--app-color-primary)
     20%
       opacity: .4
-      background-color: #0000FF
+      background-color: var(--app-color-primary)
     50%
       opacity: .6
-      background-color: #000080
+      background-color: var(--app-color-primary)
     70%
       opacity: .4
-      background-color: #0000FF
+      background-color: var(--app-color-primary)
     100%
       opacity: .1
-      background-color: $app-primary-color
+      background-color: var(--app-color-primary)
 
   @keyframes preloader-animate-2
     0%
@@ -86,7 +84,7 @@ export default defineComponent({
   &::before
     flex-shrink: 0
     animation: preloader-animate 3s ease-in-out infinite
-    background-color: $app-primary-color
+    background-color: var(--app-color-primary)
     background-color: black
     height: 100%
     margin: auto
@@ -115,5 +113,5 @@ export default defineComponent({
     width: 70px
     z-index: 10
     bottom: 0
-    background-image: var(--app-preloader-image)
+    background-image: var(--app-image-preloader)
 </style>

@@ -1,8 +1,12 @@
 <template lang="pug">
 .page-error
   .page-error__box
-    nuxt-link.page-error__logo(:to='`/${$langDefault()}`', data-element-type='page-error__logo')
-      img.page-error__logo-img(src='@/assets/img/logo.png', alt='Logo')
+    nuxt-link.page-error__logo(
+      :to='`/${$langDefault()}`',
+      data-element-type='page-error__logo',
+      v-if='logoImage'
+    )
+      img.page-error__logo-img(:src='logoImage', alt='Logo')
 
     .page-error__code {{ error.statusCode }}
     // 503
@@ -43,12 +47,22 @@ export default defineNuxtComponent({
     return {};
   },
 
-  beforeCreate() {
+  created() {
+    // Settings will be applied if available
     let { $setTranslations, $setLangs, $setLangDefault } = useNuxtApp();
-    let { translations, langs, langDefault } = useSettingsStore().items;
-    $setTranslations(translations);
-    $setLangs(langs);
-    $setLangDefault(langDefault);
+    let settings = useSettingsStore().items;
+    if (settings && Object.keys(settings).length) {
+      this.logoImage = settings.imageAppLogo;
+      $setTranslations(settings.translations);
+      $setLangs(settings.langs);
+      $setLangDefault(settings.langDefault);
+    }
+  },
+
+  data() {
+    return {
+      logoImage: '',
+    };
   },
 
   props: {
@@ -65,11 +79,18 @@ export default defineNuxtComponent({
 </script>
 <style lang="sass">
 @import '@/assets/style/_style.sass'
+// In case of an error, variables may not come from the server, so they are on this page on their own
 .page-error
+  --app-color-primary: #5a448d
+  --app-color-primary-inverted: #ffffff
+  --app-color-text-regular: #222222
+  --app-color-selection-background: #f88686
+  --app-color-selection-text: #ffffff
+
   width: 100%
   height: 100vh
-  background-color: $app-primary-color
-  color: #ffffff
+  background-color: var(--app-color-primary)
+  color: var(--app-color-primary-inverted)
   text-align: center
   padding: 10px
   display: flex
@@ -97,11 +118,21 @@ export default defineNuxtComponent({
     display: inline-flex
     font-size: 16px
     text-transform: uppercase
-    color: #ffffff
-    border: 2px solid #ffffff
+    color: var(--app-color-primary-inverted)
+    border: 2px solid var(--app-color-primary-inverted)
     padding: 15px
     border-radius: 10px
     margin-top: 30px
     font-weight: 700
-    background-color: $app-primary-light-color
+    background-color: var(--app-color-primary)
+    position: relative
+    overflow: hidden
+    &::after
+      content: ""
+      background-color: rgba(255, 255, 255, .1)
+      position: absolute
+      top: 0
+      left: 0
+      right: 0
+      bottom: 0
 </style>

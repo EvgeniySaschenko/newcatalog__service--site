@@ -48,14 +48,12 @@ export default defineComponent({
 });
 </script>
 <style lang="sass" scoped>
-@import '@/assets/style/_variables.sass'
-
 .app-breadcrumbs
   width: 100%
   min-height: 30px
   &__list
     display: flex
-    color: $app-primary-color
+    color: var(--app-color-primary)
     overflow-x: auto
     white-space: nowrap
     padding-bottom: 10px
@@ -74,5 +72,5 @@ export default defineComponent({
       &::after
         content: ""
   &__link
-    border-bottom: 1px solid $app-primary-color
+    border-bottom: 1px solid var(--app-color-primary)
 </style>

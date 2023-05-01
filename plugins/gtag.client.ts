@@ -1,5 +1,6 @@
 import VueGtag, { trackRouter } from 'vue-gtag-next';
 import { AppContextType } from '@/types';
+import useSettingsStore from '@/store/settings';
 
 type GtmInfoType = {
   event: 'rating-item.click' | 'page.transition';
@@ -29,9 +30,13 @@ export default defineNuxtPlugin((nuxtApp) => {
 
   onNuxtReady(() => {
     let { $configApp, $screen } = nuxtApp as never as AppContextType;
+    let { googleTagManagerId } = useSettingsStore().items;
+
+    if (!googleTagManagerId) return;
+
     nuxtApp.vueApp.use(VueGtag, {
       property: {
-        id: $configApp.gtmId,
+        id: googleTagManagerId,
       },
     });
 

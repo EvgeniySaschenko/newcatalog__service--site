@@ -46,6 +46,7 @@ export default defineNuxtComponent({
 
     let headStyles = `
       :root {
+        --app-color-body-background: ${settings[SettingsEnum.colorBodyBackground]};
         --app-color-primary: ${settings[SettingsEnum.colorPrimary]};
         --app-color-primary-inverted: ${settings[SettingsEnum.colorPrimaryInverted]};
         --app-color-text-regular: ${settings[SettingsEnum.colorTextRegular]};
@@ -99,6 +100,8 @@ export default defineNuxtComponent({
   min-height: 100vh
   margin-bottom: 15px
   padding: 10px
+  box-shadow: inset 0 0 2px var(--app-color-body-background)
+  border-radius: 2px
   &__custom-code
     &-top,
     &-bottom

@@ -87,6 +87,9 @@ export default defineComponent({
     cursor: pointer
     color: var(--app-color-primary)
     border: 1px solid var(--app-color-primary)
+    border-bottom: 0
+    &:last-child
+      border-bottom: 1px solid var(--app-color-primary)
     &.active
       background-color: var(--app-color-primary)
       color: var(--app-color-primary-inverted)

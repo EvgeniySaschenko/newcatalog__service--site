@@ -1,8 +1,4 @@
 export class PluginConfigApp {
-  // Used in meta tags
-  projectName = 'NEWCATALOG';
-  // Google Tag Manager
-  gtmId = 'GTM-KCCL483';
   // Elements types aliases, for Google Tag Manager
   elementsTypes = {
     'app-header__logo': 1,

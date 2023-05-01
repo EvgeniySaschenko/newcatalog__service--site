@@ -40,6 +40,7 @@ export enum SettingsEnum {
   imageAppPreloader = 'imageAppPreloader',
   imageAppLogo = 'imageAppLogo',
   // colors
+  colorBodyBackground = 'colorBodyBackground',
   colorPrimary = 'colorPrimary',
   colorPrimaryInverted = 'colorPrimaryInverted',
   colorTextRegular = 'colorTextRegular',
@@ -52,6 +53,10 @@ export enum SettingsEnum {
   contentTopHtml = 'contentTopHtml',
   contentBottomHtml = 'contentBottomHtml',
   footerHtml = 'footerHtml',
+  // Seo / Marketing
+  pageTitlePrefix = 'pageTitlePrefix',
+  pageTitleSufix = 'pageTitleSufix',
+  googleTagManagerId = 'googleTagManagerId',
 }
 
 export type SettingsType = {
@@ -65,6 +70,7 @@ export type SettingsType = {
   [SettingsEnum.imageAppPreloader]: string;
   [SettingsEnum.imageAppLogo]: string;
   // colors
+  [SettingsEnum.colorBodyBackground]: string;
   [SettingsEnum.colorPrimary]: string;
   [SettingsEnum.colorPrimaryInverted]: string;
   [SettingsEnum.colorTextRegular]: string;
@@ -77,6 +83,10 @@ export type SettingsType = {
   [SettingsEnum.contentTopHtml]: string;
   [SettingsEnum.contentBottomHtml]: string;
   [SettingsEnum.footerHtml]: string;
+  // Seo / Marketing
+  [SettingsEnum.pageTitlePrefix]: string;
+  [SettingsEnum.pageTitleSufix]: string;
+  [SettingsEnum.googleTagManagerId]: string;
 };
 
 // Response show error

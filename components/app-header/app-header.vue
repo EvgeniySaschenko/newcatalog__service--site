@@ -34,6 +34,8 @@ export default defineComponent({
   padding: 15px 0
   background-color: var(--app-color-primary)
   margin-bottom: 15px
+  box-shadow: 0 4px 2px -2px var(--app-color-primary)
+  border-radius: 0 0 2px 2px
   &__row
     display: flex
     justify-content: space-between

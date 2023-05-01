@@ -20,6 +20,7 @@
 import RatingItems from './rating-items.vue';
 import useSectionsStore from '@/store/sections';
 import useBreadcrumbsStore from '@/store/breadcrumbs';
+import useSettingsStore from '@/store/settings';
 import { LabelType, RatingType, RatingItemType } from '@/types';
 
 // Get ratings list
@@ -47,8 +48,10 @@ export default defineNuxtComponent({
       },
     ]);
 
+    let { pageTitlePrefix, pageTitleSufix } = useSettingsStore().items;
+
     useSeoMeta({
-      title: `${$configApp.projectName} - ${rating.name[$langDefault()]}`,
+      title: `${pageTitlePrefix} ${rating.name[$langDefault()]} ${pageTitleSufix}`.trim(),
       description: rating.descr[$langDefault()],
     });
 

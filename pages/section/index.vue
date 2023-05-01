@@ -10,6 +10,7 @@
 import AppRatingsList from '@/components/app-ratings-list/app-ratings-list.vue';
 import useSectionsStore from '@/store/sections';
 import useBreadcrumbsStore from '@/store/breadcrumbs';
+import useSettingsStore from '@/store/settings';
 import { RatinsBriefType } from '@/types';
 
 async function getRatingsList() {
@@ -25,7 +26,7 @@ async function getRatingsList() {
 
 export default defineNuxtComponent({
   async asyncData() {
-    let { $configApp, $t, $langDefault } = useNuxtApp();
+    let { $t, $langDefault } = useNuxtApp();
     let { params } = useRoute();
     let ratingsList = await getRatingsList();
 
@@ -48,8 +49,10 @@ export default defineNuxtComponent({
       },
     ]);
 
+    let { pageTitlePrefix, pageTitleSufix } = useSettingsStore().items;
+
     useSeoMeta({
-      title: `${$configApp.projectName} - ${$t('Section')}: ${sectionName}`,
+      title: `${pageTitlePrefix} ${$t('Section')}: ${sectionName} ${pageTitleSufix}`.trim(),
     });
 
     return {

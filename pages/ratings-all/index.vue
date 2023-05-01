@@ -9,6 +9,7 @@
 <script lang="ts">
 import AppRatingsList from '@/components/app-ratings-list/app-ratings-list.vue';
 import useBreadcrumbsStore from '@/store/breadcrumbs';
+import useSettingsStore from '@/store/settings';
 import { RatinsBriefType } from '@/types';
 
 // Get ratings list
@@ -24,7 +25,7 @@ async function getRatingsList() {
 
 export default defineNuxtComponent({
   async asyncData() {
-    let { $configApp, $t } = useNuxtApp();
+    let { $t } = useNuxtApp();
     let ratingsList = await getRatingsList();
     if (ratingsList?.isError) {
       return ratingsList.showError();
@@ -33,9 +34,10 @@ export default defineNuxtComponent({
     let store = useBreadcrumbsStore();
 
     store.setBreadcrumbs([]);
+    let { pageTitlePrefix, pageTitleSufix } = useSettingsStore().items;
 
     useSeoMeta({
-      title: `${$configApp.projectName} - ${$t('Rating of Internet services')}`,
+      title: `${pageTitlePrefix} ${$t('Rating of Internet services')} ${pageTitleSufix}`.trim(),
     });
 
     return {

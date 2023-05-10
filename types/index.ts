@@ -49,6 +49,7 @@ export enum SettingsEnum {
   // Code / text
   headScript = 'headScript',
   headStyles = 'headStyles',
+  headerInfoHtml = 'headerInfoHtml',
   headerHtml = 'headerHtml',
   contentTopHtml = 'contentTopHtml',
   contentBottomHtml = 'contentBottomHtml',
@@ -79,6 +80,7 @@ export type SettingsType = {
   // Code / text
   [SettingsEnum.headScript]: string;
   [SettingsEnum.headStyles]: string;
+  [SettingsEnum.headerInfoHtml]: string;
   [SettingsEnum.headerHtml]: string;
   [SettingsEnum.contentTopHtml]: string;
   [SettingsEnum.contentBottomHtml]: string;

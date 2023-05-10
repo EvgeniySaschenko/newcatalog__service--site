@@ -1,5 +1,6 @@
 <template lang="pug">
 .wrapper
+  .wrapper__info-band(v-if='settings[SettingsEnum.headerInfoHtml]') {{ settings[SettingsEnum.headerInfoHtml] }}
   app-header(
     :logoImage='settings[SettingsEnum.imageAppLogo]',
     :headerHtml='settings[SettingsEnum.headerHtml]'
@@ -95,6 +96,24 @@ export default defineNuxtComponent({
 </script>
 <style lang="sass">
 @import '@/assets/style/_style.sass'
+.wrapper
+  &__info-band
+    padding: 5px 10px
+    text-align: center
+    position: relative
+    font-size: 14px
+    color: var(--app-color-primary-inverted)
+    &::after
+      content: ""
+      position: absolute
+      top: 0
+      left: 0
+      right: 0
+      bottom: 0
+      background-color: var(--app-color-primary)
+      opacity: .7
+      z-index: -1
+
 .app-content
   background-color: #ffffff
   min-height: 100vh

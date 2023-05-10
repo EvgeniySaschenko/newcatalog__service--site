@@ -44,6 +44,7 @@ export default defineComponent({
       flex-direction: column
   &__logo
     max-width: 280px
+    display: inline-flex
     @media (max-width: $app-screen-sm)
       margin-bottom: 10px
     &-img

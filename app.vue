@@ -3,7 +3,8 @@
   .wrapper__info-band(v-if='settings[SettingsEnum.headerInfoHtml]') {{ settings[SettingsEnum.headerInfoHtml] }}
   app-header(
     :logoImage='settings[SettingsEnum.imageAppLogo]',
-    :headerHtml='settings[SettingsEnum.headerHtml]'
+    :headerHtml='settings[SettingsEnum.headerHtml]',
+    :sections='sections'
   )
   .app-content.container
     app-breadcrumbs(:breadcrumbs='breadcrumbs')
@@ -11,7 +12,7 @@
       v-html='settings[SettingsEnum.contentTopHtml]',
       v-if='settings[SettingsEnum.contentTopHtml]'
     )
-    app-menu-main(:sections='sections')
+    app-menu-slider(:sections='sections')
     .app-content__layout
       nuxt-layout
         nuxt-page
@@ -25,7 +26,7 @@
 <script lang="ts">
 import AppHeader from '@/components/app-header/app-header.vue';
 import AppFooter from '@/components/app-footer/app-footer.vue';
-import AppMenuMain from '@/components/app-menu-main/app-menu-main.vue';
+import AppMenuSlider from '@/components/app-menu-slider/app-menu-slider.vue';
 import AppBreadcrumbs from '@/components/app-breadcrumbs/app-breadcrumbs.vue';
 import useSectionsStore from '@/store/sections';
 import useSettingsStore from '@/store/settings';
@@ -89,7 +90,7 @@ export default defineNuxtComponent({
   components: {
     AppHeader,
     AppFooter,
-    AppMenuMain,
+    AppMenuSlider,
     AppBreadcrumbs,
   },
 });

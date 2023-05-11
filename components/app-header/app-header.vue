@@ -1,19 +1,30 @@
 <template lang="pug">
 header.app-header
   .app-header__row.container
-    nuxt-link.app-header__logo(:to='`/${$langDefault()}`', data-element-type='app-header__logo')
-      img.app-header__logo-img(:src='logoImage', alt='Logo')
-    .app-header__custom-code(v-html='headerHtml', v-if='headerHtml')
-    .app-header__langs
-      app-language-swich
+    .app-header__col.app-header__col--logo
+      nuxt-link.app-header__logo(:to='`/${$langDefault()}`', data-element-type='app-header__logo')
+        img.app-header__logo-img(:src='logoImage', alt='Logo')
+    .app-header__col.app-header__col--custom-code
+      .app-header__custom-code(v-html='headerHtml', v-if='headerHtml')
+    .app-header__col.app-header__col--control
+      .app-header__langs
+        app-language-swich
+      .app-header__btn-menu(@click='isShowMenuMain = true')
+        .app-header__btn-menu-item
+        .app-header__btn-menu-item
+        .app-header__btn-menu-item
+  app-menu-main(v-model='isShowMenuMain', :sections='sections')
 </template>
 
 <script lang="ts">
 import AppLanguageSwich from '@/components/app-language-swich/app-language-swich.vue';
+import AppMenuMain from '@/components/app-menu-main/app-menu-main.vue';
+import { SectionType } from '@/types';
 
 export default defineComponent({
   components: {
     AppLanguageSwich,
+    AppMenuMain,
   },
   props: {
     logoImage: {
@@ -23,6 +34,21 @@ export default defineComponent({
     headerHtml: {
       type: String,
       default: '',
+    },
+    // sections
+    sections: {
+      type: Array as () => SectionType[],
+      default: () => [],
+    },
+  },
+  data() {
+    return {
+      isShowMenuMain: false,
+    };
+  },
+  methods: {
+    toggleMenuMain() {
+      this.isShowMenuMain = !this.isShowMenuMain;
     },
   },
 });
@@ -40,13 +66,38 @@ export default defineComponent({
     display: flex
     justify-content: space-between
     align-items: center
+  &__col
+    display: flex
+    align-items: center
+    padding: 0 5px
+    &--control
+      @media (max-width: $app-screen-sm)
+        flex-direction: column-reverse
+        justify-content: center
+  &__btn-menu
+    margin-left: 20px
     @media (max-width: $app-screen-sm)
-      flex-direction: column
+      margin-left: 0
+      margin-bottom: 15px
   &__logo
     max-width: 280px
     display: inline-flex
-    @media (max-width: $app-screen-sm)
-      margin-bottom: 10px
     &-img
       width: 100%
+  &__btn-menu
+    height: 40px
+    width: 40px
+    display: flex
+    align-items: center
+    justify-content: space-around
+    flex-direction: column
+    cursor: pointer
+    @media (max-width: $app-screen-sm)
+      height: 35px
+      width: 35px
+    &-item
+      background-color: var(--app-color-primary-inverted)
+      width: 100%
+      height: 4px
+      border-radius: 3px
 </style>

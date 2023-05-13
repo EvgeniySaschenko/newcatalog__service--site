@@ -1,14 +1,10 @@
 import { defineStore } from 'pinia';
-import { SectionType } from '@/types';
-
-type ItemsMapType = {
-  [key: SectionType['sectionId']]: SectionType;
-};
+import { SectionType, SectionMapType } from '@/types';
 
 export default defineStore('sections', {
   state: () => ({
     items: [] as SectionType[],
-    itemsMap: {} as ItemsMapType,
+    itemsMap: {} as SectionMapType,
   }),
   actions: {
     // Set sections

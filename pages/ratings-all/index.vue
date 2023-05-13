@@ -1,7 +1,7 @@
 <template lang="pug">
 .page.page--section
   app-preloader(:isLoading='isLoading', position='fixed')
-  app-page-title(:text='$t("Rating of Internet services")')
+  app-title(:text='$t("Rating of Internet services")')
   .page__ratings-list
     app-ratings-list(:ratingsList='ratingsList')
 </template>

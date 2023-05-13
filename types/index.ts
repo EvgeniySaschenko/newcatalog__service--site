@@ -104,6 +104,10 @@ export type SectionType = {
   countRatingPublished: number;
 };
 
+export type SectionMapType = {
+  [key: SectionType['sectionId']]: SectionType;
+};
+
 // Label
 export type LabelType = {
   labelId: number;
@@ -116,6 +120,7 @@ export type RatingType = {
   ratingId: number;
   descr: LangType;
   name: LangType;
+  linksToSources: string[];
   sectionsIds: [key: SectionType['sectionId']];
   dateFirstPublication: Date | null;
 };

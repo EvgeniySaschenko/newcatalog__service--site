@@ -1,11 +1,15 @@
 <template lang="pug">
 .wrapper
-  .wrapper__info-band(v-if='settings[SettingsEnum.headerInfoHtml]') {{ settings[SettingsEnum.headerInfoHtml] }}
+  .wrapper__info-band(
+    v-if='settings[SettingsEnum.headerInfoHtml]',
+    v-html='settings[SettingsEnum.headerInfoHtml]'
+  )
   app-header(
     :logoImage='settings[SettingsEnum.imageAppLogo]',
     :headerHtml='settings[SettingsEnum.headerHtml]',
     :sections='sections'
   )
+
   .app-content.container
     app-breadcrumbs(:breadcrumbs='breadcrumbs')
     .app-content__custom-code-top(

@@ -2,8 +2,8 @@
 ul.app-menu-slider
   li.app-menu-slider__item(v-for='(item, index) in sections')
     nuxt-link.app-menu-slider__link(
+      data-gtm-element='menu-slider-item',
       :to='`/${$langDefault()}/section/${item.sectionId}`',
-      data-element-type='app-menu-slider__link',
       :class='{ active: $route.path == `/${$langDefault()}/section/${item.sectionId}` }'
     ) {{ item.name[$langDefault()] }}
 </template>

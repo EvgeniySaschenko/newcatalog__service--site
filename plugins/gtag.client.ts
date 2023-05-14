@@ -1,9 +1,11 @@
 import VueGtag, { trackRouter } from 'vue-gtag-next';
-import { AppContextType } from '@/types';
+import { AppContextType, GtmElementsEnum } from '@/types';
 import useSettingsStore from '@/store/settings';
 
+const gtmElemtSelector = '[data-gtm-element]';
+
 type GtmInfoType = {
-  event: 'rating-item.click' | 'page.transition';
+  event: 'click' | 'goToPage';
   elementType: number;
   timestamp: number;
   userAgent: string;
@@ -29,7 +31,7 @@ export default defineNuxtPlugin((nuxtApp) => {
   let $gtmPush = new PluginGtag().gtmPush;
 
   onNuxtReady(() => {
-    let { $configApp, $screen } = nuxtApp as never as AppContextType;
+    let { $screen } = nuxtApp as never as AppContextType;
     let { googleTagManagerId } = useSettingsStore().items;
 
     if (!googleTagManagerId) return;
@@ -44,36 +46,60 @@ export default defineNuxtPlugin((nuxtApp) => {
 
     let elementCurent: any = null;
 
-    // Google Tag Manager - collection of statistics of transitions of transitions between pages
+    // Google Tag Manager - Click handling
     let handlerClicks = (event: any) => {
-      let element: any = event.target;
+      let element: any = event.target.closest(gtmElemtSelector);
       if (!element) return;
-      if (!element.dataset.elementType) return;
+      if (!element.dataset.gtmElement) return;
       elementCurent = element;
+      let gtmElement = element.dataset.gtmElement as keyof typeof GtmElementsEnum;
+      let gtmElementType = GtmElementsEnum[gtmElement];
+
+      switch (gtmElementType) {
+        case GtmElementsEnum['header-button-menu-main']:
+        case GtmElementsEnum['header-language-swich-item']:
+        case GtmElementsEnum['menu-main-button-close']:
+        case GtmElementsEnum['rating-button-links-to-sources']:
+        case GtmElementsEnum['links-to-sources-item']:
+        case GtmElementsEnum['footer-langs-item']: {
+          let { fullPath, name } = useRoute();
+          $gtmPush({
+            event: 'click',
+            pathFrom: fullPath,
+            nameFrom: name as any,
+            elementType: gtmElementType,
+            timestamp: Date.now(),
+            userAgent: window.navigator.userAgent,
+            isTouchDevice: $screen.isTouchDevice,
+            screen: { height: window.screen.height, width: window.screen.width },
+          });
+          break;
+        }
+      }
     };
 
     if (!$screen.isTouchDevice) {
       document.addEventListener('mouseup', handlerClicks);
     } else {
-      document.addEventListener('touchstart', handlerClicks);
+      document.addEventListener('touchend', handlerClicks);
     }
 
+    // Adding page transitions in Google Tag Manager
     useRouter().beforeEach((to, from) => {
-      let elementTypeFrom = null;
+      let gtmElementType = null;
 
-      if (elementCurent && elementCurent.dataset.elementType) {
-        let elementsTypes = $configApp.elementsTypes;
-        elementTypeFrom = elementCurent.dataset.elementType as keyof typeof elementsTypes;
-        elementTypeFrom = elementsTypes[elementTypeFrom];
+      if (elementCurent && elementCurent.dataset.gtmElement) {
+        gtmElementType = elementCurent.dataset.gtmElement as keyof typeof GtmElementsEnum;
       }
+      if (!gtmElementType) return;
 
       $gtmPush({
-        event: 'page.transition',
+        event: 'goToPage',
         pathTo: to?.fullPath,
         nameTo: (to?.name || null) as any,
         pathFrom: from?.fullPath || null,
         nameFrom: (from?.name || null) as any,
-        elementType: elementTypeFrom as number,
+        elementType: GtmElementsEnum[gtmElementType],
         timestamp: Date.now(),
         userAgent: window.navigator.userAgent,
         isTouchDevice: $screen.isTouchDevice,

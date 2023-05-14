@@ -165,3 +165,25 @@ export type BreadcrumbType = {
   name: string;
   url: string;
 };
+
+
+// Elements types aliases, for Google Tag Manager
+export enum GtmElementsEnum {
+  'header-logo' = 1,
+  'header-button-menu-main' = 2,
+  'header-language-swich-item' = 3,
+  'menu-main-button-close' = 4,
+  'menu-main-logo' = 5,
+  'menu-main-item' = 6,
+  'menu-slider-item' = 7, 
+  'rating-button-links-to-sources' = 8, 
+  'links-to-sources-item' = 9, 
+  'breadcrumbs-item' = 10,
+  'pagination-item' = 11, 
+  'ratings-list-title' = 12, 
+  'labels-sections-item' = 13, 
+  'rating-items-item' = 14,
+  'footer-langs-item' = 15,
+  'page-error-logo' = 16,
+  'page-error-button-home' = 17,
+};

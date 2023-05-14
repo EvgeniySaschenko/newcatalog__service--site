@@ -1,16 +1,21 @@
 <template lang="pug">
-ul.app-menu-main(v-if='modelValue')
-  .app-menu-main__btn-close(@click='closeMenu()')
-  nuxt-link.app-menu-main__logo(:to='`/${$langDefault()}`', @click='closeMenu()')
-    img.app-menu-main__logo-img(:src='imageAppLogo')
-  ul.app-menu-main__list
-    li.app-menu-main__item(v-for='(item, index) in sections')
-      nuxt-link.app-menu-main__link(
-        :to='`/${$langDefault()}/section/${item.sectionId}`',
-        data-element-type='app-menu-main__link',
-        @click='closeMenu()',
-        :class='{ active: $route.path == `/${$langDefault()}/section/${item.sectionId}` }'
-      ) {{ item.name[$langDefault()] }}
+.app-menu-main(v-if='modelValue')
+  .app-menu-main__wrapper
+    .app-menu-main__btn-close(@click='closeMenu()', data-gtm-element='menu-main-button-close')
+    nuxt-link.app-menu-main__logo(
+      :to='`/${$langDefault()}`',
+      @click='closeMenu()',
+      data-gtm-element='menu-main-logo'
+    )
+      img.app-menu-main__logo-img(:src='imageAppLogo')
+    ul.app-menu-main__list
+      li.app-menu-main__item(v-for='(item, index) in sections')
+        nuxt-link.app-menu-main__link(
+          :to='`/${$langDefault()}/section/${item.sectionId}`',
+          data-gtm-element='menu-main-item',
+          @click='closeMenu()',
+          :class='{ active: $route.path == `/${$langDefault()}/section/${item.sectionId}` }'
+        ) {{ item.name[$langDefault()] }}
 </template>
 
 <script lang="ts">
@@ -61,20 +66,23 @@ export default defineComponent({
 @import '@/assets/style/_variables.sass'
 
 .app-menu-main
-  display: flex
-  flex-direction: column
-  align-items: center
-  justify-content: center
   position: fixed
   top: 0
   left: 0
   bottom: 0
   right: 0
   z-index: 1000
-  overflow-y: auto
   background: var(--app-color-primary)
   font-weight: bold
-  padding: 10px
+  overflow-y: auto
+  &__wrapper
+    display: flex
+    flex-direction: column
+    align-items: center
+    justify-content: center
+    width: 100%
+    min-height: 100%
+    padding: 50px 0
   &__item
     font-size: 18px
     text-transform: uppercase
@@ -92,9 +100,8 @@ export default defineComponent({
       display: block
       background-color: var(--app-color-selection-background)
       position: relative
-
   &__logo
-    margin: 20px 10px
+    margin-bottom: 20px
     max-width: 300px
     &-img
       max-width: 100%

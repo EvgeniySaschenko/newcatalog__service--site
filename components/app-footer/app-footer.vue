@@ -5,7 +5,11 @@ footer.app-footer
       .app-footer__custom-code(v-html='footerHtml')
     .app-footer__row
       .app-footer__langs
-        a.app-footer__langs-item(:href='`/${item}`', v-for='item in $langs()') {{ item }}
+        a.app-footer__langs-item(
+          :href='`/${item}`',
+          v-for='item in $langs()',
+          data-gtm-element='footer-langs-item'
+        ) {{ item }}
 </template>
 
 <script lang="ts">

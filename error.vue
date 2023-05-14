@@ -3,7 +3,7 @@
   .page-error__box
     nuxt-link.page-error__logo(
       :to='`/${$langDefault()}`',
-      data-element-type='page-error__logo',
+      data-gtm-element='page-error-logo',
       v-if='logoImage'
     )
       img.page-error__logo-img(:src='logoImage', alt='Logo')
@@ -22,14 +22,14 @@
       .page-error__text-1 {{ $t('Page not found') }}
       nuxt-link.page-error__btn(
         :to='`/${$langDefault()}`',
-        data-element-type='page-error__btn--go-to-home'
+        data-gtm-element='page-error-button-home'
       ) {{ $t('Go to home') }}
     // 204
     .page-error__text(v-if='error.statusCode == 204')
       .page-error__text-1 {{ $t('Page content not found') }}
       nuxt-link.page-error__btn(
         :to='`/${$langDefault()}`',
-        data-element-type='page-error__btn--go-to-home'
+        data-gtm-element='page-error-button-home'
       ) {{ $t('Go to home') }}
 </template>
 

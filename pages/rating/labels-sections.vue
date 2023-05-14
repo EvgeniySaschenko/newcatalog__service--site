@@ -1,7 +1,7 @@
 <template lang="pug">
 .labels-sections
   nuxt-link.labels-sections__item(
-    data-element-type='labels-sections__item',
+    data-gtm-element='labels-sections-item',
     v-for='sectionId of sectionsIds',
     :to='`/${$langDefault()}/section/${sectionId}`'
   ) {{ `#${sectionsMap[sectionId].name[$langDefault()]}` }}

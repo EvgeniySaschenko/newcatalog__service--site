@@ -2,14 +2,17 @@
 header.app-header
   .app-header__row.container
     .app-header__col.app-header__col--logo
-      nuxt-link.app-header__logo(:to='`/${$langDefault()}`', data-element-type='app-header__logo')
+      nuxt-link.app-header__logo(:to='`/${$langDefault()}`', data-gtm-element='header-logo')
         img.app-header__logo-img(:src='imageAppLogo', alt='Logo')
     .app-header__col.app-header__col--custom-code
       .app-header__custom-code(v-html='headerHtml', v-if='headerHtml')
     .app-header__col.app-header__col--control
       .app-header__langs
         app-language-swich
-      .app-header__btn-menu(@click='isShowMenuMain = true')
+      .app-header__btn-menu(
+        @click='isShowMenuMain = true',
+        data-gtm-element='header-button-menu-main'
+      )
         .app-header__btn-menu-item
         .app-header__btn-menu-item
         .app-header__btn-menu-item

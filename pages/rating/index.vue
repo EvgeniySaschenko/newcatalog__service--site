@@ -3,26 +3,45 @@
   app-preloader(:isLoading='isLoading', position='fixed')
   app-title(:text='rating.name[$langDefault()]')
   .page__top
+    // button-sources
     .page__top-col-1
-      span.page__button-sources(
+      .button-sources(
         v-if='rating.linksToSources.length',
+        data-gtm-element='rating-button-links-to-sources',
         @click='scrollToLinksSources()'
       )
-        span.page__button-sources-text-1 {{ $t('Links to sources') }}
-        span.page__button-sources-text-2 {{ $t('Sources') }}
-    .page__top-col-2
-      labels-sections(:sectionsIds='rating.sectionsIds', :sectionsMap='sectionsMap')
+        span.button-sources-text-1 {{ $t('Links to sources') }}
+        span.button-sources-text-2 {{ $t('Sources') }}
 
+    // labels-sections
+    .page__top-col-2
+      .labels-sections
+        nuxt-link.labels-sections__item(
+          data-gtm-element='labels-sections-item',
+          v-for='sectionId of rating.sectionsIds',
+          :to='`/${$langDefault()}/section/${sectionId}`'
+        ) {{ `#${sectionsMap[sectionId].name[$langDefault()]}` }}
+
+  // rating-items
   .page__rating-items
     rating-items(:labels='labels', :items='ratingItems', :rating='rating')
 
+  // descr
   .page__descr(v-if='rating.descr[$langDefault()]')
     app-title(:text='$t("Description")', :level='3', textAlign='left')
     div {{ rating.descr[$langDefault()] }}
 
+  // links-sources
   .page__links-sources(v-if='rating.linksToSources.length', ref='links-sources')
     app-title(:text='$t("Links to sources")', :level='3', textAlign='left')
-    links-sources(:linksToSources='rating.linksToSources')
+    .links-sources
+      .links-sources__item(v-for='(item, index) in rating.linksToSources')
+        span.links-sources__number {{ `#${index + 1}` }}.
+        a.links-sources__link(
+          :href='item',
+          target='_blank',
+          data-gtm-element='links-to-sources-item'
+        ) {{ item }}
 </template>
 
 <script lang="ts">
@@ -126,7 +145,10 @@ export default defineNuxtComponent({
     justify-content: space-between
     align-items: center
     margin-bottom: 10px
-  &__button-sources
+  &__descr
+    margin: 20px 0
+
+  .button-sources
     color: var(--app-color-primary)
     text-transform: uppercase
     font-weight: 700
@@ -142,6 +164,31 @@ export default defineNuxtComponent({
         display: inline
         font-size: 14px
 
-  &__descr
-    margin: 20px 0
+  .labels-sections
+    display: inline-flex
+    flex-wrap: wrap
+    justify-content: flex-end
+    &__item
+      margin: 5px
+      padding: 5px
+      border-bottom: 2px dotted var(--app-color-primary)
+      color: var(--app-color-primary)
+      text-transform: uppercase
+      font-weight: 700
+      @media (max-width: $app-screen-lg)
+        font-size: 14px
+
+  .links-sources
+    color: var(--app-color-primary)
+    &__item
+      font-size: 16px
+      margin-bottom: 10px
+      white-space: nowrap
+      overflow: hidden
+      text-overflow: ellipsis
+    &__number
+      padding-right: 5px
+      font-weight: bold
+    &__link
+      text-decoration: underline
 </style>

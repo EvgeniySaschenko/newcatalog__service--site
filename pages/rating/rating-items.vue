@@ -5,7 +5,8 @@
       v-for='(item, index) in items',
       :href='item.url',
       target='_blank',
-      @click='gtmPush(index)'
+      @click='gtmPush(index)',
+      data-gtm-element='rating-items-item'
     )
       .rating-items__img-box(:style='`background-color: ${item.color}`')
         img.rating-items__img(:src='item.logoImg', :alt='item.hostname')
@@ -22,7 +23,7 @@
 </template>
 
 <script lang="ts">
-import { LabelType, RatingItemType } from '@/types';
+import { LabelType, RatingItemType, GtmElementsEnum } from '@/types';
 
 type LabelsMapType = {
   [key: LabelType['labelId']]: LabelType;
@@ -62,11 +63,11 @@ export default defineComponent({
     gtmPush(index: number) {
       let rating = this.items[index] as RatingItemType;
       this.$gtmPush({
-        event: 'rating-item.click',
+        event: 'click',
         ratingItemId: rating.ratingItemId,
         ratingId: rating.ratingId,
         siteId: rating.siteId,
-        elementType: this.$configApp.elementsTypes['rating-items__item'],
+        elementType: GtmElementsEnum['rating-items-item'],
         timestamp: Date.now(),
         userAgent: window.navigator.userAgent,
         isTouchDevice: this.$screen.isTouchDevice,

@@ -2,7 +2,7 @@
 .links-sources
   .links-sources__item(v-for='(item, index) in linksToSources')
     span.links-sources__number {{ `#${index + 1}` }}.
-    a.links-sources__link(href='item', target='_blank') {{ item }}
+    a.links-sources__link(:href='item', target='_blank') {{ item }}
 </template>
 
 <script lang="ts">

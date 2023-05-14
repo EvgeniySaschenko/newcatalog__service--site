@@ -1,11 +1,14 @@
 <template lang="pug">
 ul.app-menu-main(v-if='modelValue')
-  .app-menu-main__btn-close(@click='$emit("update:modelValue", false)')
+  .app-menu-main__btn-close(@click='closeMenu()')
+  nuxt-link.app-menu-main__logo(:to='`/${$langDefault()}`', @click='closeMenu()')
+    img.app-menu-main__logo-img(:src='imageAppLogo')
   ul.app-menu-main__list
     li.app-menu-main__item(v-for='(item, index) in sections')
       nuxt-link.app-menu-main__link(
         :to='`/${$langDefault()}/section/${item.sectionId}`',
         data-element-type='app-menu-main__link',
+        @click='closeMenu()',
         :class='{ active: $route.path == `/${$langDefault()}/section/${item.sectionId}` }'
       ) {{ item.name[$langDefault()] }}
 </template>
@@ -25,6 +28,11 @@ export default defineComponent({
       type: Boolean,
       default: false,
     },
+    // Logo image second
+    imageAppLogo: {
+      type: String,
+      required: true,
+    },
   },
   emits: ['update:modelValue'],
 
@@ -38,6 +46,13 @@ export default defineComponent({
       } else {
         bodyElement.classList.remove('body-scroll-lock');
       }
+    },
+  },
+
+  methods: {
+    // Close menu
+    closeMenu() {
+      this.$emit('update:modelValue', false);
     },
   },
 });
@@ -73,13 +88,16 @@ export default defineComponent({
     border: 1px dashed var(--app-color-primary)
     border-bottom-color: var(--app-color-primary-inverted)
     display: inline-block
-    @media (max-width: $app-screen-md)
-      padding: 5px
     &.active
       display: block
       background-color: var(--app-color-selection-background)
       position: relative
 
+  &__logo
+    margin: 20px 10px
+    max-width: 300px
+    &-img
+      max-width: 100%
   &__btn-close
     position: absolute
     height: 30px
@@ -104,9 +122,4 @@ export default defineComponent({
     &::before
       transform: rotate(45deg)
       margin-bottom: -6px
-  // &::before
-  //   background: var(--app-color-primary)
-  // border: 1px dashed var(--app-color-primary-inverted)
-  // color: var(--app-color-primary-inverted)
-  // background: var(--app-color-primary)
 </style>

@@ -5,7 +5,7 @@
     v-html='settings[SettingsEnum.headerInfoHtml]'
   )
   app-header(
-    :logoImage='settings[SettingsEnum.imageAppLogo]',
+    :imageAppLogo='settings[SettingsEnum.imageAppLogo]',
     :headerHtml='settings[SettingsEnum.headerHtml]',
     :sections='sections'
   )

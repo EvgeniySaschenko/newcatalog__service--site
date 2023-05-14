@@ -3,7 +3,7 @@ header.app-header
   .app-header__row.container
     .app-header__col.app-header__col--logo
       nuxt-link.app-header__logo(:to='`/${$langDefault()}`', data-element-type='app-header__logo')
-        img.app-header__logo-img(:src='logoImage', alt='Logo')
+        img.app-header__logo-img(:src='imageAppLogo', alt='Logo')
     .app-header__col.app-header__col--custom-code
       .app-header__custom-code(v-html='headerHtml', v-if='headerHtml')
     .app-header__col.app-header__col--control
@@ -13,7 +13,7 @@ header.app-header
         .app-header__btn-menu-item
         .app-header__btn-menu-item
         .app-header__btn-menu-item
-  app-menu-main(v-model='isShowMenuMain', :sections='sections')
+  app-menu-main(v-model='isShowMenuMain', :sections='sections', :imageAppLogo='imageAppLogo')
 </template>
 
 <script lang="ts">
@@ -27,7 +27,7 @@ export default defineComponent({
     AppMenuMain,
   },
   props: {
-    logoImage: {
+    imageAppLogo: {
       type: String,
       required: true,
     },
@@ -66,24 +66,30 @@ export default defineComponent({
     display: flex
     justify-content: space-between
     align-items: center
+    @media (max-width: $app-screen-sm)
+      flex-direction: column
   &__col
     display: flex
     align-items: center
     padding: 0 5px
+    &--logo
+      @media (max-width: $app-screen-sm)
+        margin-bottom: 15px
     &--control
       @media (max-width: $app-screen-sm)
-        flex-direction: column-reverse
-        justify-content: center
+        margin-top: 15px
   &__btn-menu
     margin-left: 20px
     @media (max-width: $app-screen-sm)
-      margin-left: 0
-      margin-bottom: 15px
+      margin-left: 30px
   &__logo
-    max-width: 280px
+    height: 75px
+    max-width: 300px
     display: inline-flex
+    align-items: center
     &-img
-      width: 100%
+      max-width: 100%
+      max-height: 100%
   &__btn-menu
     height: 40px
     width: 40px

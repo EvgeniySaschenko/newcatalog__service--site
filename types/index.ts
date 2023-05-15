@@ -39,7 +39,7 @@ export enum SettingsEnum {
   imageAppFavicon = 'imageAppFavicon',
   imageAppPreloader = 'imageAppPreloader',
   imageAppLogo = 'imageAppLogo',
-
+  imageAppDefault = 'imageAppDefault',
   // colors
   colorBodyBackground = 'colorBodyBackground',
   colorPrimary = 'colorPrimary',
@@ -71,6 +71,7 @@ export type SettingsType = {
   [SettingsEnum.imageAppFavicon]: string;
   [SettingsEnum.imageAppPreloader]: string;
   [SettingsEnum.imageAppLogo]: string;
+  [SettingsEnum.imageAppDefault]: string;
   // colors
   [SettingsEnum.colorBodyBackground]: string;
   [SettingsEnum.colorPrimary]: string;

@@ -23,14 +23,14 @@
       nuxt-link.page-error__btn(
         :to='`/${$langDefault()}`',
         data-gtm-element='page-error-button-home'
-      ) {{ $t('Go to home') }}
+      ) {{ $t('Go to Main Page') }}
     // 204
     .page-error__text(v-if='error.statusCode == 204')
       .page-error__text-1 {{ $t('Page content not found') }}
       nuxt-link.page-error__btn(
         :to='`/${$langDefault()}`',
         data-gtm-element='page-error-button-home'
-      ) {{ $t('Go to home') }}
+      ) {{ $t('Go to Main Page') }}
 </template>
 
 <script lang="ts">

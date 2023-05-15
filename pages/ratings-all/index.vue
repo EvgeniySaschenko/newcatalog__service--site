@@ -1,7 +1,7 @@
 <template lang="pug">
 .page.page--section
   app-preloader(:isLoading='isLoading', position='fixed')
-  app-title(:text='$t("Rating of Internet services")')
+  app-title(:text='$t("#Title main page")')
   .page__ratings-list
     app-ratings-list(:ratingsList='ratingsList')
 </template>
@@ -37,7 +37,7 @@ export default defineNuxtComponent({
     let { pageTitlePrefix, pageTitleSufix } = useSettingsStore().items;
 
     useSeoMeta({
-      title: `${pageTitlePrefix} ${$t('Rating of Internet services')} ${pageTitleSufix}`.trim(),
+      title: `${pageTitlePrefix} ${$t('#Title main page')} ${pageTitleSufix}`.trim(),
     });
 
     return {

@@ -48,8 +48,12 @@ export default defineNuxtComponent({
     let { sections, settings } = response;
     // The data was not stored in "data()", so I used "Store"
     useSectionsStore().setSections(sections);
-    useSettingsStore().setSettings(settings); //
+    useSettingsStore().setSettings(settings);
+    return {};
+  },
 
+  head() {
+    let settings = useSettingsStore().items;
     let headStyles = `
       :root {
         --app-color-body-background: ${settings[SettingsEnum.colorBodyBackground]};
@@ -62,11 +66,10 @@ export default defineNuxtComponent({
       }
       ${settings[SettingsEnum.headStyles]}`;
 
-    useHead({
+    return {
       style: [headStyles],
       script: [settings[SettingsEnum.headScript]],
-    });
-    return {};
+    };
   },
 
   data() {

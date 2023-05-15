@@ -9,7 +9,11 @@
       data-gtm-element='rating-items-item'
     )
       .rating-items__img-box(:style='`background-color: ${item.color}`')
-        img.rating-items__img(:src='item.logoImg', :alt='item.hostname')
+        img.rating-items__img(
+          v-lazy='item.logoImg',
+          :alt='item.hostname',
+          :src='$configApp.imageStub'
+        )
       .rating-items__info
         .rating-items__name-box
           .rating-items__name {{ item.name[$langDefault()] }}
@@ -57,7 +61,6 @@ export default defineComponent({
       this.labelsMap[label.labelId] = label;
     }
   },
-
   methods: {
     // Add info to Google Tag Manager
     gtmPush(index: number) {

@@ -1,0 +1,6 @@
+const appLanguageSwich_vue_vue_type_style_index_0_scoped_b193b5f9_lang = ".app-language-swich[data-v-b193b5f9]{color:var(--app-color-primary-inverted);font-size:12px;font-weight:700;text-align:center;text-transform:uppercase}.app-language-swich__current[data-v-b193b5f9]{border:1px solid var(--app-color-primary-inverted);cursor:pointer;padding:5px}.app-language-swich__box[data-v-b193b5f9]{position:relative}.app-language-swich__list[data-v-b193b5f9]{background-color:var(--app-color-primary-inverted);border:1px solid var(--app-color-primary-inverted);border-radius:2px;left:50%;position:absolute;text-align:center;top:5px;transform:translateX(-50%);z-index:100}.app-language-swich__item[data-v-b193b5f9]{border:1px solid var(--app-color-primary);border-bottom:0;color:var(--app-color-primary);cursor:pointer;padding:6px}.app-language-swich__item[data-v-b193b5f9]:last-child{border-bottom:1px solid var(--app-color-primary)}.app-language-swich__item.active[data-v-b193b5f9]{background-color:var(--app-color-primary);color:var(--app-color-primary-inverted)}";
+
+const appLanguageSwichStyles_cb71e2da = [appLanguageSwich_vue_vue_type_style_index_0_scoped_b193b5f9_lang];
+
+export { appLanguageSwichStyles_cb71e2da as default };
+//# sourceMappingURL=app-language-swich-styles.cb71e2da.mjs.map

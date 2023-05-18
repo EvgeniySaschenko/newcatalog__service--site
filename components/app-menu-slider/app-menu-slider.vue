@@ -45,14 +45,12 @@ export default defineComponent({
     margin: 12px $item-m-lr
     cursor: pointer
     border-radius: 5px
-    min-width: calc(100% / 5 - $item-m-lr * 2)
+    min-width: calc(100% / 4 - $item-m-lr * 2)
     padding: 5px
     background: var(--app-color-primary)
     display: flex
     align-items: center
     justify-content: center
-    @media (max-width: $app-screen-xl)
-      min-width: calc(100% / 4 - $item-m-lr * 2)
     @media (max-width: $app-screen-lg)
       min-width: calc(100% / 3 - $item-m-lr * 2)
     @media (max-width: $app-screen-md)

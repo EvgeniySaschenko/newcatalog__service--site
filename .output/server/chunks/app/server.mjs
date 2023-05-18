@@ -9,6 +9,7 @@ import { unpackMeta, composableNames, getActiveHead, createServerHead as createS
 import { defineHeadPlugin } from '@unhead/shared';
 import { createMemoryHistory, createRouter, START_LOCATION, useRoute as useRoute$1, RouterView } from 'vue-router';
 import { hasProtocol, parseURL, parseQuery, withTrailingSlash, withoutTrailingSlash, joinURL } from 'ufo';
+import VueLazyLoad from 'vue3-lazyload';
 import { parse, serialize } from 'cookie-es';
 import { isEqual } from 'ohash';
 import { ssrRenderAttrs, ssrInterpolate, ssrRenderStyle, ssrRenderList, ssrRenderClass, ssrRenderComponent, ssrRenderAttr, ssrRenderSuspense, ssrRenderVNode } from 'vue/server-renderer';
@@ -36,7 +37,7 @@ const appConfig = useRuntimeConfig$1().app;
 const baseURL = () => appConfig.baseURL;
 const nuxtAppCtx = /* @__PURE__ */ getContext("nuxt-app");
 const NuxtPluginIndicator = "__nuxt_plugin";
-function createNuxtApp(options) {
+function createNuxtApp(options2) {
   let hydratingCount = 0;
   const nuxtApp = {
     provide: void 0,
@@ -82,7 +83,7 @@ function createNuxtApp(options) {
     _asyncDataPromises: {},
     _asyncData: {},
     _payloadRevivers: {},
-    ...options
+    ...options2
   };
   nuxtApp.hooks = createHooks();
   nuxtApp.hook = nuxtApp.hooks.hook;
@@ -115,11 +116,11 @@ function createNuxtApp(options) {
     }
     nuxtApp.ssrContext.payload = nuxtApp.payload;
     nuxtApp.ssrContext.config = {
-      public: options.ssrContext.runtimeConfig.public,
-      app: options.ssrContext.runtimeConfig.app
+      public: options2.ssrContext.runtimeConfig.public,
+      app: options2.ssrContext.runtimeConfig.app
     };
   }
-  const runtimeConfig = options.ssrContext.runtimeConfig;
+  const runtimeConfig = options2.ssrContext.runtimeConfig;
   nuxtApp.provide("config", runtimeConfig);
   return nuxtApp;
 }
@@ -327,8 +328,8 @@ const { assign } = Object;
 function isComputed(o) {
   return !!(isRef(o) && o.effect);
 }
-function createOptionsStore(id, options, pinia, hot) {
-  const { state, actions, getters } = options;
+function createOptionsStore(id, options2, pinia, hot) {
+  const { state, actions, getters } = options2;
   const initialState = pinia.state.value[id];
   let store;
   function setup() {
@@ -347,12 +348,12 @@ function createOptionsStore(id, options, pinia, hot) {
       return computedGetters;
     }, {}));
   }
-  store = createSetupStore(id, setup, options, pinia, hot, true);
+  store = createSetupStore(id, setup, options2, pinia, hot, true);
   return store;
 }
-function createSetupStore($id, setup, options = {}, pinia, hot, isOptionsStore) {
+function createSetupStore($id, setup, options2 = {}, pinia, hot, isOptionsStore) {
   let scope;
-  const optionsForPlugin = assign({ actions: {} }, options);
+  const optionsForPlugin = assign({ actions: {} }, options2);
   const $subscribeOptions = {
     deep: true
     // flush: 'post',
@@ -399,7 +400,7 @@ function createSetupStore($id, setup, options = {}, pinia, hot, isOptionsStore) 
     triggerSubscriptions(subscriptions, subscriptionMutation, pinia.state.value[$id]);
   }
   const $reset = isOptionsStore ? function $reset2() {
-    const { state } = options;
+    const { state } = options2;
     const newState = state ? state() : {};
     this.$patch(($state) => {
       assign($state, newState);
@@ -460,17 +461,17 @@ function createSetupStore($id, setup, options = {}, pinia, hot, isOptionsStore) 
     $onAction: addSubscription.bind(null, actionSubscriptions),
     $patch,
     $reset,
-    $subscribe(callback, options2 = {}) {
-      const removeSubscription = addSubscription(subscriptions, callback, options2.detached, () => stopWatcher());
+    $subscribe(callback, options3 = {}) {
+      const removeSubscription = addSubscription(subscriptions, callback, options3.detached, () => stopWatcher());
       const stopWatcher = scope.run(() => watch(() => pinia.state.value[$id], (state) => {
-        if (options2.flush === "sync" ? isSyncListening : isListening) {
+        if (options3.flush === "sync" ? isSyncListening : isListening) {
           callback({
             storeId: $id,
             type: MutationType.direct,
             events: debuggerEvents
           }, state);
         }
-      }, assign({}, $subscribeOptions, options2)));
+      }, assign({}, $subscribeOptions, options3)));
       return removeSubscription;
     },
     $dispose
@@ -526,8 +527,8 @@ function createSetupStore($id, setup, options = {}, pinia, hot, isOptionsStore) 
       })));
     }
   });
-  if (initialState && isOptionsStore && options.hydrate) {
-    options.hydrate(store.$state, initialState);
+  if (initialState && isOptionsStore && options2.hydrate) {
+    options2.hydrate(store.$state, initialState);
   }
   isListening = true;
   isSyncListening = true;
@@ -535,13 +536,13 @@ function createSetupStore($id, setup, options = {}, pinia, hot, isOptionsStore) 
 }
 function defineStore(idOrOptions, setup, setupOptions) {
   let id;
-  let options;
+  let options2;
   const isSetupStore = typeof setup === "function";
   if (typeof idOrOptions === "string") {
     id = idOrOptions;
-    options = isSetupStore ? setupOptions : setup;
+    options2 = isSetupStore ? setupOptions : setup;
   } else {
-    options = idOrOptions;
+    options2 = idOrOptions;
     id = idOrOptions.id;
   }
   function useStore(pinia, hot) {
@@ -554,9 +555,9 @@ function defineStore(idOrOptions, setup, setupOptions) {
     pinia = activePinia;
     if (!pinia._s.has(id)) {
       if (isSetupStore) {
-        createSetupStore(id, setup, options, pinia);
+        createSetupStore(id, setup, options2, pinia);
       } else {
-        createOptionsStore(id, options, pinia);
+        createOptionsStore(id, options2, pinia);
       }
     }
     const store = pinia._s.get(id);
@@ -604,12 +605,12 @@ function vueInstall(head) {
   };
   return plugin2.install;
 }
-function createServerHead(options = {}) {
+function createServerHead(options2 = {}) {
   const head = createServerHead$1({
-    ...options,
+    ...options2,
     plugins: [
       VueReactiveUseHeadPlugin(),
-      ...(options == null ? void 0 : options.plugins) || []
+      ...(options2 == null ? void 0 : options2.plugins) || []
     ]
   });
   head.install = vueInstall(head);
@@ -625,35 +626,35 @@ function VueReactiveUseHeadPlugin() {
     }
   });
 }
-function clientUseHead(input, options = {}) {
+function clientUseHead(input, options2 = {}) {
   const head = injectHead();
   const deactivated = ref(false);
   const resolvedInput = ref({});
   watchEffect(() => {
     resolvedInput.value = deactivated.value ? {} : resolveUnrefHeadInput(input);
   });
-  const entry2 = head.push(resolvedInput.value, options);
+  const entry2 = head.push(resolvedInput.value, options2);
   watch(resolvedInput, (e) => {
     entry2.patch(e);
   });
   getCurrentInstance();
   return entry2;
 }
-function serverUseHead(input, options = {}) {
+function serverUseHead(input, options2 = {}) {
   const head = injectHead();
-  return head.push(input, options);
+  return head.push(input, options2);
 }
-function useHead(input, options = {}) {
+function useHead(input, options2 = {}) {
   var _a;
   const head = injectHead();
   if (head) {
     const isBrowser = !!((_a = head.resolvedOptions) == null ? void 0 : _a.document);
-    if (options.mode === "server" && isBrowser || options.mode === "client" && !isBrowser)
+    if (options2.mode === "server" && isBrowser || options2.mode === "client" && !isBrowser)
       return;
-    return isBrowser ? clientUseHead(input, options) : serverUseHead(input, options);
+    return isBrowser ? clientUseHead(input, options2) : serverUseHead(input, options2);
   }
 }
-function useSeoMeta(input, options) {
+function useSeoMeta(input, options2) {
   const headInput = ref({});
   watchEffect(() => {
     const resolvedMeta = resolveUnrefHeadInput(input);
@@ -664,7 +665,7 @@ function useSeoMeta(input, options) {
       meta: unpackMeta(meta)
     };
   });
-  return useHead(headInput, options);
+  return useHead(headInput, options2);
 }
 const coreComposableNames = [
   "injectHead"
@@ -718,13 +719,13 @@ const isProcessingMiddleware = () => {
   }
   return false;
 };
-const navigateTo = (to, options) => {
+const navigateTo = (to, options2) => {
   if (!to) {
     to = "/";
   }
   const toPath = typeof to === "string" ? to : to.path || "/";
-  const isExternal = (options == null ? void 0 : options.external) || hasProtocol(toPath, { acceptRelative: true });
-  if (isExternal && !(options == null ? void 0 : options.external)) {
+  const isExternal = (options2 == null ? void 0 : options2.external) || hasProtocol(toPath, { acceptRelative: true });
+  if (isExternal && !(options2 == null ? void 0 : options2.external)) {
     throw new Error("Navigating to external URL is not allowed by default. Use `navigateTo (url, { external: true })`.");
   }
   if (isExternal && parseURL(toPath).protocol === "script:") {
@@ -741,7 +742,7 @@ const navigateTo = (to, options) => {
         await nuxtApp.callHook("app:redirected");
         const encodedLoc = location2.replace(/"/g, "%22");
         nuxtApp.ssrContext._renderResponse = {
-          statusCode: sanitizeStatusCode((options == null ? void 0 : options.redirectCode) || 302, 302),
+          statusCode: sanitizeStatusCode((options2 == null ? void 0 : options2.redirectCode) || 302, 302),
           body: `<!DOCTYPE html><html><head><meta http-equiv="refresh" content="0; url=${encodedLoc}"></head></html>`,
           headers: { location: location2 }
         };
@@ -758,14 +759,14 @@ const navigateTo = (to, options) => {
     }
   }
   if (isExternal) {
-    if (options == null ? void 0 : options.replace) {
+    if (options2 == null ? void 0 : options2.replace) {
       location.replace(toPath);
     } else {
       location.href = toPath;
     }
     return Promise.resolve();
   }
-  return (options == null ? void 0 : options.replace) ? router.replace(to) : router.push(to);
+  return (options2 == null ? void 0 : options2.replace) ? router.replace(to) : router.push(to);
 };
 const useError = () => toRef(useNuxtApp().payload, "error");
 const showError = (_err) => {
@@ -794,23 +795,23 @@ function useAsyncData(...args) {
   if (typeof args[0] !== "string") {
     args.unshift(autoKey);
   }
-  let [key, handler, options = {}] = args;
+  let [key, handler, options2 = {}] = args;
   if (typeof key !== "string") {
     throw new TypeError("[nuxt] [asyncData] key must be a string.");
   }
   if (typeof handler !== "function") {
     throw new TypeError("[nuxt] [asyncData] handler must be a function.");
   }
-  options.server = options.server ?? true;
-  options.default = options.default ?? getDefault;
-  options.lazy = options.lazy ?? false;
-  options.immediate = options.immediate ?? true;
+  options2.server = options2.server ?? true;
+  options2.default = options2.default ?? getDefault;
+  options2.lazy = options2.lazy ?? false;
+  options2.immediate = options2.immediate ?? true;
   const nuxt = useNuxtApp();
   const getCachedData = () => nuxt.isHydrating ? nuxt.payload.data[key] : nuxt.static.data[key];
   const hasCachedData = () => getCachedData() !== void 0;
   if (!nuxt._asyncData[key]) {
     nuxt._asyncData[key] = {
-      data: ref(getCachedData() ?? ((_a = options.default) == null ? void 0 : _a.call(options)) ?? null),
+      data: ref(getCachedData() ?? ((_a = options2.default) == null ? void 0 : _a.call(options2)) ?? null),
       pending: ref(!hasCachedData()),
       error: toRef(nuxt.payload._errors, key)
     };
@@ -840,11 +841,11 @@ function useAsyncData(...args) {
         return nuxt._asyncDataPromises[key];
       }
       let result = _result;
-      if (options.transform) {
-        result = options.transform(_result);
+      if (options2.transform) {
+        result = options2.transform(_result);
       }
-      if (options.pick) {
-        result = pick(result, options.pick);
+      if (options2.pick) {
+        result = pick(result, options2.pick);
       }
       asyncData.data.value = result;
       asyncData.error.value = null;
@@ -854,7 +855,7 @@ function useAsyncData(...args) {
         return nuxt._asyncDataPromises[key];
       }
       asyncData.error.value = error;
-      asyncData.data.value = unref(((_a2 = options.default) == null ? void 0 : _a2.call(options)) ?? null);
+      asyncData.data.value = unref(((_a2 = options2.default) == null ? void 0 : _a2.call(options2)) ?? null);
     }).finally(() => {
       if (promise.cancelled) {
         return;
@@ -870,8 +871,8 @@ function useAsyncData(...args) {
     return nuxt._asyncDataPromises[key];
   };
   const initialFetch = () => asyncData.refresh({ _initial: true });
-  const fetchOnServer = options.server !== false && nuxt.payload.serverRendered;
-  if (fetchOnServer && options.immediate) {
+  const fetchOnServer = options2.server !== false && nuxt.payload.serverRendered;
+  if (fetchOnServer && options2.immediate) {
     const promise = initialFetch();
     if (getCurrentInstance()) {
       onServerPrefetch(() => promise);
@@ -905,27 +906,27 @@ async function runLegacyAsyncData(res, fn) {
     Object.assign(await res, toRefs(reactive(data.value)));
   }
 }
-const defineNuxtComponent = function defineNuxtComponent2(options) {
-  const { setup } = options;
-  if (!setup && !options.asyncData && !options.head) {
+const defineNuxtComponent = function defineNuxtComponent2(options2) {
+  const { setup } = options2;
+  if (!setup && !options2.asyncData && !options2.head) {
     return {
       [NuxtComponentIndicator]: true,
-      ...options
+      ...options2
     };
   }
   return {
     [NuxtComponentIndicator]: true,
-    ...options,
+    ...options2,
     setup(props, ctx) {
       const nuxtApp = useNuxtApp();
       const res = setup ? Promise.resolve(nuxtApp.runWithContext(() => setup(props, ctx))).then((r) => r || {}) : {};
       const promises = [];
-      if (options.asyncData) {
-        promises.push(runLegacyAsyncData(res, options.asyncData));
+      if (options2.asyncData) {
+        promises.push(runLegacyAsyncData(res, options2.asyncData));
       }
-      if (options.head) {
+      if (options2.head) {
         const nuxtApp2 = useNuxtApp();
-        useHead(typeof options.head === "function" ? () => options.head(nuxtApp2) : options.head);
+        useHead(typeof options2.head === "function" ? () => options2.head(nuxtApp2) : options2.head);
       }
       return Promise.resolve(res).then(() => Promise.all(promises)).then(() => res).finally(() => {
         promises.length = 0;
@@ -991,13 +992,13 @@ function definePayloadReducer(name, reduce) {
 }
 const firstNonUndefined = (...args) => args.find((arg) => arg !== void 0);
 const DEFAULT_EXTERNAL_REL_ATTRIBUTE = "noopener noreferrer";
-function defineNuxtLink(options) {
-  const componentName = options.componentName || "NuxtLink";
+function defineNuxtLink(options2) {
+  const componentName = options2.componentName || "NuxtLink";
   const resolveTrailingSlashBehavior = (to, resolve) => {
-    if (!to || options.trailingSlash !== "append" && options.trailingSlash !== "remove") {
+    if (!to || options2.trailingSlash !== "append" && options2.trailingSlash !== "remove") {
       return to;
     }
-    const normalizeTrailingSlash = options.trailingSlash === "append" ? withTrailingSlash : withoutTrailingSlash;
+    const normalizeTrailingSlash = options2.trailingSlash === "append" ? withTrailingSlash : withoutTrailingSlash;
     if (typeof to === "string") {
       return normalizeTrailingSlash(to, true);
     }
@@ -1117,15 +1118,15 @@ function defineNuxtLink(options) {
           const routerLinkProps = {
             ref: elRef,
             to: to.value,
-            activeClass: props.activeClass || options.activeClass,
-            exactActiveClass: props.exactActiveClass || options.exactActiveClass,
+            activeClass: props.activeClass || options2.activeClass,
+            exactActiveClass: props.exactActiveClass || options2.exactActiveClass,
             replace: props.replace,
             ariaCurrentValue: props.ariaCurrentValue,
             custom: props.custom
           };
           if (!props.custom) {
             if (prefetched.value) {
-              routerLinkProps.class = props.prefetchedClass || options.prefetchedClass;
+              routerLinkProps.class = props.prefetchedClass || options2.prefetchedClass;
             }
             routerLinkProps.rel = props.rel;
           }
@@ -1137,7 +1138,7 @@ function defineNuxtLink(options) {
         }
         const href = typeof to.value === "object" ? ((_a = router.resolve(to.value)) == null ? void 0 : _a.href) ?? null : to.value || null;
         const target = props.target || null;
-        const rel = props.noRel ? null : firstNonUndefined(props.rel, options.externalRelAttribute, href ? DEFAULT_EXTERNAL_REL_ATTRIBUTE : "") || null;
+        const rel = props.noRel ? null : firstNonUndefined(props.rel, options2.externalRelAttribute, href ? DEFAULT_EXTERNAL_REL_ATTRIBUTE : "") || null;
         const navigate = () => navigateTo(href, { replace: props.replace });
         if (props.custom) {
           if (!slots.default) {
@@ -1210,9 +1211,9 @@ const revive_payload_server_eJ33V7gbc6 = /* @__PURE__ */ defineNuxtPlugin({
     }
   }
 });
-const LazyAppPreloader = defineAsyncComponent(() => import('./_nuxt/app-preloader-ec8aa324.mjs').then((r) => r.default));
-const LazyAppLabelRating = defineAsyncComponent(() => import('./_nuxt/app-label-rating-d234306b.mjs').then((r) => r.default));
-const LazyAppTitle = defineAsyncComponent(() => import('./_nuxt/app-title-fad1a54b.mjs').then((r) => r.default));
+const LazyAppPreloader = defineAsyncComponent(() => import('./_nuxt/app-preloader-954716fa.mjs').then((r) => r.default));
+const LazyAppLabelRating = defineAsyncComponent(() => import('./_nuxt/app-label-rating-cfbe1985.mjs').then((r) => r.default));
+const LazyAppTitle = defineAsyncComponent(() => import('./_nuxt/app-title-a456aaab.mjs').then((r) => r.default));
 const lazyGlobalComponents = [
   ["AppPreloader", LazyAppPreloader],
   ["AppLabelRating", LazyAppLabelRating],
@@ -1254,7 +1255,7 @@ const _routes = [
     meta: {},
     alias: [],
     redirect: void 0,
-    component: () => import('./_nuxt/index-d43bb469.mjs').then((m) => m.default || m)
+    component: () => import('./_nuxt/index-1a869490.mjs').then((m) => m.default || m)
   },
   {
     name: "rating-labels-sections",
@@ -1262,7 +1263,7 @@ const _routes = [
     meta: {},
     alias: [],
     redirect: void 0,
-    component: () => import('./_nuxt/labels-sections-eedc1865.mjs').then((m) => m.default || m)
+    component: () => import('./_nuxt/labels-sections-cf7e2130.mjs').then((m) => m.default || m)
   },
   {
     name: "rating-links-sources",
@@ -1270,7 +1271,7 @@ const _routes = [
     meta: {},
     alias: [],
     redirect: void 0,
-    component: () => import('./_nuxt/links-sources-386cd2e8.mjs').then((m) => m.default || m)
+    component: () => import('./_nuxt/links-sources-23e44b8f.mjs').then((m) => m.default || m)
   },
   {
     name: "rating-rating-items",
@@ -1278,7 +1279,7 @@ const _routes = [
     meta: {},
     alias: [],
     redirect: void 0,
-    component: () => import('./_nuxt/rating-items-e1713809.mjs').then((m) => m.default || m)
+    component: () => import('./_nuxt/rating-items-b2410ad3.mjs').then((m) => m.default || m)
   },
   {
     name: "ratings-all",
@@ -1286,7 +1287,7 @@ const _routes = [
     meta: {},
     alias: [],
     redirect: void 0,
-    component: () => import('./_nuxt/index-a2f5e7f4.mjs').then((m) => m.default || m)
+    component: () => import('./_nuxt/index-fc9ba44a.mjs').then((m) => m.default || m)
   },
   {
     name: "section",
@@ -1294,7 +1295,7 @@ const _routes = [
     meta: {},
     alias: [],
     redirect: void 0,
-    component: () => import('./_nuxt/index-ac4e20b2.mjs').then((m) => m.default || m)
+    component: () => import('./_nuxt/index-b7e48b8a.mjs').then((m) => m.default || m)
   }
 ];
 const $router = {
@@ -1302,22 +1303,22 @@ const $router = {
     {
       name: "home",
       path: "/",
-      component: () => import('./_nuxt/index-a2f5e7f4.mjs')
+      component: () => import('./_nuxt/index-fc9ba44a.mjs')
     },
     {
       name: "ratings-all",
       path: "/:lang",
-      component: () => import('./_nuxt/index-a2f5e7f4.mjs')
+      component: () => import('./_nuxt/index-fc9ba44a.mjs')
     },
     {
       name: "rating",
       path: "/:lang/rating/:ratingId",
-      component: () => import('./_nuxt/index-d43bb469.mjs')
+      component: () => import('./_nuxt/index-1a869490.mjs')
     },
     {
       name: "section",
       path: "/:lang/section/:sectionId",
-      component: () => import('./_nuxt/index-ac4e20b2.mjs')
+      component: () => import('./_nuxt/index-b7e48b8a.mjs')
     }
   ]
 };
@@ -1623,7 +1624,14 @@ const useSettingsStore = defineStore("settings", {
     }
   }
 });
+let options = {
+  observerOptions: {
+    rootMargin: "100px 0px 100px 0px"
+  }
+};
 const lazy_load_Ii6vFyPvsK = /* @__PURE__ */ defineNuxtPlugin((nuxtApp) => {
+  let { imageAppDefault } = useSettingsStore().items;
+  nuxtApp.vueApp.use(VueLazyLoad, Object.assign(options, { error: imageAppDefault }));
 });
 const redirect_TPR3QTtWHS = /* @__PURE__ */ defineNuxtPlugin((nuxtApp) => {
 });
@@ -2042,9 +2050,9 @@ const _sfc_main$3 = /* @__PURE__ */ defineComponent({
 });
 function ssrRender$2(_ctx, _push, _parent, _attrs, $props, $setup, $data, $options) {
   const _component_nuxt_link = __nuxt_component_0$2;
-  _push(`<ul${ssrRenderAttrs(mergeProps({ class: "app-menu-slider" }, _attrs))} data-v-0f394fb1><!--[-->`);
+  _push(`<ul${ssrRenderAttrs(mergeProps({ class: "app-menu-slider" }, _attrs))} data-v-a9ef9b75><!--[-->`);
   ssrRenderList(_ctx.sections, (item, index) => {
-    _push(`<li class="app-menu-slider__item" data-v-0f394fb1>`);
+    _push(`<li class="app-menu-slider__item" data-v-a9ef9b75>`);
     _push(ssrRenderComponent(_component_nuxt_link, {
       class: ["app-menu-slider__link", { active: _ctx.$route.path == `/${_ctx.$langDefault()}/section/${item.sectionId}` }],
       "data-gtm-element": "menu-slider-item",
@@ -2071,7 +2079,7 @@ _sfc_main$3.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("components/app-menu-slider/app-menu-slider.vue");
   return _sfc_setup$3 ? _sfc_setup$3(props, ctx) : void 0;
 };
-const AppMenuSlider = /* @__PURE__ */ _export_sfc(_sfc_main$3, [["ssrRender", ssrRender$2], ["__scopeId", "data-v-0f394fb1"]]);
+const AppMenuSlider = /* @__PURE__ */ _export_sfc(_sfc_main$3, [["ssrRender", ssrRender$2], ["__scopeId", "data-v-a9ef9b75"]]);
 const _sfc_main$2 = /* @__PURE__ */ defineComponent({
   props: {
     breadcrumbs: {
@@ -2484,8 +2492,8 @@ const _sfc_main = {
   __name: "nuxt-root",
   __ssrInlineRender: true,
   setup(__props) {
-    const ErrorComponent = /* @__PURE__ */ defineAsyncComponent(() => import('./_nuxt/error-component-f593bbd0.mjs').then((r) => r.default || r));
-    const IslandRenderer = /* @__PURE__ */ defineAsyncComponent(() => import('./_nuxt/island-renderer-357cd71e.mjs').then((r) => r.default || r));
+    const ErrorComponent = /* @__PURE__ */ defineAsyncComponent(() => import('./_nuxt/error-component-6f89b241.mjs').then((r) => r.default || r));
+    const IslandRenderer = /* @__PURE__ */ defineAsyncComponent(() => import('./_nuxt/island-renderer-e3e3f562.mjs').then((r) => r.default || r));
     const nuxtApp = useNuxtApp();
     nuxtApp.deferHydration();
     nuxtApp.ssrContext.url;

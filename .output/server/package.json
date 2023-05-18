@@ -52,8 +52,10 @@
     "unstorage": "1.6.0",
     "vue": "3.3.2",
     "vue-bundle-renderer": "1.0.3",
+    "vue-demi": "0.12.5",
     "vue-devtools-stub": "0.1.0",
     "vue-router": "4.2.0",
+    "vue3-lazyload": "0.3.6",
     "yallist": "4.0.0"
   }
 }

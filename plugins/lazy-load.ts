@@ -8,8 +8,6 @@ let options = {
 };
 
 export default defineNuxtPlugin((nuxtApp) => {
-  onNuxtReady(() => {
-    let { imageAppDefault } = useSettingsStore().items;
-    nuxtApp.vueApp.use(VueLazyLoad, Object.assign(options, { error: imageAppDefault }));
-  });
+  let { imageAppDefault } = useSettingsStore().items;
+  nuxtApp.vueApp.use(VueLazyLoad, Object.assign(options, { error: imageAppDefault }));
 });

@@ -2046,13 +2046,42 @@ const _sfc_main$3 = /* @__PURE__ */ defineComponent({
       type: Array,
       default: () => []
     }
+  },
+  watch: {
+    $route: {
+      handler(route) {
+        this.scrollLeftItem(+route.params.sectionId);
+      }
+    }
+  },
+  mounted() {
+    let route = useRoute();
+    this.scrollLeftItem(+route.params.sectionId);
+  },
+  methods: {
+    scrollLeftItem(sectionId) {
+      let sliderMenu = this.$refs["app-menu-slider"];
+      let menuLeft = sliderMenu.getBoundingClientRect().left;
+      let itemLeft = 0;
+      if (sectionId) {
+        itemLeft = sliderMenu.querySelector(`[data-app-menu-slider='${sectionId}']`).getBoundingClientRect().left;
+      }
+      let scrolLeft = sectionId ? itemLeft - menuLeft + sliderMenu.scrollLeft : 0;
+      sliderMenu.scrollTo({
+        left: scrolLeft,
+        behavior: "smooth"
+      });
+    }
   }
 });
 function ssrRender$2(_ctx, _push, _parent, _attrs, $props, $setup, $data, $options) {
   const _component_nuxt_link = __nuxt_component_0$2;
-  _push(`<ul${ssrRenderAttrs(mergeProps({ class: "app-menu-slider" }, _attrs))} data-v-a9ef9b75><!--[-->`);
+  _push(`<ul${ssrRenderAttrs(mergeProps({
+    class: "app-menu-slider",
+    ref: "app-menu-slider"
+  }, _attrs))} data-v-1b7a407c><!--[-->`);
   ssrRenderList(_ctx.sections, (item, index) => {
-    _push(`<li class="app-menu-slider__item" data-v-a9ef9b75>`);
+    _push(`<li class="app-menu-slider__item"${ssrRenderAttr("data-app-menu-slider", item.sectionId)} data-v-1b7a407c>`);
     _push(ssrRenderComponent(_component_nuxt_link, {
       class: ["app-menu-slider__link", { active: _ctx.$route.path == `/${_ctx.$langDefault()}/section/${item.sectionId}` }],
       "data-gtm-element": "menu-slider-item",
@@ -2079,7 +2108,7 @@ _sfc_main$3.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("components/app-menu-slider/app-menu-slider.vue");
   return _sfc_setup$3 ? _sfc_setup$3(props, ctx) : void 0;
 };
-const AppMenuSlider = /* @__PURE__ */ _export_sfc(_sfc_main$3, [["ssrRender", ssrRender$2], ["__scopeId", "data-v-a9ef9b75"]]);
+const AppMenuSlider = /* @__PURE__ */ _export_sfc(_sfc_main$3, [["ssrRender", ssrRender$2], ["__scopeId", "data-v-1b7a407c"]]);
 const _sfc_main$2 = /* @__PURE__ */ defineComponent({
   props: {
     breadcrumbs: {
@@ -2134,7 +2163,7 @@ const __nuxt_component_0$1 = /* @__PURE__ */ defineComponent({
 });
 function ssrRender$1(_ctx, _push, _parent, _attrs, $props, $setup, $data, $options) {
   const _component_client_only = __nuxt_component_0$1;
-  _push(`<div${ssrRenderAttrs(mergeProps({ class: "app-breadcrumbs" }, _attrs))} data-v-83c32fa0>`);
+  _push(`<div${ssrRenderAttrs(mergeProps({ class: "app-breadcrumbs" }, _attrs))} data-v-b9710851>`);
   _push(ssrRenderComponent(_component_client_only, null, {}, _parent));
   _push(`</div>`);
 }
@@ -2144,7 +2173,7 @@ _sfc_main$2.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("components/app-breadcrumbs/app-breadcrumbs.vue");
   return _sfc_setup$2 ? _sfc_setup$2(props, ctx) : void 0;
 };
-const AppBreadcrumbs = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["ssrRender", ssrRender$1], ["__scopeId", "data-v-83c32fa0"]]);
+const AppBreadcrumbs = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["ssrRender", ssrRender$1], ["__scopeId", "data-v-b9710851"]]);
 const useSectionsStore = defineStore("sections", {
   state: () => ({
     items: [],
@@ -2195,28 +2224,28 @@ var SettingsEnum = /* @__PURE__ */ ((SettingsEnum2) => {
   SettingsEnum2["footerHtml"] = "footerHtml";
   SettingsEnum2["pageTitlePrefix"] = "pageTitlePrefix";
   SettingsEnum2["pageTitleSufix"] = "pageTitleSufix";
-  SettingsEnum2["googleTagManagerId"] = "googleTagManagerId";
+  SettingsEnum2["googleTagManagerCode"] = "googleTagManagerCode";
   return SettingsEnum2;
 })(SettingsEnum || {});
 var GtmElementsEnum = /* @__PURE__ */ ((GtmElementsEnum2) => {
-  GtmElementsEnum2[GtmElementsEnum2["custom-element"] = 1] = "custom-element";
-  GtmElementsEnum2[GtmElementsEnum2["header-logo"] = 2] = "header-logo";
-  GtmElementsEnum2[GtmElementsEnum2["header-button-menu-main"] = 3] = "header-button-menu-main";
-  GtmElementsEnum2[GtmElementsEnum2["header-language-swich-item"] = 4] = "header-language-swich-item";
-  GtmElementsEnum2[GtmElementsEnum2["menu-main-button-close"] = 5] = "menu-main-button-close";
-  GtmElementsEnum2[GtmElementsEnum2["menu-main-logo"] = 6] = "menu-main-logo";
-  GtmElementsEnum2[GtmElementsEnum2["menu-main-item"] = 7] = "menu-main-item";
-  GtmElementsEnum2[GtmElementsEnum2["menu-slider-item"] = 8] = "menu-slider-item";
-  GtmElementsEnum2[GtmElementsEnum2["rating-button-links-to-sources"] = 9] = "rating-button-links-to-sources";
-  GtmElementsEnum2[GtmElementsEnum2["links-to-sources-item"] = 10] = "links-to-sources-item";
-  GtmElementsEnum2[GtmElementsEnum2["breadcrumbs-item"] = 11] = "breadcrumbs-item";
-  GtmElementsEnum2[GtmElementsEnum2["pagination-item"] = 12] = "pagination-item";
-  GtmElementsEnum2[GtmElementsEnum2["ratings-list-title"] = 13] = "ratings-list-title";
-  GtmElementsEnum2[GtmElementsEnum2["labels-sections-item"] = 14] = "labels-sections-item";
-  GtmElementsEnum2[GtmElementsEnum2["rating-items-item"] = 15] = "rating-items-item";
-  GtmElementsEnum2[GtmElementsEnum2["footer-langs-item"] = 16] = "footer-langs-item";
-  GtmElementsEnum2[GtmElementsEnum2["page-error-logo"] = 17] = "page-error-logo";
-  GtmElementsEnum2[GtmElementsEnum2["page-error-button-home"] = 18] = "page-error-button-home";
+  GtmElementsEnum2["custom-element"] = "custom-element";
+  GtmElementsEnum2["header-logo"] = "header-logo";
+  GtmElementsEnum2["header-button-menu-main"] = "header-button-menu-main";
+  GtmElementsEnum2["header-language-swich-item"] = "header-language-swich-item";
+  GtmElementsEnum2["menu-main-button-close"] = "menu-main-button-close";
+  GtmElementsEnum2["menu-main-logo"] = "menu-main-logo";
+  GtmElementsEnum2["menu-main-item"] = "menu-main-item";
+  GtmElementsEnum2["menu-slider-item"] = "menu-slider-item";
+  GtmElementsEnum2["rating-button-links-to-sources"] = "rating-button-links-to-sources";
+  GtmElementsEnum2["links-to-sources-item"] = "links-to-sources-item";
+  GtmElementsEnum2["breadcrumbs-item"] = "breadcrumbs-item";
+  GtmElementsEnum2["pagination-item"] = "pagination-item";
+  GtmElementsEnum2["ratings-list-title"] = "ratings-list-title";
+  GtmElementsEnum2["labels-sections-item"] = "labels-sections-item";
+  GtmElementsEnum2["rating-items-item"] = "rating-items-item";
+  GtmElementsEnum2["footer-langs-item"] = "footer-langs-item";
+  GtmElementsEnum2["page-error-logo"] = "page-error-logo";
+  GtmElementsEnum2["page-error-button-home"] = "page-error-button-home";
   return GtmElementsEnum2;
 })(GtmElementsEnum || {});
 const _sfc_main$1 = /* @__PURE__ */ defineNuxtComponent({
@@ -2247,7 +2276,7 @@ const _sfc_main$1 = /* @__PURE__ */ defineNuxtComponent({
       ${settings[SettingsEnum.headStyles]}`;
     return {
       style: [headStyles],
-      script: [settings[SettingsEnum.headScript]]
+      script: [settings[SettingsEnum.googleTagManagerCode], settings[SettingsEnum.headScript]]
     };
   },
   data() {

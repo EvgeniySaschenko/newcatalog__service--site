@@ -1,6 +1,9 @@
 <template lang="pug">
-ul.app-menu-slider
-  li.app-menu-slider__item(v-for='(item, index) in sections')
+ul.app-menu-slider(:ref='"app-menu-slider"')
+  li.app-menu-slider__item(
+    v-for='(item, index) in sections',
+    :data-app-menu-slider='item.sectionId'
+  )
     nuxt-link.app-menu-slider__link(
       data-gtm-element='menu-slider-item',
       :to='`/${$langDefault()}/section/${item.sectionId}`',
@@ -19,6 +22,39 @@ export default defineComponent({
       default: () => [],
     },
   },
+
+  watch: {
+    $route: {
+      handler(route) {
+        this.scrollLeftItem(+route.params.sectionId);
+      },
+    },
+  },
+
+  mounted() {
+    let route = useRoute();
+    this.scrollLeftItem(+route.params.sectionId);
+  },
+
+  methods: {
+    scrollLeftItem(sectionId: number) {
+      let sliderMenu = (this as any).$refs['app-menu-slider'];
+      let menuLeft = sliderMenu.getBoundingClientRect().left;
+      let itemLeft = 0;
+      if (sectionId) {
+        itemLeft = sliderMenu
+          .querySelector(`[data-app-menu-slider='${sectionId}']`)
+          .getBoundingClientRect().left;
+      }
+
+      let scrolLeft = sectionId ? itemLeft - menuLeft + sliderMenu.scrollLeft : 0;
+
+      sliderMenu.scrollTo({
+        left: scrolLeft,
+        behavior: 'smooth',
+      });
+    },
+  },
 });
 </script>
 <style lang="sass" scoped>
@@ -35,7 +71,6 @@ export default defineComponent({
   scrollbar-width: 8px
   scrollbar-color: var(--app-color-primary) var(--app-color-primary-inverted)
   &::-webkit-scrollbar
-    // width: 5px
     height: 8px
     background-color: var(--app-color-primary-inverted)
   &::-webkit-scrollbar-thumb

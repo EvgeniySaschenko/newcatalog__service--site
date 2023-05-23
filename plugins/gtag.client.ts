@@ -1,4 +1,3 @@
-import VueGtag, { trackRouter } from 'vue-gtag-next';
 import { AppContextType, GtmElementsEnum } from '@/types';
 import useSettingsStore from '@/store/settings';
 
@@ -6,7 +5,7 @@ const gtmElemtSelector = '[data-gtm-element]';
 
 type GtmInfoType = {
   event: 'click' | 'goToPage';
-  elementType: number;
+  elementType: string;
   timestamp: number;
   userAgent: string;
   isTouchDevice: boolean;
@@ -33,17 +32,9 @@ export default defineNuxtPlugin((nuxtApp) => {
 
   onNuxtReady(() => {
     let { $screen } = nuxtApp as never as AppContextType;
-    let { googleTagManagerId } = useSettingsStore().items;
+    let { googleTagManagerCode } = useSettingsStore().items;
 
-    if (!googleTagManagerId) return;
-
-    nuxtApp.vueApp.use(VueGtag, {
-      property: {
-        id: googleTagManagerId,
-      },
-    });
-
-    trackRouter(useRouter());
+    if (!googleTagManagerCode) return;
 
     let elementCurent: any = null;
 

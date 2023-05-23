@@ -57,6 +57,13 @@ export default defineComponent({
     overflow-x: auto
     white-space: nowrap
     padding-bottom: 10px
+    scrollbar-width: 8px
+    scrollbar-color: var(--app-color-primary) var(--app-color-primary-inverted)
+    &::-webkit-scrollbar
+      height: 8px
+      background-color: var(--app-color-primary-inverted)
+    &::-webkit-scrollbar-thumb
+      background: var(--app-color-primary)
   &__item
     font-weight: 700
     &::after

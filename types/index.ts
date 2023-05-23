@@ -58,7 +58,7 @@ export enum SettingsEnum {
   // Seo / Marketing
   pageTitlePrefix = 'pageTitlePrefix',
   pageTitleSufix = 'pageTitleSufix',
-  googleTagManagerId = 'googleTagManagerId',
+  googleTagManagerCode = 'googleTagManagerCode',
 }
 
 export type SettingsType = {
@@ -90,7 +90,7 @@ export type SettingsType = {
   // Seo / Marketing
   [SettingsEnum.pageTitlePrefix]: string;
   [SettingsEnum.pageTitleSufix]: string;
-  [SettingsEnum.googleTagManagerId]: string;
+  [SettingsEnum.googleTagManagerCode]: string;
 };
 
 // Response show error
@@ -170,22 +170,22 @@ export type BreadcrumbType = {
 
 // Elements types aliases, for Google Tag Manager
 export enum GtmElementsEnum {
-  'custom-element' = 1, // can be used in custom HTML blocks 
-  'header-logo' = 2,
-  'header-button-menu-main' = 3,
-  'header-language-swich-item' = 4,
-  'menu-main-button-close' = 5,
-  'menu-main-logo' = 6,
-  'menu-main-item' = 7,
-  'menu-slider-item' = 8, 
-  'rating-button-links-to-sources' = 9, 
-  'links-to-sources-item' = 10, 
-  'breadcrumbs-item' = 11,
-  'pagination-item' = 12, 
-  'ratings-list-title' = 13, 
-  'labels-sections-item' = 14, 
-  'rating-items-item' = 15,
-  'footer-langs-item' = 16,
-  'page-error-logo' = 17,
-  'page-error-button-home' = 18,
+  'custom-element' = 'custom-element', // can be used in custom HTML blocks 
+  'header-logo' = 'header-logo',
+  'header-button-menu-main' = 'header-button-menu-main',
+  'header-language-swich-item' = 'header-language-swich-item',
+  'menu-main-button-close' = 'menu-main-button-close',
+  'menu-main-logo' = 'menu-main-logo',
+  'menu-main-item' = 'menu-main-item',
+  'menu-slider-item' = 'menu-slider-item', 
+  'rating-button-links-to-sources' = 'rating-button-links-to-sources', 
+  'links-to-sources-item' = 'links-to-sources-item', 
+  'breadcrumbs-item' = 'breadcrumbs-item',
+  'pagination-item' = 'pagination-item', 
+  'ratings-list-title' = 'ratings-list-title', 
+  'labels-sections-item' = 'labels-sections-item', 
+  'rating-items-item' = 'rating-items-item',
+  'footer-langs-item' = 'footer-langs-item',
+  'page-error-logo' = 'page-error-logo',
+  'page-error-button-home' = 'page-error-button-home',
 };

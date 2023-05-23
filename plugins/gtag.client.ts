@@ -11,6 +11,7 @@ type GtmInfoType = {
   userAgent: string;
   isTouchDevice: boolean;
   screen: { height: number; width: number };
+  data?: any;
   ratingId?: number;
   ratingItemId?: number;
   siteId?: number;
@@ -52,10 +53,12 @@ export default defineNuxtPlugin((nuxtApp) => {
       if (!element) return;
       if (!element.dataset.gtmElement) return;
       elementCurent = element;
+      let gtmElementData: any = element.dataset.gtmElementData || null;
       let gtmElement = element.dataset.gtmElement as keyof typeof GtmElementsEnum;
       let gtmElementType = GtmElementsEnum[gtmElement];
 
       switch (gtmElementType) {
+        case GtmElementsEnum['custom-element']:
         case GtmElementsEnum['header-button-menu-main']:
         case GtmElementsEnum['header-language-swich-item']:
         case GtmElementsEnum['menu-main-button-close']:
@@ -72,6 +75,7 @@ export default defineNuxtPlugin((nuxtApp) => {
             userAgent: window.navigator.userAgent,
             isTouchDevice: $screen.isTouchDevice,
             screen: { height: window.screen.height, width: window.screen.width },
+            data: gtmElementData,
           });
           break;
         }

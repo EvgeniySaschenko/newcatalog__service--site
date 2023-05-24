@@ -5,7 +5,6 @@ import { PluginApi } from '@/plugins/api';
 import { PluginRequest } from '@/plugins/request';
 import { PluginConfigApp } from '@/plugins/config';
 import { PluginScreen } from '@/plugins/screen.client';
-import { PluginGtag } from '@/plugins/gtag.client';
 import { PluginTranslations } from '@/plugins/translations';
 
 export type AppContextType = {
@@ -13,7 +12,6 @@ export type AppContextType = {
   $request: PluginRequest['request'];
   $configApp: PluginConfigApp;
   $screen: PluginScreen;
-  $gtmPush: PluginGtag['gtmPush'];
   $router: Router;
   $langs: PluginTranslations['getLangs'];
   $langDefault: PluginTranslations['getLangDefault'];

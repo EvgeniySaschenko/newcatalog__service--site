@@ -1,7 +1,7 @@
 import { executeAsync } from 'unctx';
 import { b as _export_sfc, d as defineNuxtComponent, u as useNuxtApp, e as useRoute, f as useBreadcrumbsStore, a as useSettingsStore, g as useSeoMeta, h as useSectionsStore, _ as __nuxt_component_0$2 } from '../server.mjs';
 import { useSSRContext, resolveComponent, mergeProps, withCtx, createTextVNode, toDisplayString } from 'vue';
-import RatingItems from './rating-items-b2410ad3.mjs';
+import RatingItems from './rating-items-7521bcbc.mjs';
 import LabelsSections from './labels-sections-cf7e2130.mjs';
 import LinksSources from './links-sources-23e44b8f.mjs';
 import __nuxt_component_0 from './app-preloader-954716fa.mjs';
@@ -186,4 +186,4 @@ _sfc_main.setup = (props, ctx) => {
 const index = /* @__PURE__ */ _export_sfc(_sfc_main, [["ssrRender", ssrRender]]);
 
 export { index as default };
-//# sourceMappingURL=index-1a869490.mjs.map
+//# sourceMappingURL=index-a3018519.mjs.map

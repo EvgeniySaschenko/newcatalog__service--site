@@ -5,8 +5,8 @@
       v-for='(item, index) in items',
       :href='item.url',
       target='_blank',
-      @click='gtmPush(index)',
-      data-gtm-element='rating-items-item'
+      data-gtm-element='rating-items-item',
+      :data-gtm-element-data='JSON.stringify({ ratingItemId: item.ratingItemId, ratingId: item.ratingId, siteId: item.siteId })'
     )
       .rating-items__img-box(:style='`background-color: ${item.color}`')
         img.rating-items__img(
@@ -27,7 +27,7 @@
 </template>
 
 <script lang="ts">
-import { LabelType, RatingItemType, GtmElementsEnum } from '@/types';
+import { LabelType, RatingItemType } from '@/types';
 
 type LabelsMapType = {
   [key: LabelType['labelId']]: LabelType;
@@ -60,23 +60,6 @@ export default defineComponent({
     for (let label of this.labels as LabelType[]) {
       this.labelsMap[label.labelId] = label;
     }
-  },
-  methods: {
-    // Add info to Google Tag Manager
-    gtmPush(index: number) {
-      let rating = this.items[index] as RatingItemType;
-      this.$gtmPush({
-        event: 'click',
-        ratingItemId: rating.ratingItemId,
-        ratingId: rating.ratingId,
-        siteId: rating.siteId,
-        elementType: GtmElementsEnum['rating-items-item'],
-        timestamp: Date.now(),
-        userAgent: window.navigator.userAgent,
-        isTouchDevice: this.$screen.isTouchDevice,
-        screen: { height: window.screen.height, width: window.screen.width },
-      });
-    },
   },
 });
 </script>

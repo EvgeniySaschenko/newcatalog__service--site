@@ -68,7 +68,7 @@ export default defineNuxtComponent({
 
     return {
       style: [headStyles],
-      script: [settings[SettingsEnum.googleTagManagerCode], settings[SettingsEnum.headScript]],
+      script: [settings[SettingsEnum.headScript]],
     };
   },
 

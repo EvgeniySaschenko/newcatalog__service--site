@@ -1255,7 +1255,7 @@ const _routes = [
     meta: {},
     alias: [],
     redirect: void 0,
-    component: () => import('./_nuxt/index-1a869490.mjs').then((m) => m.default || m)
+    component: () => import('./_nuxt/index-a3018519.mjs').then((m) => m.default || m)
   },
   {
     name: "rating-labels-sections",
@@ -1279,7 +1279,7 @@ const _routes = [
     meta: {},
     alias: [],
     redirect: void 0,
-    component: () => import('./_nuxt/rating-items-b2410ad3.mjs').then((m) => m.default || m)
+    component: () => import('./_nuxt/rating-items-7521bcbc.mjs').then((m) => m.default || m)
   },
   {
     name: "ratings-all",
@@ -1313,7 +1313,7 @@ const $router = {
     {
       name: "rating",
       path: "/:lang/rating/:ratingId",
-      component: () => import('./_nuxt/index-1a869490.mjs')
+      component: () => import('./_nuxt/index-a3018519.mjs')
     },
     {
       name: "section",
@@ -2227,27 +2227,6 @@ var SettingsEnum = /* @__PURE__ */ ((SettingsEnum2) => {
   SettingsEnum2["googleTagManagerCode"] = "googleTagManagerCode";
   return SettingsEnum2;
 })(SettingsEnum || {});
-var GtmElementsEnum = /* @__PURE__ */ ((GtmElementsEnum2) => {
-  GtmElementsEnum2["custom-element"] = "custom-element";
-  GtmElementsEnum2["header-logo"] = "header-logo";
-  GtmElementsEnum2["header-button-menu-main"] = "header-button-menu-main";
-  GtmElementsEnum2["header-language-swich-item"] = "header-language-swich-item";
-  GtmElementsEnum2["menu-main-button-close"] = "menu-main-button-close";
-  GtmElementsEnum2["menu-main-logo"] = "menu-main-logo";
-  GtmElementsEnum2["menu-main-item"] = "menu-main-item";
-  GtmElementsEnum2["menu-slider-item"] = "menu-slider-item";
-  GtmElementsEnum2["rating-button-links-to-sources"] = "rating-button-links-to-sources";
-  GtmElementsEnum2["links-to-sources-item"] = "links-to-sources-item";
-  GtmElementsEnum2["breadcrumbs-item"] = "breadcrumbs-item";
-  GtmElementsEnum2["pagination-item"] = "pagination-item";
-  GtmElementsEnum2["ratings-list-title"] = "ratings-list-title";
-  GtmElementsEnum2["labels-sections-item"] = "labels-sections-item";
-  GtmElementsEnum2["rating-items-item"] = "rating-items-item";
-  GtmElementsEnum2["footer-langs-item"] = "footer-langs-item";
-  GtmElementsEnum2["page-error-logo"] = "page-error-logo";
-  GtmElementsEnum2["page-error-button-home"] = "page-error-button-home";
-  return GtmElementsEnum2;
-})(GtmElementsEnum || {});
 const _sfc_main$1 = /* @__PURE__ */ defineNuxtComponent({
   async asyncData() {
     let __temp, __restore;
@@ -2276,7 +2255,7 @@ const _sfc_main$1 = /* @__PURE__ */ defineNuxtComponent({
       ${settings[SettingsEnum.headStyles]}`;
     return {
       style: [headStyles],
-      script: [settings[SettingsEnum.googleTagManagerCode], settings[SettingsEnum.headScript]]
+      script: [settings[SettingsEnum.headScript]]
     };
   },
   data() {
@@ -2588,5 +2567,5 @@ const plugins = normalizePlugins(_plugins);
 }
 const entry$1 = (ctx) => entry(ctx);
 
-export { GtmElementsEnum as G, __nuxt_component_0$2 as _, useSettingsStore as a, _export_sfc as b, createError as c, defineNuxtComponent as d, entry$1 as default, useRoute as e, useBreadcrumbsStore as f, useSeoMeta as g, useSectionsStore as h, useNuxtApp as u };
+export { __nuxt_component_0$2 as _, useSettingsStore as a, _export_sfc as b, createError as c, defineNuxtComponent as d, entry$1 as default, useRoute as e, useBreadcrumbsStore as f, useSeoMeta as g, useSectionsStore as h, useNuxtApp as u };
 //# sourceMappingURL=server.mjs.map

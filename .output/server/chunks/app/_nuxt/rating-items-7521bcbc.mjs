@@ -1,7 +1,7 @@
 import { useSSRContext, defineComponent, resolveDirective, mergeProps } from 'vue';
-import { b as _export_sfc, G as GtmElementsEnum } from '../server.mjs';
 import __nuxt_component_1 from './app-label-rating-cfbe1985.mjs';
 import { ssrRenderAttrs, ssrRenderList, ssrRenderAttr, ssrRenderStyle, ssrGetDirectiveProps, ssrInterpolate, ssrRenderComponent } from 'vue/server-renderer';
+import { b as _export_sfc } from '../server.mjs';
 import 'ofetch';
 import 'hookable';
 import 'unctx';
@@ -55,37 +55,20 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     for (let label of this.labels) {
       this.labelsMap[label.labelId] = label;
     }
-  },
-  methods: {
-    // Add info to Google Tag Manager
-    gtmPush(index) {
-      let rating = this.items[index];
-      this.$gtmPush({
-        event: "click",
-        ratingItemId: rating.ratingItemId,
-        ratingId: rating.ratingId,
-        siteId: rating.siteId,
-        elementType: GtmElementsEnum["rating-items-item"],
-        timestamp: Date.now(),
-        userAgent: window.navigator.userAgent,
-        isTouchDevice: this.$screen.isTouchDevice,
-        screen: { height: window.screen.height, width: window.screen.width }
-      });
-    }
   }
 });
 function ssrRender(_ctx, _push, _parent, _attrs, $props, $setup, $data, $options) {
   const _component_app_label_rating = __nuxt_component_1;
   const _directive_lazy = resolveDirective("lazy");
-  _push(`<div${ssrRenderAttrs(mergeProps({ class: "rating-items" }, _attrs))} data-v-3d4c5fab><div class="rating-items__list" data-v-3d4c5fab><!--[-->`);
+  _push(`<div${ssrRenderAttrs(mergeProps({ class: "rating-items" }, _attrs))} data-v-39977100><div class="rating-items__list" data-v-39977100><!--[-->`);
   ssrRenderList(_ctx.items, (item, index) => {
-    _push(`<a class="rating-items__item"${ssrRenderAttr("href", item.url)} target="_blank" data-gtm-element="rating-items-item" data-v-3d4c5fab><div class="rating-items__img-box" style="${ssrRenderStyle(`background-color: ${item.color}`)}" data-v-3d4c5fab><img${ssrRenderAttrs(mergeProps({
+    _push(`<a class="rating-items__item"${ssrRenderAttr("href", item.url)} target="_blank" data-gtm-element="rating-items-item"${ssrRenderAttr("data-gtm-element-data", JSON.stringify({ ratingItemId: item.ratingItemId, ratingId: item.ratingId, siteId: item.siteId }))} data-v-39977100><div class="rating-items__img-box" style="${ssrRenderStyle(`background-color: ${item.color}`)}" data-v-39977100><img${ssrRenderAttrs(mergeProps({
       class: "rating-items__img",
       alt: item.hostname,
       src: _ctx.$configApp.imageStub
-    }, ssrGetDirectiveProps(_ctx, _directive_lazy, item.logoImg)))} data-v-3d4c5fab></div><div class="rating-items__info" data-v-3d4c5fab><div class="rating-items__name-box" data-v-3d4c5fab><div class="rating-items__name" data-v-3d4c5fab>${ssrInterpolate(item.name[_ctx.$langDefault()])}</div></div><div class="rating-items__hostname" data-v-3d4c5fab>${ssrInterpolate(item.hostname)}</div>`);
+    }, ssrGetDirectiveProps(_ctx, _directive_lazy, item.logoImg)))} data-v-39977100></div><div class="rating-items__info" data-v-39977100><div class="rating-items__name-box" data-v-39977100><div class="rating-items__name" data-v-39977100>${ssrInterpolate(item.name[_ctx.$langDefault()])}</div></div><div class="rating-items__hostname" data-v-39977100>${ssrInterpolate(item.hostname)}</div>`);
     if (_ctx.labels.length) {
-      _push(`<div class="rating-items__labels" data-v-3d4c5fab><!--[-->`);
+      _push(`<div class="rating-items__labels" data-v-39977100><!--[-->`);
       ssrRenderList(item.labelsIds, (labelId) => {
         _push(ssrRenderComponent(_component_app_label_rating, {
           color: _ctx.labelsMap[labelId].color,
@@ -106,7 +89,7 @@ _sfc_main.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("pages/rating/rating-items.vue");
   return _sfc_setup ? _sfc_setup(props, ctx) : void 0;
 };
-const RatingItems = /* @__PURE__ */ _export_sfc(_sfc_main, [["ssrRender", ssrRender], ["__scopeId", "data-v-3d4c5fab"]]);
+const RatingItems = /* @__PURE__ */ _export_sfc(_sfc_main, [["ssrRender", ssrRender], ["__scopeId", "data-v-39977100"]]);
 
 export { RatingItems as default };
-//# sourceMappingURL=rating-items-b2410ad3.mjs.map
+//# sourceMappingURL=rating-items-7521bcbc.mjs.map

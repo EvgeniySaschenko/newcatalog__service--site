@@ -1,11 +1,11 @@
 const client_manifest = {
-  "_app-ratings-list.ad96b17e.js": {
+  "_app-ratings-list.3d2e24ff.js": {
     "resourceType": "script",
     "module": true,
     "css": [
       "app-ratings-list.078f6c8f.css"
     ],
-    "file": "app-ratings-list.ad96b17e.js",
+    "file": "app-ratings-list.3d2e24ff.js",
     "imports": [
       "node_modules/nuxt/dist/app/entry.js",
       "components/app-label-rating/app-label-rating.vue"
@@ -15,10 +15,10 @@ const client_manifest = {
     "file": "app-ratings-list.078f6c8f.css",
     "resourceType": "style"
   },
-  "_index.4ecb0686.js": {
+  "_index.8caf1ea8.js": {
     "resourceType": "script",
     "module": true,
-    "file": "index.4ecb0686.js",
+    "file": "index.8caf1ea8.js",
     "imports": [
       "node_modules/nuxt/dist/app/entry.js"
     ]
@@ -49,7 +49,7 @@ const client_manifest = {
     "resourceType": "script",
     "module": true,
     "css": [],
-    "file": "app-label-rating.640bc2b4.js",
+    "file": "app-label-rating.42e23f11.js",
     "imports": [
       "node_modules/nuxt/dist/app/entry.js"
     ],
@@ -69,7 +69,7 @@ const client_manifest = {
     "resourceType": "script",
     "module": true,
     "css": [],
-    "file": "app-preloader.a73fe623.js",
+    "file": "app-preloader.0d715855.js",
     "imports": [
       "node_modules/nuxt/dist/app/entry.js"
     ],
@@ -89,7 +89,7 @@ const client_manifest = {
     "resourceType": "script",
     "module": true,
     "css": [],
-    "file": "app-title.de0650b7.js",
+    "file": "app-title.b89db5a4.js",
     "imports": [
       "node_modules/nuxt/dist/app/entry.js"
     ],
@@ -118,7 +118,7 @@ const client_manifest = {
     "dynamicImports": [
       "virtual:nuxt:/app/newcatalog/service--site/.nuxt/error-component.mjs"
     ],
-    "file": "entry.3c66e604.js",
+    "file": "entry.2b266255.js",
     "isEntry": true,
     "src": "node_modules/nuxt/dist/app/entry.js"
   },
@@ -145,10 +145,10 @@ const client_manifest = {
     "resourceType": "script",
     "module": true,
     "css": [],
-    "file": "index.6bf1a9a0.js",
+    "file": "index.81548238.js",
     "imports": [
       "node_modules/nuxt/dist/app/entry.js",
-      "_index.4ecb0686.js",
+      "_index.8caf1ea8.js",
       "pages/rating/rating-items.vue",
       "pages/rating/labels-sections.vue",
       "pages/rating/links-sources.vue",
@@ -172,7 +172,7 @@ const client_manifest = {
     "resourceType": "script",
     "module": true,
     "css": [],
-    "file": "labels-sections.b4c70e92.js",
+    "file": "labels-sections.f9d5533f.js",
     "imports": [
       "node_modules/nuxt/dist/app/entry.js"
     ],
@@ -192,7 +192,7 @@ const client_manifest = {
     "resourceType": "script",
     "module": true,
     "css": [],
-    "file": "links-sources.52c8d9fc.js",
+    "file": "links-sources.054ef365.js",
     "imports": [
       "node_modules/nuxt/dist/app/entry.js"
     ],
@@ -205,14 +205,14 @@ const client_manifest = {
   },
   "pages/rating/rating-items.css": {
     "resourceType": "style",
-    "file": "rating-items.a636ae9f.css",
+    "file": "rating-items.5aa160eb.css",
     "src": "pages/rating/rating-items.css"
   },
   "pages/rating/rating-items.vue": {
     "resourceType": "script",
     "module": true,
     "css": [],
-    "file": "rating-items.d3f6fcb6.js",
+    "file": "rating-items.55a06577.js",
     "imports": [
       "node_modules/nuxt/dist/app/entry.js",
       "components/app-label-rating/app-label-rating.vue"
@@ -220,18 +220,18 @@ const client_manifest = {
     "isDynamicEntry": true,
     "src": "pages/rating/rating-items.vue"
   },
-  "rating-items.a636ae9f.css": {
-    "file": "rating-items.a636ae9f.css",
+  "rating-items.5aa160eb.css": {
+    "file": "rating-items.5aa160eb.css",
     "resourceType": "style"
   },
   "pages/ratings-all/index.vue": {
     "resourceType": "script",
     "module": true,
-    "file": "index.8f0eb26e.js",
+    "file": "index.0e8ec2af.js",
     "imports": [
       "node_modules/nuxt/dist/app/entry.js",
-      "_index.4ecb0686.js",
-      "_app-ratings-list.ad96b17e.js",
+      "_index.8caf1ea8.js",
+      "_app-ratings-list.3d2e24ff.js",
       "components/app-preloader/app-preloader.vue",
       "components/app-title/app-title.vue",
       "components/app-label-rating/app-label-rating.vue"
@@ -242,11 +242,11 @@ const client_manifest = {
   "pages/section/index.vue": {
     "resourceType": "script",
     "module": true,
-    "file": "index.1cac8908.js",
+    "file": "index.bc2d7822.js",
     "imports": [
       "node_modules/nuxt/dist/app/entry.js",
-      "_index.4ecb0686.js",
-      "_app-ratings-list.ad96b17e.js",
+      "_index.8caf1ea8.js",
+      "_app-ratings-list.3d2e24ff.js",
       "components/app-preloader/app-preloader.vue",
       "components/app-title/app-title.vue",
       "components/app-label-rating/app-label-rating.vue"
@@ -269,7 +269,7 @@ const client_manifest = {
     "css": [
       "error-component.f6c99654.css"
     ],
-    "file": "error-component.404c81bf.js",
+    "file": "error-component.d52595a1.js",
     "imports": [
       "node_modules/nuxt/dist/app/entry.js"
     ],

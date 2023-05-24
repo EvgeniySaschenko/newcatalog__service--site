@@ -7,7 +7,7 @@
     .page__top-col-1
       .button-sources(
         v-if='rating.linksToSources.length',
-        data-gtm-element='rating-button-links-to-sources',
+        data-analyzed-element='rating-button-links-to-sources',
         @click='scrollToLinksSources()'
       )
         span.button-sources-text-1 {{ $t('Links to sources') }}
@@ -17,7 +17,7 @@
     .page__top-col-2
       .labels-sections
         nuxt-link.labels-sections__item(
-          data-gtm-element='labels-sections-item',
+          data-analyzed-element='labels-sections-item',
           v-for='sectionId of rating.sectionsIds',
           :to='`/${$langDefault()}/section/${sectionId}`'
         ) {{ `#${sectionsMap[sectionId].name[$langDefault()]}` }}
@@ -40,7 +40,7 @@
         a.links-sources__link(
           :href='item',
           target='_blank',
-          data-gtm-element='links-to-sources-item'
+          data-analyzed-element='links-to-sources-item'
         ) {{ item }}
 </template>
 

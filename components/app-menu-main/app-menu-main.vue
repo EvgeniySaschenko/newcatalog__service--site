@@ -1,18 +1,18 @@
 <template lang="pug">
 .app-menu-main(v-if='modelValue')
   .app-menu-main__wrapper
-    .app-menu-main__btn-close(@click='closeMenu()', data-gtm-element='menu-main-button-close')
+    .app-menu-main__btn-close(@click='closeMenu()', data-analyzed-element='menu-main-button-close')
     nuxt-link.app-menu-main__logo(
       :to='`/${$langDefault()}`',
       @click='closeMenu()',
-      data-gtm-element='menu-main-logo'
+      data-analyzed-element='menu-main-logo'
     )
       img.app-menu-main__logo-img(:src='imageAppLogo')
     ul.app-menu-main__list
       li.app-menu-main__item(v-for='(item, index) in sections')
         nuxt-link.app-menu-main__link(
           :to='`/${$langDefault()}/section/${item.sectionId}`',
-          data-gtm-element='menu-main-item',
+          data-analyzed-element='menu-main-item',
           @click='closeMenu()',
           :class='{ active: $route.path == `/${$langDefault()}/section/${item.sectionId}` }'
         ) {{ item.name[$langDefault()] }}

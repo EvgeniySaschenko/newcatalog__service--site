@@ -3,7 +3,7 @@
   .app-pagination__list
     nuxt-link.app-pagination__item(
       :to='`/${$langDefault()}/?page=${item}`',
-      data-gtm-element='pagination-item',
+      data-analyzed-element='pagination-item',
       @click.prevent='setUrlParam(item)',
       v-for='item of pages',
       :class='{ active: item === pageCurent }'

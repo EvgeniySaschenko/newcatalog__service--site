@@ -5,8 +5,8 @@
       v-for='(item, index) in items',
       :href='item.url',
       target='_blank',
-      data-gtm-element='rating-items-item',
-      :data-gtm-element-data='JSON.stringify({ ratingItemId: item.ratingItemId, ratingId: item.ratingId, siteId: item.siteId })'
+      data-analyzed-element='rating-items-item',
+      :data-analyzed-element-data='JSON.stringify({ ratingItemId: item.ratingItemId, ratingId: item.ratingId, siteId: item.siteId })'
     )
       .rating-items__img-box(:style='`background-color: ${item.color}`')
         img.rating-items__img(

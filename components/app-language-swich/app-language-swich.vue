@@ -4,7 +4,7 @@
   .app-language-swich__box
     ul.app-language-swich__list(v-show='isShow')
       li.app-language-swich__item(
-        data-gtm-element='header-language-swich-item',
+        data-analyzed-element='header-language-swich-item',
         v-for='item of $langs()',
         :class='{ active: $langDefault() == item }',
         @click='swichLang(item)'

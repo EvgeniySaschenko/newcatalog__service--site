@@ -8,7 +8,7 @@ footer.app-footer
         a.app-footer__langs-item(
           :href='`/${item}`',
           v-for='item in $langs()',
-          data-gtm-element='footer-langs-item'
+          data-analyzed-element='footer-langs-item'
         ) {{ item }}
 </template>
 

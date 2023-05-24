@@ -6,7 +6,7 @@
         nuxt-link.app-breadcrumbs__link(
           :to='item.url',
           v-if='index != items.length - 1',
-          data-gtm-element='breadcrumbs-item'
+          data-analyzed-element='breadcrumbs-item'
         ) {{ item.name }}
         span.app-breadcrumbs__link.active(v-else) {{ item.name }}
 </template>

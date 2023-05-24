@@ -1,0 +1,6 @@
+const appBreadcrumbs_vue_vue_type_style_index_0_scoped_83890aa0_lang = '.app-breadcrumbs[data-v-83890aa0]{min-height:30px;width:100%}.app-breadcrumbs__list[data-v-83890aa0]{color:var(--app-color-primary);display:flex;overflow-x:auto;padding-bottom:10px;scrollbar-color:var(--app-color-primary) var(--app-color-primary-inverted);scrollbar-width:8px;white-space:nowrap}.app-breadcrumbs__list[data-v-83890aa0]::-webkit-scrollbar{background-color:var(--app-color-primary-inverted);height:8px}.app-breadcrumbs__list[data-v-83890aa0]::-webkit-scrollbar-thumb{background:var(--app-color-primary)}.app-breadcrumbs__item[data-v-83890aa0]{font-weight:700}.app-breadcrumbs__item[data-v-83890aa0]:after{content:"/";font-size:10px;font-weight:400;margin:0 5px}.app-breadcrumbs__item[data-v-83890aa0]:last-child{border-bottom:0;font-weight:400}.app-breadcrumbs__item:last-child .app-breadcrumbs__link[data-v-83890aa0]{border-bottom:0}.app-breadcrumbs__item[data-v-83890aa0]:last-child:after{content:""}.app-breadcrumbs__link[data-v-83890aa0]{border-bottom:1px solid var(--app-color-primary)}';
+
+const appBreadcrumbsStyles_8260a96f = [appBreadcrumbs_vue_vue_type_style_index_0_scoped_83890aa0_lang];
+
+export { appBreadcrumbsStyles_8260a96f as default };
+//# sourceMappingURL=app-breadcrumbs-styles.8260a96f.mjs.map

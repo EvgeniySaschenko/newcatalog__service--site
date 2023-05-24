@@ -5,7 +5,7 @@ ul.app-menu-slider(:ref='"app-menu-slider"')
     :data-app-menu-slider='item.sectionId'
   )
     nuxt-link.app-menu-slider__link(
-      data-gtm-element='menu-slider-item',
+      data-analyzed-element='menu-slider-item',
       :to='`/${$langDefault()}/section/${item.sectionId}`',
       :class='{ active: $route.path == `/${$langDefault()}/section/${item.sectionId}` }'
     ) {{ item.name[$langDefault()] }}

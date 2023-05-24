@@ -5,7 +5,7 @@
       // content
       nuxt-link.app-ratings-list__title(
         :to='`/${$langDefault()}/rating/${item.rating.ratingId}`',
-        data-gtm-element='ratings-list-title'
+        data-analyzed-element='ratings-list-title'
       ) {{ item.rating.name[$langDefault()] }}
       .app-ratings-list__descr {{ item.rating.descr[$langDefault()] }}
 

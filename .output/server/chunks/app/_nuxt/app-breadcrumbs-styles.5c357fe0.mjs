@@ -1,6 +1,0 @@
-const appBreadcrumbs_vue_vue_type_style_index_0_scoped_b9710851_lang = '.app-breadcrumbs[data-v-b9710851]{min-height:30px;width:100%}.app-breadcrumbs__list[data-v-b9710851]{color:var(--app-color-primary);display:flex;overflow-x:auto;padding-bottom:10px;scrollbar-color:var(--app-color-primary) var(--app-color-primary-inverted);scrollbar-width:8px;white-space:nowrap}.app-breadcrumbs__list[data-v-b9710851]::-webkit-scrollbar{background-color:var(--app-color-primary-inverted);height:8px}.app-breadcrumbs__list[data-v-b9710851]::-webkit-scrollbar-thumb{background:var(--app-color-primary)}.app-breadcrumbs__item[data-v-b9710851]{font-weight:700}.app-breadcrumbs__item[data-v-b9710851]:after{content:"/";font-size:10px;font-weight:400;margin:0 5px}.app-breadcrumbs__item[data-v-b9710851]:last-child{border-bottom:0;font-weight:400}.app-breadcrumbs__item:last-child .app-breadcrumbs__link[data-v-b9710851]{border-bottom:0}.app-breadcrumbs__item[data-v-b9710851]:last-child:after{content:""}.app-breadcrumbs__link[data-v-b9710851]{border-bottom:1px solid var(--app-color-primary)}';
-
-const appBreadcrumbsStyles_5c357fe0 = [appBreadcrumbs_vue_vue_type_style_index_0_scoped_b9710851_lang];
-
-export { appBreadcrumbsStyles_5c357fe0 as default };
-//# sourceMappingURL=app-breadcrumbs-styles.5c357fe0.mjs.map

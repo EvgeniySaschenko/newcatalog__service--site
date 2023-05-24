@@ -1255,7 +1255,7 @@ const _routes = [
     meta: {},
     alias: [],
     redirect: void 0,
-    component: () => import('./_nuxt/index-a3018519.mjs').then((m) => m.default || m)
+    component: () => import('./_nuxt/index-6343e998.mjs').then((m) => m.default || m)
   },
   {
     name: "rating-labels-sections",
@@ -1263,7 +1263,7 @@ const _routes = [
     meta: {},
     alias: [],
     redirect: void 0,
-    component: () => import('./_nuxt/labels-sections-cf7e2130.mjs').then((m) => m.default || m)
+    component: () => import('./_nuxt/labels-sections-37da43fa.mjs').then((m) => m.default || m)
   },
   {
     name: "rating-links-sources",
@@ -1279,7 +1279,7 @@ const _routes = [
     meta: {},
     alias: [],
     redirect: void 0,
-    component: () => import('./_nuxt/rating-items-7521bcbc.mjs').then((m) => m.default || m)
+    component: () => import('./_nuxt/rating-items-fc304020.mjs').then((m) => m.default || m)
   },
   {
     name: "ratings-all",
@@ -1287,7 +1287,7 @@ const _routes = [
     meta: {},
     alias: [],
     redirect: void 0,
-    component: () => import('./_nuxt/index-fc9ba44a.mjs').then((m) => m.default || m)
+    component: () => import('./_nuxt/index-37375791.mjs').then((m) => m.default || m)
   },
   {
     name: "section",
@@ -1295,7 +1295,7 @@ const _routes = [
     meta: {},
     alias: [],
     redirect: void 0,
-    component: () => import('./_nuxt/index-b7e48b8a.mjs').then((m) => m.default || m)
+    component: () => import('./_nuxt/index-f2116e69.mjs').then((m) => m.default || m)
   }
 ];
 const $router = {
@@ -1303,22 +1303,22 @@ const $router = {
     {
       name: "home",
       path: "/",
-      component: () => import('./_nuxt/index-fc9ba44a.mjs')
+      component: () => import('./_nuxt/index-37375791.mjs')
     },
     {
       name: "ratings-all",
       path: "/:lang",
-      component: () => import('./_nuxt/index-fc9ba44a.mjs')
+      component: () => import('./_nuxt/index-37375791.mjs')
     },
     {
       name: "rating",
       path: "/:lang/rating/:ratingId",
-      component: () => import('./_nuxt/index-a3018519.mjs')
+      component: () => import('./_nuxt/index-6343e998.mjs')
     },
     {
       name: "section",
       path: "/:lang/section/:sectionId",
-      component: () => import('./_nuxt/index-b7e48b8a.mjs')
+      component: () => import('./_nuxt/index-f2116e69.mjs')
     }
   ]
 };
@@ -1811,9 +1811,9 @@ function ssrRender$6(_ctx, _push, _parent, _attrs, $props, $setup, $data, $optio
     _push(`<div${ssrRenderAttrs(mergeProps({
       class: "app-language-swich",
       "data-app-language-swich": ""
-    }, _attrs))} data-v-b193b5f9><div class="app-language-swich__current" data-v-b193b5f9>${ssrInterpolate(_ctx.$langDefault())}</div><div class="app-language-swich__box" data-v-b193b5f9><ul class="app-language-swich__list" style="${ssrRenderStyle(_ctx.isShow ? null : { display: "none" })}" data-v-b193b5f9><!--[-->`);
+    }, _attrs))} data-v-f6df5485><div class="app-language-swich__current" data-v-f6df5485>${ssrInterpolate(_ctx.$langDefault())}</div><div class="app-language-swich__box" data-v-f6df5485><ul class="app-language-swich__list" style="${ssrRenderStyle(_ctx.isShow ? null : { display: "none" })}" data-v-f6df5485><!--[-->`);
     ssrRenderList(_ctx.$langs(), (item) => {
-      _push(`<li data-gtm-element="header-language-swich-item" class="${ssrRenderClass([{ active: _ctx.$langDefault() == item }, "app-language-swich__item"])}" data-v-b193b5f9>${ssrInterpolate(item)}</li>`);
+      _push(`<li data-analyzed-element="header-language-swich-item" class="${ssrRenderClass([{ active: _ctx.$langDefault() == item }, "app-language-swich__item"])}" data-v-f6df5485>${ssrInterpolate(item)}</li>`);
     });
     _push(`<!--]--></ul></div></div>`);
   } else {
@@ -1833,7 +1833,7 @@ _sfc_main$7.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("components/app-language-swich/app-language-swich.vue");
   return _sfc_setup$7 ? _sfc_setup$7(props, ctx) : void 0;
 };
-const AppLanguageSwich = /* @__PURE__ */ _export_sfc(_sfc_main$7, [["ssrRender", ssrRender$6], ["__scopeId", "data-v-b193b5f9"]]);
+const AppLanguageSwich = /* @__PURE__ */ _export_sfc(_sfc_main$7, [["ssrRender", ssrRender$6], ["__scopeId", "data-v-f6df5485"]]);
 const _sfc_main$6 = /* @__PURE__ */ defineComponent({
   props: {
     // sections
@@ -1876,16 +1876,16 @@ const _sfc_main$6 = /* @__PURE__ */ defineComponent({
 function ssrRender$5(_ctx, _push, _parent, _attrs, $props, $setup, $data, $options) {
   const _component_nuxt_link = __nuxt_component_0$2;
   if (_ctx.modelValue) {
-    _push(`<div${ssrRenderAttrs(mergeProps({ class: "app-menu-main" }, _attrs))} data-v-99d61a35><div class="app-menu-main__wrapper" data-v-99d61a35><div class="app-menu-main__btn-close" data-gtm-element="menu-main-button-close" data-v-99d61a35></div>`);
+    _push(`<div${ssrRenderAttrs(mergeProps({ class: "app-menu-main" }, _attrs))} data-v-2a090c2b><div class="app-menu-main__wrapper" data-v-2a090c2b><div class="app-menu-main__btn-close" data-analyzed-element="menu-main-button-close" data-v-2a090c2b></div>`);
     _push(ssrRenderComponent(_component_nuxt_link, {
       class: "app-menu-main__logo",
       to: `/${_ctx.$langDefault()}`,
       onClick: ($event) => _ctx.closeMenu(),
-      "data-gtm-element": "menu-main-logo"
+      "data-analyzed-element": "menu-main-logo"
     }, {
       default: withCtx((_, _push2, _parent2, _scopeId) => {
         if (_push2) {
-          _push2(`<img class="app-menu-main__logo-img"${ssrRenderAttr("src", _ctx.imageAppLogo)} data-v-99d61a35${_scopeId}>`);
+          _push2(`<img class="app-menu-main__logo-img"${ssrRenderAttr("src", _ctx.imageAppLogo)} data-v-2a090c2b${_scopeId}>`);
         } else {
           return [
             createVNode("img", {
@@ -1897,13 +1897,13 @@ function ssrRender$5(_ctx, _push, _parent, _attrs, $props, $setup, $data, $optio
       }),
       _: 1
     }, _parent));
-    _push(`<ul class="app-menu-main__list" data-v-99d61a35><!--[-->`);
+    _push(`<ul class="app-menu-main__list" data-v-2a090c2b><!--[-->`);
     ssrRenderList(_ctx.sections, (item, index) => {
-      _push(`<li class="app-menu-main__item" data-v-99d61a35>`);
+      _push(`<li class="app-menu-main__item" data-v-2a090c2b>`);
       _push(ssrRenderComponent(_component_nuxt_link, {
         class: ["app-menu-main__link", { active: _ctx.$route.path == `/${_ctx.$langDefault()}/section/${item.sectionId}` }],
         to: `/${_ctx.$langDefault()}/section/${item.sectionId}`,
-        "data-gtm-element": "menu-main-item",
+        "data-analyzed-element": "menu-main-item",
         onClick: ($event) => _ctx.closeMenu()
       }, {
         default: withCtx((_, _push2, _parent2, _scopeId) => {
@@ -1930,7 +1930,7 @@ _sfc_main$6.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("components/app-menu-main/app-menu-main.vue");
   return _sfc_setup$6 ? _sfc_setup$6(props, ctx) : void 0;
 };
-const AppMenuMain = /* @__PURE__ */ _export_sfc(_sfc_main$6, [["ssrRender", ssrRender$5], ["__scopeId", "data-v-99d61a35"]]);
+const AppMenuMain = /* @__PURE__ */ _export_sfc(_sfc_main$6, [["ssrRender", ssrRender$5], ["__scopeId", "data-v-2a090c2b"]]);
 const _sfc_main$5 = /* @__PURE__ */ defineComponent({
   components: {
     AppLanguageSwich,
@@ -1966,15 +1966,15 @@ function ssrRender$4(_ctx, _push, _parent, _attrs, $props, $setup, $data, $optio
   const _component_nuxt_link = __nuxt_component_0$2;
   const _component_app_language_swich = resolveComponent("app-language-swich");
   const _component_app_menu_main = resolveComponent("app-menu-main");
-  _push(`<header${ssrRenderAttrs(mergeProps({ class: "app-header" }, _attrs))} data-v-4f4e6684><div class="app-header__row container" data-v-4f4e6684><div class="app-header__col app-header__col--logo" data-v-4f4e6684>`);
+  _push(`<header${ssrRenderAttrs(mergeProps({ class: "app-header" }, _attrs))} data-v-b9388150><div class="app-header__row container" data-v-b9388150><div class="app-header__col app-header__col--logo" data-v-b9388150>`);
   _push(ssrRenderComponent(_component_nuxt_link, {
     class: "app-header__logo",
     to: `/${_ctx.$langDefault()}`,
-    "data-gtm-element": "header-logo"
+    "data-analyzed-element": "header-logo"
   }, {
     default: withCtx((_, _push2, _parent2, _scopeId) => {
       if (_push2) {
-        _push2(`<img class="app-header__logo-img"${ssrRenderAttr("src", _ctx.imageAppLogo)} alt="Logo" data-v-4f4e6684${_scopeId}>`);
+        _push2(`<img class="app-header__logo-img"${ssrRenderAttr("src", _ctx.imageAppLogo)} alt="Logo" data-v-b9388150${_scopeId}>`);
       } else {
         return [
           createVNode("img", {
@@ -1987,15 +1987,15 @@ function ssrRender$4(_ctx, _push, _parent, _attrs, $props, $setup, $data, $optio
     }),
     _: 1
   }, _parent));
-  _push(`</div><div class="app-header__col app-header__col--custom-code" data-v-4f4e6684>`);
+  _push(`</div><div class="app-header__col app-header__col--custom-code" data-v-b9388150>`);
   if (_ctx.headerHtml) {
-    _push(`<div class="app-header__custom-code" data-v-4f4e6684>${_ctx.headerHtml}</div>`);
+    _push(`<div class="app-header__custom-code" data-v-b9388150>${_ctx.headerHtml}</div>`);
   } else {
     _push(`<!---->`);
   }
-  _push(`</div><div class="app-header__col app-header__col--control" data-v-4f4e6684><div class="app-header__langs" data-v-4f4e6684>`);
+  _push(`</div><div class="app-header__col app-header__col--control" data-v-b9388150><div class="app-header__langs" data-v-b9388150>`);
   _push(ssrRenderComponent(_component_app_language_swich, null, null, _parent));
-  _push(`</div><div class="app-header__btn-menu" data-gtm-element="header-button-menu-main" data-v-4f4e6684><div class="app-header__btn-menu-item" data-v-4f4e6684></div><div class="app-header__btn-menu-item" data-v-4f4e6684></div><div class="app-header__btn-menu-item" data-v-4f4e6684></div></div></div></div>`);
+  _push(`</div><div class="app-header__btn-menu" data-analyzed-element="header-button-menu-main" data-v-b9388150><div class="app-header__btn-menu-item" data-v-b9388150></div><div class="app-header__btn-menu-item" data-v-b9388150></div><div class="app-header__btn-menu-item" data-v-b9388150></div></div></div></div>`);
   _push(ssrRenderComponent(_component_app_menu_main, {
     modelValue: _ctx.isShowMenuMain,
     "onUpdate:modelValue": ($event) => _ctx.isShowMenuMain = $event,
@@ -2010,7 +2010,7 @@ _sfc_main$5.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("components/app-header/app-header.vue");
   return _sfc_setup$5 ? _sfc_setup$5(props, ctx) : void 0;
 };
-const AppHeader = /* @__PURE__ */ _export_sfc(_sfc_main$5, [["ssrRender", ssrRender$4], ["__scopeId", "data-v-4f4e6684"]]);
+const AppHeader = /* @__PURE__ */ _export_sfc(_sfc_main$5, [["ssrRender", ssrRender$4], ["__scopeId", "data-v-b9388150"]]);
 const _sfc_main$4 = /* @__PURE__ */ defineComponent({
   props: {
     footerHtml: {
@@ -2020,15 +2020,15 @@ const _sfc_main$4 = /* @__PURE__ */ defineComponent({
   }
 });
 function ssrRender$3(_ctx, _push, _parent, _attrs, $props, $setup, $data, $options) {
-  _push(`<footer${ssrRenderAttrs(mergeProps({ class: "app-footer" }, _attrs))} data-v-716d91a8><div class="container" data-v-716d91a8>`);
+  _push(`<footer${ssrRenderAttrs(mergeProps({ class: "app-footer" }, _attrs))} data-v-a355ad5a><div class="container" data-v-a355ad5a>`);
   if (_ctx.footerHtml) {
-    _push(`<div class="app-footer__row" data-v-716d91a8><div class="app-footer__custom-code" data-v-716d91a8>${_ctx.footerHtml}</div></div>`);
+    _push(`<div class="app-footer__row" data-v-a355ad5a><div class="app-footer__custom-code" data-v-a355ad5a>${_ctx.footerHtml}</div></div>`);
   } else {
     _push(`<!---->`);
   }
-  _push(`<div class="app-footer__row" data-v-716d91a8><div class="app-footer__langs" data-v-716d91a8><!--[-->`);
+  _push(`<div class="app-footer__row" data-v-a355ad5a><div class="app-footer__langs" data-v-a355ad5a><!--[-->`);
   ssrRenderList(_ctx.$langs(), (item) => {
-    _push(`<a class="app-footer__langs-item"${ssrRenderAttr("href", `/${item}`)} data-gtm-element="footer-langs-item" data-v-716d91a8>${ssrInterpolate(item)}</a>`);
+    _push(`<a class="app-footer__langs-item"${ssrRenderAttr("href", `/${item}`)} data-analyzed-element="footer-langs-item" data-v-a355ad5a>${ssrInterpolate(item)}</a>`);
   });
   _push(`<!--]--></div></div></div></footer>`);
 }
@@ -2038,7 +2038,7 @@ _sfc_main$4.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("components/app-footer/app-footer.vue");
   return _sfc_setup$4 ? _sfc_setup$4(props, ctx) : void 0;
 };
-const AppFooter = /* @__PURE__ */ _export_sfc(_sfc_main$4, [["ssrRender", ssrRender$3], ["__scopeId", "data-v-716d91a8"]]);
+const AppFooter = /* @__PURE__ */ _export_sfc(_sfc_main$4, [["ssrRender", ssrRender$3], ["__scopeId", "data-v-a355ad5a"]]);
 const _sfc_main$3 = /* @__PURE__ */ defineComponent({
   props: {
     // sections
@@ -2079,12 +2079,12 @@ function ssrRender$2(_ctx, _push, _parent, _attrs, $props, $setup, $data, $optio
   _push(`<ul${ssrRenderAttrs(mergeProps({
     class: "app-menu-slider",
     ref: "app-menu-slider"
-  }, _attrs))} data-v-1b7a407c><!--[-->`);
+  }, _attrs))} data-v-7f53b322><!--[-->`);
   ssrRenderList(_ctx.sections, (item, index) => {
-    _push(`<li class="app-menu-slider__item"${ssrRenderAttr("data-app-menu-slider", item.sectionId)} data-v-1b7a407c>`);
+    _push(`<li class="app-menu-slider__item"${ssrRenderAttr("data-app-menu-slider", item.sectionId)} data-v-7f53b322>`);
     _push(ssrRenderComponent(_component_nuxt_link, {
       class: ["app-menu-slider__link", { active: _ctx.$route.path == `/${_ctx.$langDefault()}/section/${item.sectionId}` }],
-      "data-gtm-element": "menu-slider-item",
+      "data-analyzed-element": "menu-slider-item",
       to: `/${_ctx.$langDefault()}/section/${item.sectionId}`
     }, {
       default: withCtx((_, _push2, _parent2, _scopeId) => {
@@ -2108,7 +2108,7 @@ _sfc_main$3.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("components/app-menu-slider/app-menu-slider.vue");
   return _sfc_setup$3 ? _sfc_setup$3(props, ctx) : void 0;
 };
-const AppMenuSlider = /* @__PURE__ */ _export_sfc(_sfc_main$3, [["ssrRender", ssrRender$2], ["__scopeId", "data-v-1b7a407c"]]);
+const AppMenuSlider = /* @__PURE__ */ _export_sfc(_sfc_main$3, [["ssrRender", ssrRender$2], ["__scopeId", "data-v-7f53b322"]]);
 const _sfc_main$2 = /* @__PURE__ */ defineComponent({
   props: {
     breadcrumbs: {
@@ -2163,7 +2163,7 @@ const __nuxt_component_0$1 = /* @__PURE__ */ defineComponent({
 });
 function ssrRender$1(_ctx, _push, _parent, _attrs, $props, $setup, $data, $options) {
   const _component_client_only = __nuxt_component_0$1;
-  _push(`<div${ssrRenderAttrs(mergeProps({ class: "app-breadcrumbs" }, _attrs))} data-v-b9710851>`);
+  _push(`<div${ssrRenderAttrs(mergeProps({ class: "app-breadcrumbs" }, _attrs))} data-v-83890aa0>`);
   _push(ssrRenderComponent(_component_client_only, null, {}, _parent));
   _push(`</div>`);
 }
@@ -2173,7 +2173,7 @@ _sfc_main$2.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("components/app-breadcrumbs/app-breadcrumbs.vue");
   return _sfc_setup$2 ? _sfc_setup$2(props, ctx) : void 0;
 };
-const AppBreadcrumbs = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["ssrRender", ssrRender$1], ["__scopeId", "data-v-b9710851"]]);
+const AppBreadcrumbs = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["ssrRender", ssrRender$1], ["__scopeId", "data-v-83890aa0"]]);
 const useSectionsStore = defineStore("sections", {
   state: () => ({
     items: [],
@@ -2501,7 +2501,7 @@ const _sfc_main = {
   __name: "nuxt-root",
   __ssrInlineRender: true,
   setup(__props) {
-    const ErrorComponent = /* @__PURE__ */ defineAsyncComponent(() => import('./_nuxt/error-component-6f89b241.mjs').then((r) => r.default || r));
+    const ErrorComponent = /* @__PURE__ */ defineAsyncComponent(() => import('./_nuxt/error-component-1cd7c66f.mjs').then((r) => r.default || r));
     const IslandRenderer = /* @__PURE__ */ defineAsyncComponent(() => import('./_nuxt/island-renderer-e3e3f562.mjs').then((r) => r.default || r));
     const nuxtApp = useNuxtApp();
     nuxtApp.deferHydration();

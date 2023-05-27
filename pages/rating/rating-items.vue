@@ -6,7 +6,7 @@
       :href='item.url',
       target='_blank',
       data-analyzed-element='rating-items-item',
-      :data-analyzed-element-data='JSON.stringify({ ratingItemId: item.ratingItemId, ratingId: item.ratingId, siteId: item.siteId })'
+      :data-analyzed-element-data='item.dataForAnalyzed'
     )
       .rating-items__img-box(:style='`background-color: ${item.color}`')
         img.rating-items__img(

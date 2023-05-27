@@ -1,10 +1,10 @@
 import { executeAsync } from 'unctx';
 import { b as _export_sfc, d as defineNuxtComponent, u as useNuxtApp, e as useRoute, h as useSectionsStore, f as useBreadcrumbsStore, a as useSettingsStore, g as useSeoMeta } from '../server.mjs';
 import { useSSRContext, resolveComponent, mergeProps } from 'vue';
-import { A as AppRatingsList } from './app-ratings-list-d46f9c98.mjs';
+import { A as AppRatingsList } from './app-ratings-list-f99255e7.mjs';
 import __nuxt_component_0 from './app-preloader-954716fa.mjs';
 import __nuxt_component_1 from './app-title-a456aaab.mjs';
-import { ssrRenderAttrs, ssrRenderComponent } from 'vue/server-renderer';
+import { ssrRenderAttrs, ssrRenderComponent, ssrInterpolate } from 'vue/server-renderer';
 import 'ofetch';
 import 'hookable';
 import 'destr';
@@ -45,16 +45,22 @@ const _sfc_main = /* @__PURE__ */ defineNuxtComponent({
   async asyncData() {
     let __temp, __restore;
     let { $t, $langDefault } = useNuxtApp();
-    let { params } = useRoute();
+    let { params, query } = useRoute();
     let ratingsList = ([__temp, __restore] = executeAsync(() => getRatingsList()), __temp = await __temp, __restore(), __temp);
     if (ratingsList == null ? void 0 : ratingsList.isError) {
       ratingsList.showError();
     }
-    let store = useSectionsStore();
-    let section = store.items.filter((el) => el.sectionId == params.sectionId);
+    let sections = useSectionsStore();
+    let sectionCurrent = sections.itemsMap[+params.sectionId];
     let sectionName = "";
-    if (section[0].name) {
-      sectionName = `${section[0].name[$langDefault()]}`;
+    let descr = "";
+    let pageText = "";
+    if (Number(query.page) > 1) {
+      pageText = `(${$t("Page")} ${query.page})`;
+    }
+    if (sectionCurrent) {
+      sectionName = `${sectionCurrent.name[$langDefault()]}`.trim();
+      descr = `${sectionCurrent.descr[$langDefault()]}`.trim();
     }
     useBreadcrumbsStore().setBreadcrumbs([
       {
@@ -64,19 +70,26 @@ const _sfc_main = /* @__PURE__ */ defineNuxtComponent({
     ]);
     let { pageTitlePrefix, pageTitleSufix } = useSettingsStore().items;
     useSeoMeta({
-      title: `${pageTitlePrefix} ${$t("Section")}: ${sectionName} ${pageTitleSufix}`.trim()
+      title: `${pageTitlePrefix} 
+      ${$t("Section")}: 
+      ${sectionName} ${pageText} ${pageTitleSufix}`.trim(),
+      description: `${descr} ${pageText}`.trim()
     });
     return {
       ratingsList,
       sectionName,
-      isLoading: false
+      isLoading: false,
+      descr,
+      pageText
     };
   },
   data() {
     return {
       ratingsList: [],
       sectionName: "",
-      isLoading: true
+      isLoading: true,
+      descr: "",
+      pageText: ""
     };
   },
   watch: {
@@ -89,6 +102,11 @@ const _sfc_main = /* @__PURE__ */ defineNuxtComponent({
         if (to.query.page === from.query.page)
           return;
         await this.setRatingsList();
+        let pageText = "";
+        if (Number(to.query.page) > 1) {
+          pageText = `(${this.$t("Page")} ${to.query.page})`;
+        }
+        this.pageText = pageText;
       }
     }
   },
@@ -119,11 +137,23 @@ function ssrRender(_ctx, _push, _parent, _attrs, $props, $setup, $data, $options
     position: "fixed"
   }, null, _parent));
   _push(ssrRenderComponent(_component_app_title, {
-    text: `${_ctx.$t("Section")}: ${_ctx.sectionName}`
+    text: `${_ctx.$t("Section")}: ${_ctx.sectionName} ${_ctx.pageText}`
   }, null, _parent));
   _push(`<div class="page__ratings-list">`);
   _push(ssrRenderComponent(_component_app_ratings_list, { ratingsList: _ctx.ratingsList }, null, _parent));
-  _push(`</div></div>`);
+  _push(`</div>`);
+  if (_ctx.descr) {
+    _push(`<div class="page__descr">`);
+    _push(ssrRenderComponent(_component_app_title, {
+      text: _ctx.$t("Description"),
+      level: 3,
+      textAlign: "left"
+    }, null, _parent));
+    _push(`<div>${ssrInterpolate(`${_ctx.descr} ${_ctx.pageText}`)}</div></div>`);
+  } else {
+    _push(`<!---->`);
+  }
+  _push(`</div>`);
 }
 const _sfc_setup = _sfc_main.setup;
 _sfc_main.setup = (props, ctx) => {
@@ -134,4 +164,4 @@ _sfc_main.setup = (props, ctx) => {
 const index = /* @__PURE__ */ _export_sfc(_sfc_main, [["ssrRender", ssrRender]]);
 
 export { index as default };
-//# sourceMappingURL=index-f2116e69.mjs.map
+//# sourceMappingURL=index-bdd018cc.mjs.map

@@ -101,6 +101,7 @@ export type ResponseShowErrorType = {
 export type SectionType = {
   sectionId: number;
   name: LangType;
+  descr: LangType;
   countRatingPublished: number;
 };
 

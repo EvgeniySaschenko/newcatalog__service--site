@@ -1,10 +1,10 @@
 import { executeAsync } from 'unctx';
-import { b as _export_sfc, d as defineNuxtComponent, u as useNuxtApp, f as useBreadcrumbsStore, a as useSettingsStore, g as useSeoMeta, e as useRoute } from '../server.mjs';
+import { b as _export_sfc, d as defineNuxtComponent, u as useNuxtApp, e as useRoute, f as useBreadcrumbsStore, h as useSectionsStore, a as useSettingsStore, g as useSeoMeta } from '../server.mjs';
 import { useSSRContext, resolveComponent, mergeProps } from 'vue';
-import { A as AppRatingsList } from './app-ratings-list-d46f9c98.mjs';
+import { A as AppRatingsList } from './app-ratings-list-f99255e7.mjs';
 import __nuxt_component_0 from './app-preloader-954716fa.mjs';
 import __nuxt_component_1 from './app-title-a456aaab.mjs';
-import { ssrRenderAttrs, ssrRenderComponent } from 'vue/server-renderer';
+import { ssrRenderAttrs, ssrRenderComponent, ssrInterpolate } from 'vue/server-renderer';
 import 'ofetch';
 import 'hookable';
 import 'destr';
@@ -43,20 +43,28 @@ async function getRatingsList() {
 const _sfc_main = /* @__PURE__ */ defineNuxtComponent({
   async asyncData() {
     let __temp, __restore;
-    let { $t } = useNuxtApp();
+    let { $t, $langDefault } = useNuxtApp();
     let ratingsList = ([__temp, __restore] = executeAsync(() => getRatingsList()), __temp = await __temp, __restore(), __temp);
     if (ratingsList == null ? void 0 : ratingsList.isError) {
       return ratingsList.showError();
     }
+    let { query } = useRoute();
     let store = useBreadcrumbsStore();
+    let pageText = Number(query.page) > 1 ? `(${$t("Page")} ${query.page})` : "";
+    let sections = useSectionsStore().items;
+    let descr = `#${sections.map((el) => el.name[$langDefault()]).join(" #")}`;
     store.setBreadcrumbs([]);
     let { pageTitlePrefix, pageTitleSufix } = useSettingsStore().items;
     useSeoMeta({
-      title: `${pageTitlePrefix} ${$t("#Title main page")} ${pageTitleSufix}`.trim()
+      title: `${pageTitlePrefix} ${$t("#Title main page")} ${pageText} ${pageTitleSufix}`.trim(),
+      description: `${descr} ${pageText}`.trim()
     });
     return {
       ratingsList,
-      isLoading: false
+      isLoading: false,
+      title: `${$t("#Title main page")}`.trim(),
+      pageText,
+      descr
     };
   },
   data() {
@@ -64,7 +72,10 @@ const _sfc_main = /* @__PURE__ */ defineNuxtComponent({
       // Ratings list
       ratingsList: [],
       // Loading data
-      isLoading: true
+      isLoading: true,
+      title: "",
+      pageText: "",
+      descr: ""
     };
   },
   watch: {
@@ -76,6 +87,7 @@ const _sfc_main = /* @__PURE__ */ defineNuxtComponent({
         }
         if (to.query.page === from.query.page)
           return;
+        this.pageText = Number(to.query.page) > 1 ? `(${this.$t("Page")} ${to.query.page})` : "";
         await this.setRatingsList();
       }
     }
@@ -111,11 +123,23 @@ function ssrRender(_ctx, _push, _parent, _attrs, $props, $setup, $data, $options
     position: "fixed"
   }, null, _parent));
   _push(ssrRenderComponent(_component_app_title, {
-    text: _ctx.$t("#Title main page")
+    text: `${_ctx.$t("#Title main page")} ${_ctx.pageText}`
   }, null, _parent));
   _push(`<div class="page__ratings-list">`);
   _push(ssrRenderComponent(_component_app_ratings_list, { ratingsList: _ctx.ratingsList }, null, _parent));
-  _push(`</div></div>`);
+  _push(`</div>`);
+  if (_ctx.descr) {
+    _push(`<div class="page__descr">`);
+    _push(ssrRenderComponent(_component_app_title, {
+      text: _ctx.$t("Description"),
+      level: 3,
+      textAlign: "left"
+    }, null, _parent));
+    _push(`<div>${ssrInterpolate(`${_ctx.descr} ${_ctx.pageText}`)}</div></div>`);
+  } else {
+    _push(`<!---->`);
+  }
+  _push(`</div>`);
 }
 const _sfc_setup = _sfc_main.setup;
 _sfc_main.setup = (props, ctx) => {
@@ -126,4 +150,4 @@ _sfc_main.setup = (props, ctx) => {
 const index = /* @__PURE__ */ _export_sfc(_sfc_main, [["ssrRender", ssrRender]]);
 
 export { index as default };
-//# sourceMappingURL=index-37375791.mjs.map
+//# sourceMappingURL=index-bb9b7ab6.mjs.map

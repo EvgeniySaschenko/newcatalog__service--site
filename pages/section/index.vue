@@ -1,9 +1,13 @@
 <template lang="pug">
 .page.page--section
   app-preloader(:isLoading='isLoading', position='fixed')
-  app-title(:text='`${$t("Section")}: ${sectionName}`')
+  app-title(:text='`${$t("Section")}: ${sectionName} ${pageText}`')
   .page__ratings-list
     app-ratings-list(:ratingsList='ratingsList')
+  // descr
+  .page__descr(v-if='descr')
+    app-title(:text='$t("Description")', :level='3', textAlign='left')
+    div {{ `${descr} ${pageText}` }}
 </template>
 
 <script lang="ts">
@@ -20,26 +24,32 @@ async function getRatingsList() {
     sectionId: Number(params.sectionId),
     page: Number(query.page) || 1,
   });
-
   return ratingsList;
 }
 
 export default defineNuxtComponent({
   async asyncData() {
     let { $t, $langDefault } = useNuxtApp();
-    let { params } = useRoute();
+    let { params, query } = useRoute();
     let ratingsList = await getRatingsList();
 
     if (ratingsList?.isError) {
       ratingsList.showError();
     }
 
-    let store = useSectionsStore();
-    let section = store.items.filter((el: any) => el.sectionId == params.sectionId);
+    let sections = useSectionsStore();
+    let sectionCurrent = sections.itemsMap[+params.sectionId];
     let sectionName = '';
+    let descr = '';
 
-    if (section[0].name) {
-      sectionName = `${section[0].name[$langDefault()]}`;
+    let pageText = '';
+    if (Number(query.page) > 1) {
+      pageText = `(${$t('Page')} ${query.page})`;
+    }
+
+    if (sectionCurrent) {
+      sectionName = `${sectionCurrent.name[$langDefault()]}`.trim();
+      descr = `${sectionCurrent.descr[$langDefault()]}`.trim();
     }
 
     useBreadcrumbsStore().setBreadcrumbs([
@@ -52,13 +62,18 @@ export default defineNuxtComponent({
     let { pageTitlePrefix, pageTitleSufix } = useSettingsStore().items;
 
     useSeoMeta({
-      title: `${pageTitlePrefix} ${$t('Section')}: ${sectionName} ${pageTitleSufix}`.trim(),
+      title: `${pageTitlePrefix} 
+      ${$t('Section')}: 
+      ${sectionName} ${pageText} ${pageTitleSufix}`.trim(),
+      description: `${descr} ${pageText}`.trim(),
     });
 
     return {
       ratingsList,
       sectionName,
       isLoading: false,
+      descr,
+      pageText,
     };
   },
 
@@ -67,6 +82,8 @@ export default defineNuxtComponent({
       ratingsList: [] as RatinsBriefType[],
       sectionName: '',
       isLoading: true,
+      descr: '',
+      pageText: '',
     };
   },
 
@@ -80,6 +97,14 @@ export default defineNuxtComponent({
         }
         if (to.query.page === from.query.page) return; // Do not request data if "query.page" has not changed
         await this.setRatingsList();
+
+        // set page name
+        let pageText = '';
+        if (Number(to.query.page) > 1) {
+          pageText = `(${this.$t('Page')} ${to.query.page})`;
+        }
+
+        this.pageText = pageText;
       },
     },
   },

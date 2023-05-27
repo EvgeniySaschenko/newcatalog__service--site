@@ -1255,7 +1255,7 @@ const _routes = [
     meta: {},
     alias: [],
     redirect: void 0,
-    component: () => import('./_nuxt/index-6343e998.mjs').then((m) => m.default || m)
+    component: () => import('./_nuxt/index-2af24b04.mjs').then((m) => m.default || m)
   },
   {
     name: "rating-labels-sections",
@@ -1279,7 +1279,7 @@ const _routes = [
     meta: {},
     alias: [],
     redirect: void 0,
-    component: () => import('./_nuxt/rating-items-fc304020.mjs').then((m) => m.default || m)
+    component: () => import('./_nuxt/rating-items-784fe061.mjs').then((m) => m.default || m)
   },
   {
     name: "ratings-all",
@@ -1287,7 +1287,7 @@ const _routes = [
     meta: {},
     alias: [],
     redirect: void 0,
-    component: () => import('./_nuxt/index-37375791.mjs').then((m) => m.default || m)
+    component: () => import('./_nuxt/index-bb9b7ab6.mjs').then((m) => m.default || m)
   },
   {
     name: "section",
@@ -1295,7 +1295,7 @@ const _routes = [
     meta: {},
     alias: [],
     redirect: void 0,
-    component: () => import('./_nuxt/index-f2116e69.mjs').then((m) => m.default || m)
+    component: () => import('./_nuxt/index-bdd018cc.mjs').then((m) => m.default || m)
   }
 ];
 const $router = {
@@ -1303,22 +1303,22 @@ const $router = {
     {
       name: "home",
       path: "/",
-      component: () => import('./_nuxt/index-37375791.mjs')
+      component: () => import('./_nuxt/index-bb9b7ab6.mjs')
     },
     {
       name: "ratings-all",
       path: "/:lang",
-      component: () => import('./_nuxt/index-37375791.mjs')
+      component: () => import('./_nuxt/index-bb9b7ab6.mjs')
     },
     {
       name: "rating",
       path: "/:lang/rating/:ratingId",
-      component: () => import('./_nuxt/index-6343e998.mjs')
+      component: () => import('./_nuxt/index-2af24b04.mjs')
     },
     {
       name: "section",
       path: "/:lang/section/:sectionId",
-      component: () => import('./_nuxt/index-f2116e69.mjs')
+      component: () => import('./_nuxt/index-bdd018cc.mjs')
     }
   ]
 };

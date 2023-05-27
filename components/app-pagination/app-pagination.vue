@@ -35,6 +35,17 @@ export default defineComponent({
     };
   },
 
+  watch: {
+    $route: {
+      // Situation, for example, when the user moved from the page (1, 2, 3...) to the main page (/)
+      handler(to, from) {
+        if (!to.query.page) {
+          this.pageCurent = 1;
+        }
+      },
+    },
+  },
+
   created() {
     this.createPagesList();
     this.pageCurent = this.page;

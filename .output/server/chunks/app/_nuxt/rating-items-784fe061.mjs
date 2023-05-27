@@ -60,15 +60,15 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
 function ssrRender(_ctx, _push, _parent, _attrs, $props, $setup, $data, $options) {
   const _component_app_label_rating = __nuxt_component_1;
   const _directive_lazy = resolveDirective("lazy");
-  _push(`<div${ssrRenderAttrs(mergeProps({ class: "rating-items" }, _attrs))} data-v-5c39cc8d><div class="rating-items__list" data-v-5c39cc8d><!--[-->`);
+  _push(`<div${ssrRenderAttrs(mergeProps({ class: "rating-items" }, _attrs))} data-v-dc23ccad><div class="rating-items__list" data-v-dc23ccad><!--[-->`);
   ssrRenderList(_ctx.items, (item, index) => {
-    _push(`<a class="rating-items__item"${ssrRenderAttr("href", item.url)} target="_blank" data-analyzed-element="rating-items-item"${ssrRenderAttr("data-analyzed-element-data", JSON.stringify({ ratingItemId: item.ratingItemId, ratingId: item.ratingId, siteId: item.siteId }))} data-v-5c39cc8d><div class="rating-items__img-box" style="${ssrRenderStyle(`background-color: ${item.color}`)}" data-v-5c39cc8d><img${ssrRenderAttrs(mergeProps({
+    _push(`<a class="rating-items__item"${ssrRenderAttr("href", item.url)} target="_blank" data-analyzed-element="rating-items-item"${ssrRenderAttr("data-analyzed-element-data", item.dataForAnalyzed)} data-v-dc23ccad><div class="rating-items__img-box" style="${ssrRenderStyle(`background-color: ${item.color}`)}" data-v-dc23ccad><img${ssrRenderAttrs(mergeProps({
       class: "rating-items__img",
       alt: item.hostname,
       src: _ctx.$configApp.imageStub
-    }, ssrGetDirectiveProps(_ctx, _directive_lazy, item.logoImg)))} data-v-5c39cc8d></div><div class="rating-items__info" data-v-5c39cc8d><div class="rating-items__name-box" data-v-5c39cc8d><div class="rating-items__name" data-v-5c39cc8d>${ssrInterpolate(item.name[_ctx.$langDefault()])}</div></div><div class="rating-items__hostname" data-v-5c39cc8d>${ssrInterpolate(item.hostname)}</div>`);
+    }, ssrGetDirectiveProps(_ctx, _directive_lazy, item.logoImg)))} data-v-dc23ccad></div><div class="rating-items__info" data-v-dc23ccad><div class="rating-items__name-box" data-v-dc23ccad><div class="rating-items__name" data-v-dc23ccad>${ssrInterpolate(item.name[_ctx.$langDefault()])}</div></div><div class="rating-items__hostname" data-v-dc23ccad>${ssrInterpolate(item.hostname)}</div>`);
     if (_ctx.labels.length) {
-      _push(`<div class="rating-items__labels" data-v-5c39cc8d><!--[-->`);
+      _push(`<div class="rating-items__labels" data-v-dc23ccad><!--[-->`);
       ssrRenderList(item.labelsIds, (labelId) => {
         _push(ssrRenderComponent(_component_app_label_rating, {
           color: _ctx.labelsMap[labelId].color,
@@ -89,7 +89,7 @@ _sfc_main.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("pages/rating/rating-items.vue");
   return _sfc_setup ? _sfc_setup(props, ctx) : void 0;
 };
-const RatingItems = /* @__PURE__ */ _export_sfc(_sfc_main, [["ssrRender", ssrRender], ["__scopeId", "data-v-5c39cc8d"]]);
+const RatingItems = /* @__PURE__ */ _export_sfc(_sfc_main, [["ssrRender", ssrRender], ["__scopeId", "data-v-dc23ccad"]]);
 
 export { RatingItems as default };
-//# sourceMappingURL=rating-items-fc304020.mjs.map
+//# sourceMappingURL=rating-items-784fe061.mjs.map

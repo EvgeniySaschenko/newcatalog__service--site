@@ -25,6 +25,16 @@ const _sfc_main$1 = /* @__PURE__ */ defineComponent({
       pageCurent: 1
     };
   },
+  watch: {
+    $route: {
+      // Situation, for example, when the user moved from the page (1, 2, 3...) to the main page (/)
+      handler(to, from) {
+        if (!to.query.page) {
+          this.pageCurent = 1;
+        }
+      }
+    }
+  },
   created() {
     this.createPagesList();
     this.pageCurent = this.page;
@@ -52,7 +62,7 @@ const _sfc_main$1 = /* @__PURE__ */ defineComponent({
 });
 function ssrRender$1(_ctx, _push, _parent, _attrs, $props, $setup, $data, $options) {
   const _component_nuxt_link = __nuxt_component_0$2;
-  _push(`<div${ssrRenderAttrs(mergeProps({ class: "app-pagination" }, _attrs))} data-v-643d8be8><div class="app-pagination__list" data-v-643d8be8><!--[-->`);
+  _push(`<div${ssrRenderAttrs(mergeProps({ class: "app-pagination" }, _attrs))} data-v-73853023><div class="app-pagination__list" data-v-73853023><!--[-->`);
   ssrRenderList(_ctx.pages, (item) => {
     _push(ssrRenderComponent(_component_nuxt_link, {
       class: ["app-pagination__item", { active: item === _ctx.pageCurent }],
@@ -80,7 +90,7 @@ _sfc_main$1.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("components/app-pagination/app-pagination.vue");
   return _sfc_setup$1 ? _sfc_setup$1(props, ctx) : void 0;
 };
-const AppPagination = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["ssrRender", ssrRender$1], ["__scopeId", "data-v-643d8be8"]]);
+const AppPagination = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["ssrRender", ssrRender$1], ["__scopeId", "data-v-73853023"]]);
 const _sfc_main = /* @__PURE__ */ defineComponent({
   components: {
     AppPagination
@@ -169,4 +179,4 @@ _sfc_main.setup = (props, ctx) => {
 const AppRatingsList = /* @__PURE__ */ _export_sfc(_sfc_main, [["ssrRender", ssrRender], ["__scopeId", "data-v-1956768b"]]);
 
 export { AppRatingsList as A };
-//# sourceMappingURL=app-ratings-list-d46f9c98.mjs.map
+//# sourceMappingURL=app-ratings-list-f99255e7.mjs.map

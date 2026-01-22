@@ -116,7 +116,7 @@ const client_manifest = {
       "entry.cdf95a4c.css"
     ],
     "dynamicImports": [
-      "virtual:nuxt:/app/newcatalog/service--site/.nuxt/error-component.mjs"
+      "virtual:nuxt:/app/newcatalog/.nuxt/error-component.mjs"
     ],
     "file": "entry.b0782bab.js",
     "isEntry": true,
@@ -254,12 +254,12 @@ const client_manifest = {
     "isDynamicEntry": true,
     "src": "pages/section/index.vue"
   },
-  "virtual:nuxt:/app/newcatalog/service--site/.nuxt/error-component.css": {
+  "virtual:nuxt:/app/newcatalog/.nuxt/error-component.css": {
     "resourceType": "style",
     "file": "error-component.f6c99654.css",
-    "src": "virtual:nuxt:/app/newcatalog/service--site/.nuxt/error-component.css"
+    "src": "virtual:nuxt:/app/newcatalog/.nuxt/error-component.css"
   },
-  "virtual:nuxt:/app/newcatalog/service--site/.nuxt/error-component.mjs": {
+  "virtual:nuxt:/app/newcatalog/.nuxt/error-component.mjs": {
     "resourceType": "script",
     "module": true,
     "assets": [
@@ -274,7 +274,7 @@ const client_manifest = {
       "node_modules/nuxt/dist/app/entry.js"
     ],
     "isDynamicEntry": true,
-    "src": "virtual:nuxt:/app/newcatalog/service--site/.nuxt/error-component.mjs"
+    "src": "virtual:nuxt:/app/newcatalog/.nuxt/error-component.mjs"
   },
   "error-component.f6c99654.css": {
     "file": "error-component.f6c99654.css",

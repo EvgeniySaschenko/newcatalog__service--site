@@ -1,8 +1,8 @@
 FROM node:18.13-alpine3.17
 
-ARG WORKDIR_BASE
+ARG APP_DIR
 
-WORKDIR ${WORKDIR_BASE}
+WORKDIR ${APP_DIR}
 
 # Установка пакетов
 COPY package.json package-lock.json ./

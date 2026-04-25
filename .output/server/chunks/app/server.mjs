@@ -1213,7 +1213,7 @@ const revive_payload_server_eJ33V7gbc6 = /* @__PURE__ */ defineNuxtPlugin({
 });
 const LazyAppPreloader = defineAsyncComponent(() => import('./_nuxt/app-preloader-954716fa.mjs').then((r) => r.default));
 const LazyAppLabelRating = defineAsyncComponent(() => import('./_nuxt/app-label-rating-cfbe1985.mjs').then((r) => r.default));
-const LazyAppTitle = defineAsyncComponent(() => import('./_nuxt/app-title-a456aaab.mjs').then((r) => r.default));
+const LazyAppTitle = defineAsyncComponent(() => import('./_nuxt/app-title-b41355d9.mjs').then((r) => r.default));
 const lazyGlobalComponents = [
   ["AppPreloader", LazyAppPreloader],
   ["AppLabelRating", LazyAppLabelRating],
@@ -1255,7 +1255,7 @@ const _routes = [
     meta: {},
     alias: [],
     redirect: void 0,
-    component: () => import('./_nuxt/index-2af24b04.mjs').then((m) => m.default || m)
+    component: () => import('./_nuxt/index-b799f8ba.mjs').then((m) => m.default || m)
   },
   {
     name: "rating-labels-sections",
@@ -1263,7 +1263,7 @@ const _routes = [
     meta: {},
     alias: [],
     redirect: void 0,
-    component: () => import('./_nuxt/labels-sections-37da43fa.mjs').then((m) => m.default || m)
+    component: () => import('./_nuxt/labels-sections-871e104a.mjs').then((m) => m.default || m)
   },
   {
     name: "rating-links-sources",
@@ -1271,7 +1271,7 @@ const _routes = [
     meta: {},
     alias: [],
     redirect: void 0,
-    component: () => import('./_nuxt/links-sources-23e44b8f.mjs').then((m) => m.default || m)
+    component: () => import('./_nuxt/links-sources-db528a81.mjs').then((m) => m.default || m)
   },
   {
     name: "rating-rating-items",
@@ -1279,7 +1279,7 @@ const _routes = [
     meta: {},
     alias: [],
     redirect: void 0,
-    component: () => import('./_nuxt/rating-items-784fe061.mjs').then((m) => m.default || m)
+    component: () => import('./_nuxt/rating-items-48f849ca.mjs').then((m) => m.default || m)
   },
   {
     name: "ratings-all",
@@ -1287,7 +1287,7 @@ const _routes = [
     meta: {},
     alias: [],
     redirect: void 0,
-    component: () => import('./_nuxt/index-bb9b7ab6.mjs').then((m) => m.default || m)
+    component: () => import('./_nuxt/index-3df68f31.mjs').then((m) => m.default || m)
   },
   {
     name: "section",
@@ -1295,7 +1295,7 @@ const _routes = [
     meta: {},
     alias: [],
     redirect: void 0,
-    component: () => import('./_nuxt/index-bdd018cc.mjs').then((m) => m.default || m)
+    component: () => import('./_nuxt/index-3f3546d0.mjs').then((m) => m.default || m)
   }
 ];
 const $router = {
@@ -1303,22 +1303,22 @@ const $router = {
     {
       name: "home",
       path: "/",
-      component: () => import('./_nuxt/index-bb9b7ab6.mjs')
+      component: () => import('./_nuxt/index-3df68f31.mjs')
     },
     {
       name: "ratings-all",
       path: "/:lang",
-      component: () => import('./_nuxt/index-bb9b7ab6.mjs')
+      component: () => import('./_nuxt/index-3df68f31.mjs')
     },
     {
       name: "rating",
       path: "/:lang/rating/:ratingId",
-      component: () => import('./_nuxt/index-2af24b04.mjs')
+      component: () => import('./_nuxt/index-b799f8ba.mjs')
     },
     {
       name: "section",
       path: "/:lang/section/:sectionId",
-      component: () => import('./_nuxt/index-bdd018cc.mjs')
+      component: () => import('./_nuxt/index-3f3546d0.mjs')
     }
   ]
 };
@@ -2501,7 +2501,7 @@ const _sfc_main = {
   __name: "nuxt-root",
   __ssrInlineRender: true,
   setup(__props) {
-    const ErrorComponent = /* @__PURE__ */ defineAsyncComponent(() => import('./_nuxt/error-component-1cd7c66f.mjs').then((r) => r.default || r));
+    const ErrorComponent = /* @__PURE__ */ defineAsyncComponent(() => import('./_nuxt/error-component-f43ac093.mjs').then((r) => r.default || r));
     const IslandRenderer = /* @__PURE__ */ defineAsyncComponent(() => import('./_nuxt/island-renderer-e3e3f562.mjs').then((r) => r.default || r));
     const nuxtApp = useNuxtApp();
     nuxtApp.deferHydration();
